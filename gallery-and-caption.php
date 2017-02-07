@@ -6,7 +6,7 @@ Plugin URI: http://huge-it.com/wordpress-photo-gallery/
 Description: Photo Gallery is advanced solution for WordPress Gallery users. 7 advanced and customizable views will help to create beautiful content in minutes.
 Version: 10.0
 Author: Huge-IT
-Author: http://huge-it.com/
+Author URI: http://huge-it.com/
 License: GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
 */
 
