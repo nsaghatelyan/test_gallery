@@ -8,7 +8,7 @@ jQuery.each(justified_obj, function (index, value) {
     if (!isNaN(value)) {
         justified_obj[index] = parseInt(value);
     }else{
-        justified_obj[index] = value == 'true';
+        justified_obj[index] = value == 'yes';
     }
 });
 (function($) {
@@ -16,7 +16,7 @@ jQuery.each(justified_obj, function (index, value) {
      if(justified_obj.imagejustify == false) { var imagejustify2 = 'nojustify'; }
      if(justified_obj.imagecssAnimation == true)  { var imagecssAnimation2 = false; }
      if(justified_obj.imagecssAnimation == false) { var imagecssAnimation2 = true; }
-     
+
 	/* Events
 		jg.complete : called when all the gallery has been created
 		jg.resize : called when the gallery has been resized
@@ -25,21 +25,21 @@ jQuery.each(justified_obj, function (index, value) {
 	$.fn.justifiedGallery = function (arg) {
 
 		// Default options
-                
+
 		var defaults = {
 			sizeRangeSuffixes : {
-				'lt100': '', 
-				'lt240': '', 
-				'lt320': '', 
-				'lt500': '', 
-				'lt640': '', 
+				'lt100': '',
+				'lt240': '',
+				'lt320': '',
+				'lt500': '',
+				'lt640': '',
 				'lt1024': ''
 			},
 			rowHeight : justified_obj.imageheight,
 			maxRowHeight :0, //negative value = no limits, 0 = 1.5 * rowHeight
 			margins : justified_obj.imagemargin,
 			lastRow : imagejustify2, // or can be 'justify' or 'hide'
-			justifyThreshold: 0.75, /* if row width / available space > 0.75 it will be always justified 
+			justifyThreshold: 0.75, /* if row width / available space > 0.75 it will be always justified
 										(i.e. lastRow setting is not considered) */
 			fixedHeight : true,
 			captions : justified_obj.imageshowcaption,
@@ -47,8 +47,8 @@ jQuery.each(justified_obj, function (index, value) {
 			imagesAnimationDuration : justified_obj.imagecssAnimationSpeed, //ignored with css animations
 			captionSettings : { //ignored with css animations
 				animationDuration : 500,
-				visibleOpacity : 0.7, 
-				nonVisibleOpacity : 0 
+				visibleOpacity : 0.7,
+				nonVisibleOpacity : 0
 			},
 			rel : null, //rewrite the rel of each analyzed links
 			target : null, //rewrite the target of all links
@@ -108,8 +108,8 @@ jQuery.each(justified_obj, function (index, value) {
 
 			// Image reloading for an high quality of thumbnails
 			var imageSrc = $image.attr('src');
-			var newImageSrc = imageSrc.replace(context.settings.extension, '').replace(context.usedSizeRangeRegExp, '') + 
-								getSuffix(imgWidth, imgHeight, context) + 
+			var newImageSrc = imageSrc.replace(context.settings.extension, '').replace(context.usedSizeRangeRegExp, '') +
+								getSuffix(imgWidth, imgHeight, context) +
 								imageSrc.match(context.settings.extension)[0];
 
 			$image.one('error', function () {
@@ -142,11 +142,11 @@ jQuery.each(justified_obj, function (index, value) {
 						$entry.append($imgCaption);
 					}
 				}
-			
+
 				// Create events (we check again the $imgCaption because it can be still inexistent)
 				if ($imgCaption.length !== 0) {
 					if (!context.settings.cssAnimation) {
-						$imgCaption.stop().fadeTo(context.settings.imagesAnimationDuration, context.settings.captionSettings.nonVisibleOpacity); 
+						$imgCaption.stop().fadeTo(context.settings.imagesAnimationDuration, context.settings.captionSettings.nonVisibleOpacity);
 					}
 					if (typeof captionMouseEvents === 'undefined') {
 						captionMouseEvents = {
@@ -179,8 +179,8 @@ jQuery.each(justified_obj, function (index, value) {
 			if (isLastRow && context.settings.lastRow === 'hide' && !justificable) {
 				for (i = 0; i < context.buildingRow.entriesBuff.length; i++) {
 					$entry = context.buildingRow.entriesBuff[i];
-					if (context.settings.cssAnimation) 
-						$entry.removeClass('entry-visible');						
+					if (context.settings.cssAnimation)
+						$entry.removeClass('entry-visible');
 					else
 						$entry.stop().fadeTo(0, 0);
 				}
@@ -198,9 +198,9 @@ jQuery.each(justified_obj, function (index, value) {
 					newImgW = rowHeight * imgAspectRatio;
 					newImgH = rowHeight;
 
-					/* With fixedHeight the newImgH must be greater than rowHeight. 
+					/* With fixedHeight the newImgH must be greater than rowHeight.
 					In some cases here this is not satisfied (due to the justification).
-					But we comment it, because is better to have a shorter but justified row instead 
+					But we comment it, because is better to have a shorter but justified row instead
 					to have a cropped image at the end. */
 					/*if (context.settings.fixedHeight && newImgH < context.settings.rowHeight) {
 						newImgW = context.settings.rowHeight * imgAspectRatio;
@@ -216,7 +216,7 @@ jQuery.each(justified_obj, function (index, value) {
 				if (i === 0 || minHeight > newImgH) minHeight = newImgH;
 			}
 
-			if (context.settings.fixedHeight && minHeight > context.settings.rowHeight) 
+			if (context.settings.fixedHeight && minHeight > context.settings.rowHeight)
 				minHeight = context.settings.rowHeight;
 
 			return minHeight;
@@ -282,7 +282,7 @@ jQuery.each(justified_obj, function (index, value) {
 				var galleryWidth = parseInt(context.$gallery.width(), 10);
 				if (context.galleryWidth !== galleryWidth) {
 					//DEBUG// console.log("resize. old: " + context.galleryWidth + " new: " + galleryWidth);
-					
+
 					context.galleryWidth = galleryWidth;
 					rewind(context);
 
@@ -290,12 +290,12 @@ jQuery.each(justified_obj, function (index, value) {
 					startImgAnalyzer(context, true);
 				}
 			}, context.settings.refreshTime);
-		}	
+		}
 
 		function startLoadingSpinnerAnimation(spinnerContext) {
 			clearInterval(spinnerContext.intervalId);
 			spinnerContext.intervalId = setInterval(function () {
-				if (spinnerContext.phase < spinnerContext.$points.length) 
+				if (spinnerContext.phase < spinnerContext.$points.length)
 					spinnerContext.$points.eq(spinnerContext.phase).fadeTo(spinnerContext.timeslot, 1);
 				else
 					spinnerContext.$points.eq(spinnerContext.phase - spinnerContext.$points.length).fadeTo(spinnerContext.timeslot, 0);
@@ -320,8 +320,8 @@ jQuery.each(justified_obj, function (index, value) {
 		}
 
 		function analyzeImages(context, isForResize) {
-			
-			//DEBUG// 
+
+			//DEBUG//
 			/*var rnd = parseInt(Math.random() * 10000, 10);
 			//DEBUG// console.log('analyzeImages ' + rnd + ' start');
 			//DEBUG// console.log('images status: ');
@@ -333,7 +333,7 @@ jQuery.each(justified_obj, function (index, value) {
 
 			/* The first row */
 			var isLastRow;
-			
+
 			for (var i = context.lastAnalyzedIndex + 1; i < context.entries.length; i++) {
 				var $entry = $(context.entries[i]);
 				var $image = $entry.find('img');
@@ -375,7 +375,7 @@ jQuery.each(justified_obj, function (index, value) {
 
 			/* Stop, if there is, the timeout to start the analyzeImages.
 					This is because an image can be set loaded, and the timeout can be set,
-					but this image can be analyzed yet. 
+					but this image can be analyzed yet.
 			*/
 			stopImgAnalyzerStarter(context);
 
@@ -427,9 +427,9 @@ jQuery.each(justified_obj, function (index, value) {
 			if (context.settings.justifyThreshold < 0 || context.settings.justifyThreshold > 1)
 				throw 'justifyThreshold must be in the interval [0,1]';
 			if (typeof context.settings.cssAnimation !== 'boolean') {
-				throw 'cssAnimation must be a boolean';	
+				throw 'cssAnimation must be a boolean';
 			}
-			
+
 			checkOrConvertNumber(context.settings.captionSettings, 'animationDuration');
 			checkOrConvertNumber(context.settings, 'imagesAnimationDuration');
 
@@ -442,17 +442,17 @@ jQuery.each(justified_obj, function (index, value) {
 				throw 'captionSettings.nonVisibleOpacity must be in the interval [0, 1]';
 
 			if (typeof context.settings.fixedHeight !== 'boolean') {
-				throw 'fixedHeight must be a boolean';	
+				throw 'fixedHeight must be a boolean';
 			}
 
 			if (typeof context.settings.captions !== 'boolean') {
-				throw 'captions must be a boolean';	
+				throw 'captions must be a boolean';
 			}
 
 			checkOrConvertNumber(context.settings, 'refreshTime');
 
 			if (typeof context.settings.randomize !== 'boolean') {
-				throw 'randomize must be a boolean';	
+				throw 'randomize must be a boolean';
 			}
 
 		}
@@ -465,7 +465,7 @@ jQuery.each(justified_obj, function (index, value) {
 			var context = $gallery.data('jg.context');
 			if (typeof context === 'undefined') {
 
-				if (typeof arg !== 'undefined' && arg !== null && typeof arg !== 'object') 
+				if (typeof arg !== 'undefined' && arg !== null && typeof arg !== 'object')
 					throw 'The argument must be an object';
 
 				// Spinner init
@@ -510,7 +510,7 @@ jQuery.each(justified_obj, function (index, value) {
 				context.settings = $.extend({}, context.settings, arg);
 				rewind(context);
 			}
-			
+
 			checkSettings(context);
 
 			context.entries = $gallery.find('> a, > div').toArray();
@@ -524,12 +524,12 @@ jQuery.each(justified_obj, function (index, value) {
 				});
 			}
 
-			context.usedSizeRangeRegExp = new RegExp("(" + 
-				context.settings.sizeRangeSuffixes.lt100 + "|" + 
-				context.settings.sizeRangeSuffixes.lt240 + "|" + 
-				context.settings.sizeRangeSuffixes.lt320 + "|" + 
-				context.settings.sizeRangeSuffixes.lt500 + "|" + 
-				context.settings.sizeRangeSuffixes.lt640 + "|" + 
+			context.usedSizeRangeRegExp = new RegExp("(" +
+				context.settings.sizeRangeSuffixes.lt100 + "|" +
+				context.settings.sizeRangeSuffixes.lt240 + "|" +
+				context.settings.sizeRangeSuffixes.lt320 + "|" +
+				context.settings.sizeRangeSuffixes.lt500 + "|" +
+				context.settings.sizeRangeSuffixes.lt640 + "|" +
 				context.settings.sizeRangeSuffixes.lt1024 + ")$"
 			);
 
@@ -568,7 +568,7 @@ jQuery.each(justified_obj, function (index, value) {
 					$image.attr('src', imageSrc);
 
 					/* Check if the image is loaded or not using another image object.
-						We cannot use the 'complete' image property, because some browsers, 
+						We cannot use the 'complete' image property, because some browsers,
 						with a 404 set complete = true */
 					var loadImg = new Image();
 					var $loadImg = $(loadImg);
@@ -597,5 +597,5 @@ jQuery.each(justified_obj, function (index, value) {
 		});
 
 	};
-	
+
 }(jQuery));

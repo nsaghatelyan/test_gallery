@@ -173,7 +173,7 @@ class Photo_Gallery_WP_Frontend_Scripts {
 			'imagecssAnimationSpeed' => Photo_Gallery_WP()->settings->view8_element_animation_speed,
 			'imageheight'            => Photo_Gallery_WP()->settings->view8_element_height,
 			'imagejustify'           => Photo_Gallery_WP()->settings->view8_element_justify,
-			'imageshowcaption'       => Photo_Gallery_WP()->settings->view8_element_show_caption,
+			'imageshowcaption'       => Photo_Gallery_WP()->settings->view8_element_show_caption
 		);
 		$justified_params = array();
 		foreach ( $justified as $name => $value ) {
@@ -190,7 +190,7 @@ class Photo_Gallery_WP_Frontend_Scripts {
 		wp_localize_script( 'ph-front-end-js-'.$view_slug, 'photo_param_obj', (array) Photo_Gallery_WP()->settings );
 		wp_localize_script( 'ph-lightbox-js', 'lightbox_obj', $ph_lightbox_options );
 		wp_localize_script( 'custom-js', 'galleryId', $id );
-		wp_localize_script( 'jusiifed-js', 'justified_obj', $justified );  
+		wp_localize_script( 'jusiifed-js', 'justified_obj', $justified );
 	}
 }
 

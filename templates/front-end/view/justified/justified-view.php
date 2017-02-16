@@ -76,6 +76,7 @@
 							     '',
 							     Photo_Gallery_WP()->settings->view8_element_height
 						     ), false ) ); ?>"/>
+						
 						<?php if ( $like_dislike != 'no' ): ?>
 							<div class="ph-g-wp_gallery_like_cont_<?php echo $galleryID . $pID; ?>">
 								<div class="ph-g-wp_gallery_like_wrapper">
