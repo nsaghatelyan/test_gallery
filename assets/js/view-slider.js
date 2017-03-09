@@ -35,29 +35,50 @@ switch(re_slider_obj.ph_re_slider_effects) {
         var jssor_1_SlideshowTransitions = [
             {$Duration:parseInt(re_slider_obj.ph_re_slider_change_speed),x:1,$Delay:30,$Cols:10,$Rows:5,$Clip:15,$During:{$Left:[0.3,0.7]},$Formation:$JssorSlideshowFormations$.$FormationStraightStairs,$Easing:{$Left:$JssorEasing$.$EaseInOutExpo,$Clip:$JssorEasing$.$EaseInOutQuad},$Assembly:260,$Outside:true,$Round:{$Top:0.8}}
         ];
+        break;
     case 'zoom_in':
         var jssor_1_SlideshowTransitions = [
             {$Duration:parseInt(re_slider_obj.ph_re_slider_change_speed),y:2,$Rows:2,$Zoom:11,$ChessMode:{$Row:15},$Easing:{$Top:$JssorEasing$.$EaseInCubic,$Zoom:$JssorEasing$.$EaseInCubic,$Opacity:$JssorEasing$.$EaseOutQuad},$Assembly:2049,$Opacity:2}
         ];
+        break;
     case 'clips_chess_in':
         var jssor_1_SlideshowTransitions = [
             {$Duration:parseInt(re_slider_obj.ph_re_slider_change_speed),y:-1,$Cols:8,$Rows:4,$Clip:15,$During:{$Top:[0.5,0.5],$Clip:[0,0.5]},$Formation:$JssorSlideshowFormations$.$FormationStraight,$ChessMode:{$Column:12},$ScaleClip:0.5}
         ];
+        break;
     case 'clip_jump_in':
         var jssor_1_SlideshowTransitions = [
             {$Duration:parseInt(re_slider_obj.ph_re_slider_change_speed),x:-1,y:0.7,$Delay:80,$Cols:12,$Clip:11,$Move:true,$During:{$Left:[0.35,0.65],$Top:[0.35,0.65],$Clip:[0,0.1]},$Formation:$JssorSlideshowFormations$.$FormationStraight,$Easing:{$Left:$JssorEasing$.$EaseOutQuad,$Top:$JssorEasing$.$EaseOutJump,$Clip:$JssorEasing$.$EaseOutQuad},$Assembly:2049,$ScaleClip:0.7,$Round:{$Top:4}}
         ];
+        break;
     case 'bounce_down':
         var jssor_1_SlideshowTransitions = [
             {$Duration:parseInt(re_slider_obj.ph_re_slider_change_speed),y:1,$Easing:$JssorEasing$.$EaseInBounce}
         ];
+        break;
     case 'parabola_zigzag_in':
         var jssor_1_SlideshowTransitions = [
             {$Duration:parseInt(re_slider_obj.ph_re_slider_change_speed),x:1,y:1,$Delay:60,$Cols:8,$Rows:4,$Formation:$JssorSlideshowFormations$.$FormationZigZag,$ChessMode:{$Row:3},$Easing:{$Top:$JssorEasing$.$EaseInQuart,$Opacity:$JssorEasing$.$EaseLinear},$Assembly:260,$Opacity:2}
         ];
+        break;
     case 'jump_in_rectangle_cross':
         var jssor_1_SlideshowTransitions = [
             {$Duration:parseInt(re_slider_obj.ph_re_slider_change_speed),x:-1,y:-0.5,$Delay:50,$Cols:8,$Rows:4,$Formation:$JssorSlideshowFormations$.$FormationRectangleCross,$Easing:{$Left:$JssorEasing$.$EaseSwing,$Top:$JssorEasing$.$EaseInJump},$Assembly:260,$Round:{$Top:1.5}}
+        ];
+        break;
+    case 'wave_in_cross':
+        var jssor_1_SlideshowTransitions = [
+            {$Duration:parseInt(re_slider_obj.ph_re_slider_change_speed),x:-1,y:0.5,$Delay:60,$Cols:8,$Rows:4,$Formation:$JssorSlideshowFormations$.$FormationCross,$Easing:{$Left:$JssorEasing$.$EaseSwing,$Top:$JssorEasing$.$EaseInWave},$Assembly:260,$Round:{$Top:1.5}}
+        ];
+        break;
+    case 'wave_out_cross':
+        var jssor_1_SlideshowTransitions = [
+            {$Duration:parseInt(re_slider_obj.ph_re_slider_change_speed),x:-1,y:0.5,$Delay:60,$Cols:8,$Rows:4,$SlideOut:true,$Formation:$JssorSlideshowFormations$.$FormationCross,$Easing:{$Left:$JssorEasing$.$EaseLinear,$Top:$JssorEasing$.$EaseOutWave},$Assembly:260,$Round:{$Top:1.5}}
+        ];
+        break;
+    case 'vertical_chess_stripe':
+        var jssor_1_SlideshowTransitions = [
+            {$Duration:parseInt(re_slider_obj.ph_re_slider_change_speed),y:-1,$Cols:12,$Formation:$JssorSlideshowFormations$.$FormationStraight,$ChessMode:{$Column:12}}
         ];
         break;
 }

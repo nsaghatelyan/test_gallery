@@ -1,7 +1,7 @@
 === Gallery ===
 Contributors: Huge-IT
 Donate link: https://huge-it.com/wordpress-photo-gallery/
-Tags: photo gallery, gallery, slider, image gallery, lightbox gallery, responsive gallery, wordpress gallery, content gallery, slideshow, portfolio gallery, video gallery, gallery slider,
+Tags: photo gallery,
 Requires at least: 3.0.1
 Tested up to: 4.7.2
 Stable tag: 10.0
