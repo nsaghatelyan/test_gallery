@@ -2,8 +2,9 @@
      data-pages-count="<?php echo absint($total); ?>"
      data-content-per-page="<?php echo absint($num); ?>"
      data-current-page="2"
-	 data-show-center="<?php echo esc_html(Photo_Gallery_WP()->settings->masonry_show_content_in_the_center); ?>"
-	 data-element-width="<?php echo esc_html(Photo_Gallery_WP()->settings->masonry_image_width_in_px); ?>"
+	 data-show-center="<?php echo esc_html(Photo_Gallery_WP()->settings->mosaic_show_content_in_the_center); ?>"
+	 data-element-width="<?php if(Photo_Gallery_WP()->settings->mosaic_show_content_by == 'width'){ echo esc_html(Photo_Gallery_WP()->settings->mosaic_image_max_width_in_px); }?>"
+     data-colomn-count="<?php if(Photo_Gallery_WP()->settings->mosaic_show_content_by == 'count'){ echo esc_html(Photo_Gallery_WP()->settings->mosaic_image_column_count); }?>"
 	 data-rating-type="<?php echo esc_html($like_dislike); ?>"
      data-ph-gallery-id="<?php echo absint($galleryID); ?>">
 	<div class="ph-gallery-wp-loading-icon"></div>
@@ -19,11 +20,12 @@
 				$imagerowstype = 'image';
 			}
 			?>
-			<section id="ph_mosaic_photos">
-			</section>
+
 			<?php
 		}
 		?>
+        <section id="ph_mosaic_photos">
+        </section>
 	</div>
 
 <div style="clear:both;"></div>
@@ -147,19 +149,19 @@ if ( $a == 1 ) {
 
  } ?>
 
-	jQuery('#ph_mosaic_photos').append(allImages);
-	<?php if(Photo_Gallery_WP()->settings->mosaic_show_content_by == 'width'){ ?>
-	var width_container = jQuery( ".entry-content" ).width();
-	max_count = width_container / <?php echo absint( Photo_Gallery_WP()->settings->mosaic_image_max_width_in_px ); ?>;
-	max_count = Math.floor(max_count);
-	jQuery( document ).ready(function() {
-		jQuery("#ph_mosaic_photos").css("column-count", max_count);
-	});
-	jQuery( window ).resize(function() {
-		var width_container = jQuery( ".entry-content" ).width();
-		max_count = width_container / <?php echo absint( Photo_Gallery_WP()->settings->mosaic_image_max_width_in_px ); ?>;
-		max_count = Math.floor(max_count);
-		jQuery("#ph_mosaic_photos").css("column-count", max_count);
-	});
+    jQuery('#ph-g-wp-mosaic_<?php echo $galleryID; ?> #ph_mosaic_photos').append(allImages);
+    <?php if(Photo_Gallery_WP()->settings->mosaic_show_content_by == 'width'){ ?>
+    var width_container = jQuery( ".entry-content" ).width();
+    max_count = width_container / <?php echo absint( Photo_Gallery_WP()->settings->mosaic_image_max_width_in_px ); ?>;
+    max_count = Math.floor(max_count);
+    jQuery( document ).ready(function() {
+        jQuery('#ph-g-wp-mosaic_<?php echo $galleryID; ?> #ph_mosaic_photos').css("column-count", max_count);
+    });
+    jQuery( window ).resize(function() {
+        var width_container = jQuery( ".entry-content" ).width();
+        max_count = width_container / <?php echo absint( Photo_Gallery_WP()->settings->mosaic_image_max_width_in_px ); ?>;
+        max_count = Math.floor(max_count);
+        jQuery('#ph-g-wp-mosaic_<?php echo $galleryID; ?> #ph_mosaic_photos').css("column-count", max_count);
+    });
 	<?php } ?>
 </script>

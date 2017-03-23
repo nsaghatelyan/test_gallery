@@ -12,7 +12,6 @@
         this.$item = '';
         this.$cont = '';
         this.$items = this.$body.find('a.ph-lightbox');
-
         this.settings = $.extend({}, this.constructor.defaults, options);
 
         this.init();
