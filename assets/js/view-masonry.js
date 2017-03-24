@@ -55,6 +55,7 @@ function Ph_Gallery_Masonry(id) {
         _this.showCenter();
     };
     _this.loadMoreClick = function () {
+
         var currentPage = _this.container.attr('data-current-page');
         var data = {
             action: 'photo_gallery_wp_load_images_masonry',

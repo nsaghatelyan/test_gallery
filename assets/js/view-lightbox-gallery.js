@@ -121,6 +121,7 @@ function Ph_Gallery_Lightbox_Gallery(id) {
             ratingCount: ratingCount,
             galleryImgLightboxLoadNonce:lightboxLoadNonce
         };
+
         _this.loadingIcon.show();
         _this.loadMoreBtn.hide();
         jQuery.post(adminUrl, data, function (response) {

@@ -311,6 +311,7 @@ function galleryImgSubmitButton(pressbutton){
 		alert("Name is required.");
 		return;
 	}
+
 	galleryImgFilterInputs();
 	document.getElementById("adminForm").action=document.getElementById("adminForm").action+"&task="+pressbutton;
 	document.getElementById("adminForm").submit();
