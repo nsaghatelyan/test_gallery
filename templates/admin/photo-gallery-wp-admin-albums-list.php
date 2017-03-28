@@ -42,19 +42,19 @@ $huge_it_gallery_nonce_remove_album = wp_create_nonce('huge_it_gallery_nonce_rem
                                             <a class="next-page"
                                                href="<?php echo $pagination['links'] . '&paged=1'; ?>">
 												<span class="screen-reader-text">First page</span>
-												<span>«</span>
+												<span>Â«</span>
 											</a>
                                         <?php else: ?>
-                                            <span class="tablenav-pages-navspan">«</span>
+                                            <span class="tablenav-pages-navspan">Â«</span>
                                         <?php endif; ?>
                                     <?php if ($pagination['current'] > 1): ?>
                                         <a class="next-page"
                                            href="<?php echo $pagination['links'] . '&paged=' . ($pagination['current'] - 1); ?>">
 												<span class="screen-reader-text">Prev page</span>
-												<span>‹</span>
+												<span>â€¹</span>
 											</a>
                                     <?php else: ?>
-                                        <span class="tablenav-pages-navspan">‹</span>
+                                        <span class="tablenav-pages-navspan">â€¹</span>
                                     <?php endif; ?>
                                     <span class="paging-input">
 											<label for="current-page-selector"
@@ -69,19 +69,19 @@ $huge_it_gallery_nonce_remove_album = wp_create_nonce('huge_it_gallery_nonce_rem
                                         <a class="next-page"
                                            href="<?php echo $pagination['links'] . '&paged=' . ($pagination['current'] + 1); ?>">
 											<span class="screen-reader-text">Next page</span>
-											<span>›</span>
+											<span>â€º</span>
 										</a>
                                     <?php else: ?>
-                                        <span class="tablenav-pages-navspan">›</span>
+                                        <span class="tablenav-pages-navspan">â€º</span>
                                     <?php endif; ?>
                                     <?php if ($pagination['pagination_links_count'] - $pagination['current'] >= 2): ?>
                                         <a class="next-page"
                                            href="<?php echo $pagination['links'] . '&paged=' . $pagination['pagination_links_count']; ?>">
 											<span class="screen-reader-text">Last page</span>
-											<span>»</span>
+											<span>Â»</span>
 										</a>
                                     <?php else: ?>
-                                        <span class="tablenav-pages-navspan">»</span>
+                                        <span class="tablenav-pages-navspan">Â»</span>
                                     <?php endif; ?>
 									</span>
                             </div>
@@ -108,7 +108,6 @@ $huge_it_gallery_nonce_remove_album = wp_create_nonce('huge_it_gallery_nonce_rem
                 <tbody>
 
                 <?php
-
                 foreach ($albums as $k => $item): ?>
                     <tr <?php if ($k % 2 == 0) {
                         echo "class='has-background'";

@@ -26,18 +26,16 @@ if (isset($_GET["addslide"])) {
         <form action="admin.php?page=photo_gallery_wp_gallery&id=<?php echo $row->id; ?>" method="post"
               name="adminForm" id="adminForm">
             <input type="hidden" class="changedvalues" value="" name="changedvalues" size="80">
-
             <div id="poststuff">
                 <div id="gallery-header">
                     <ul id="ph-gallery-wp-gallerys-list">
-
                         <?php
                         foreach ($rowsld as $rowsldires) {
-                            if ($rowsldires->id != $row->id) {
+                            if ($rowsldires->id != $album_row->id) {
                                 ?>
                                 <li>
                                     <a href="#"
-                                       onclick="window.location.href='admin.php?page=photo_gallery_wp_gallery&task=edit_cat&id=<?php echo $rowsldires->id; ?>&huge_it_gallery_nonce=<?php echo $gallery_wp_nonce; ?>'"><?php echo $rowsldires->name; ?></a>
+                                       onclick="window.location.href='admin.php?page=photo_gallery_wp_albums&task=edit_cat&id=<?php echo $rowsldires->id; ?>&huge_it_gallery_nonce=<?php echo $gallery_wp_nonce; ?>'"><?php echo $rowsldires->name; ?></a>
                                 </li>
                                 <?php
                             } else { ?>
@@ -47,14 +45,14 @@ if (isset($_GET["addslide"])) {
                                     <input class="text_area" onkeyup="name_changeTop(this)"
                                            onfocus="this.style.width = ((this.value.length + 1) * 8) + 'px'" type="text"
                                            name="name" id="name" maxlength="250"
-                                           value="<?php echo esc_html(stripslashes($row->name)); ?>"/>
+                                           value="<?php echo esc_html(stripslashes($album_row->name)); ?>"/>
                                 </li>
                                 <?php
                             }
                         }
                         ?>
                         <li class="add-new">
-                            <a onclick="window.location.href='admin.php?page=photo_gallery_wp_gallery&amp;task=add_cat&photo_gallery_wp_nonce_add_galery=<?php echo $photo_gallery_wp_nonce_add_galery; ?>'">+</a>
+                            <a onclick="window.location.href='admin.php?page=photo_gallery_wp_albums&amp;task=add_cat&photo_gallery_wp_nonce_add_galery=<?php echo $photo_gallery_wp_nonce_add_galery; ?>'">+</a>
                         </li>
                     </ul>
                 </div>
@@ -65,243 +63,81 @@ if (isset($_GET["addslide"])) {
                         <div id="post-body">
                             <div id="ph-gallery-wp-post-body-heading">
                                 <div id="ph-gallery-wp-img_preview">
-                                    <h3><?php echo __('Images', 'gallery-images'); ?></h3>
+                                    <h3><?php echo __('Galleries', 'gallery-images'); ?></h3>
                                     <input type="hidden" name="imagess" id="_unique_name"/>
                                     <input type="hidden" name="photo_gallery_wp_admin_image_hover_preview" value="off"/>
-                                    <label for="img_hover_preview"><?php echo __('Image preview on hover', 'photo-gallery-wp'); ?>
-                                        <input type="checkbox" id="img_hover_preview"
-                                               name="photo_gallery_wp_admin_image_hover_preview"
-                                               value="on" <?php if (get_option('photo_gallery_wp_admin_image_hover_preview') == 'on')
-                                            echo 'checked' ?>>
-                                    </label>
                                 </div>
                                 <div class="huge-it-newuploader uploader  add-new-image">
                                     <input type="button" class="button wp-media-buttons-icon button-primary"
                                            name="_unique_name_button"
-                                           id="_unique_name_button" value="Add Image"/>
+                                           id="_unique_name_button" value="Add Gallery"/>
                                 </div>
-                                <a href="#TB_inline?&inlineId=ph-gallery-wp-add_videos&width=700&height=500"
-                                   class="button button-primary add-video-slide thickbox" id="slideup3s"
-                                   value="iframepop">
-                                    <span
-                                            class="wp-media-buttons-icon"></span><?php echo __('Add Video', 'photo-gallery-wp'); ?>
-                                </a>
                             </div>
+
                             <ul id="ph-gallery-wp-images-list">
                                 <?php
                                 $i = 2;
-                                foreach ($rowim as $key => $rowimages) { ?>
-                                    <?php if ($rowimages->sl_type == '') {
-                                        $rowimages->sl_type = 'image';
+
+                                foreach ($row_galleries as $key => $val) {
+                                    $galbom_nonce_remove_gallery = wp_create_nonce('album_nonce_remove_gallery' . $val->id); ?>
+
+
+                                    <li <?php if ($i % 2 == 0) {
+                                        echo "class='has-background'";
                                     }
-                                    $gallery_nonce_remove_image = wp_create_nonce('gallery_nonce_remove_image' . $rowimages->id);
-                                    switch ($rowimages->sl_type) {
-                                        case 'image': ?>
-                                            <li <?php if ($i % 2 == 0) {
-                                                echo "class='has-background'";
-                                            }
-                                            $i++; ?>>
-                                                <input class="order_by" type="hidden"
-                                                       name="order_by_<?php echo $rowimages->id; ?>"
-                                                       value="<?php echo $rowimages->ordering; ?>"/>
-                                                <div class="ph-gallery-wp-image-container">
-                                                    <div class="ph-gallery-wp-list-img-wrapper">
-                                                        <img src="<?php echo $rowimages->image_url; ?>"/>
-                                                    </div>
-                                                    <div>
-                                                        <input type="hidden" name="imagess<?php echo $rowimages->id; ?>"
-                                                               id="_unique_name<?php echo $rowimages->id; ?>"
-                                                               value="<?php echo esc_attr($rowimages->image_url); ?>"/>
-                                                        <span class="wp-media-buttons-icon"></span>
-                                                        <div
-                                                                class="huge-it-editnewuploader uploader button<?php echo $rowimages->id; ?> add-new-image">
-                                                            <input type="button"
-                                                                   class="button<?php echo $rowimages->id; ?> wp-media-buttons-icon ph-gallery-wp-edit-image-icon"
-                                                                   name="_unique_name_button<?php echo $rowimages->id; ?>"
-                                                                   id="_unique_name_button<?php echo $rowimages->id; ?>"
-                                                                   value="Edit image"/>
-                                                        </div>
-                                                    </div>
+                                    $i++; ?>>
+                                        <input class="order_by" type="hidden"
+                                               name="order_by_<?php echo $val->id; ?>"
+                                               value="<?php echo $val->ordering; ?>"/>
+                                        <div class="ph-gallery-wp-image-container">
+                                            <div class="ph-gallery-wp-list-img-wrapper">
+                                                <img src="<?php echo $val->image_url; ?>"/>
+                                            </div>
+                                            <div>
+                                                <input type="hidden" name="imagess<?php echo $val->id; ?>"
+                                                       id="_unique_name<?php echo $val->id; ?>"
+                                                       value="<?php echo esc_attr($val->image_url); ?>"/>
+                                                <span class="wp-media-buttons-icon"></span>
+                                                <div class="huge-it-editnewuploader uploader button<?php echo $val->id; ?> add-new-image">
+                                                    <input type="button"
+                                                           class="button<?php echo $val->id; ?> wp-media-buttons-icon ph-gallery-wp-edit-image-icon"
+                                                           name="_unique_name_button<?php echo $val->id; ?>"
+                                                           id="_unique_name_button<?php echo $val->id; ?>"
+                                                           value="Edit image"/>
                                                 </div>
-                                                <div class="ph-gallery-wp-image-options">
-                                                    <div>
-                                                        <input class="text_area" type="text"
-                                                               placeholder="<?php echo __('Title:', 'photo-gallery-wp'); ?>"
-                                                               id="titleimage<?php echo $rowimages->id; ?>"
-                                                               name="titleimage<?php echo $rowimages->id; ?>"
-                                                               id="titleimage<?php echo $rowimages->id; ?>"
-                                                               value="<?php echo esc_attr(str_replace('__5_5_5__', '%', $rowimages->name)); ?>">
-                                                    </div>
-                                                    <div class="description-block">
-														<textarea id="im_description<?php echo $rowimages->id; ?>"
+                                            </div>
+                                        </div>
+                                        <div class="ph-gallery-wp-image-options">
+                                            <div>
+                                                <input class="text_area" type="text"
+                                                       placeholder="<?php echo __('Title:', 'photo-gallery-wp'); ?>"
+                                                       id="titleimage<?php echo $val->id; ?>"
+                                                       name="titleimage<?php echo $val->id; ?>"
+                                                       id="titleimage<?php echo $val->id; ?>"
+                                                       value="<?php echo esc_attr(str_replace('__5_5_5__', '%', $val->name)); ?>">
+                                            </div>
+                                            <div class="description-block">
+														<textarea id="im_description<?php echo $val->id; ?>"
                                                                   placeholder="<?php echo __('Description:', 'photo-gallery-wp'); ?>"
-                                                                  name="im_description<?php echo $rowimages->id; ?>"><?php echo str_replace('__5_5_5__', '%', $rowimages->description) ?></textarea>
-                                                    </div>
-                                                    <div class="link-block">
-                                                        <input class="text_area url-input" type="text"
-                                                               placeholder="<?php echo __('URL:', 'photo-gallery-wp'); ?>"
-                                                               id="sl_url<?php echo $rowimages->id; ?>"
-                                                               name="sl_url<?php echo $rowimages->id; ?>"
-                                                               value="<?php echo esc_attr(str_replace('__5_5_5__', '%', $rowimages->sl_url)); ?>">
-                                                        <label class="long"
-                                                               for="sl_link_target<?php echo $rowimages->id; ?>">
-                                                            <span><?php echo __('Open in new tab', 'photo-gallery-wp'); ?></span>
-                                                            <input type="hidden"
-                                                                   name="sl_link_target<?php echo $rowimages->id; ?>"
-                                                                   value=""/>
-                                                            <input <?php if ($rowimages->link_target == 'on') {
-                                                                echo 'checked="checked"';
-                                                            } ?> class="link_target" type="checkbox"
-                                                                 id="sl_link_target<?php echo $rowimages->id; ?>"
-                                                                 name="sl_link_target<?php echo $rowimages->id; ?>"/>
-                                                        </label>
-                                                    </div>
-                                                    <div class="remove-ph-gallery-wp-image-container">
-                                                        <a id="remove_image<?php echo $rowimages->id; ?>"
-                                                           class="button remove-image"
-                                                           data-image-id="<?php echo $rowimages->id; ?>"
-                                                           data-gallery-id="<?php echo $row->id; ?>"
-                                                           data-nonce-value="<?php echo $gallery_nonce_remove_image; ?>">Remove
-                                                            Image</a>
-                                                    </div>
-                                                    <div class="like_dislike_wrapper">
-                                                        <label
-                                                                for="like_<?php echo $rowimages->id; ?>"><?php echo __('Ratings:', 'photo-gallery-wp'); ?></label>
-                                                        <label for="like_<?php echo $rowimages->id; ?>"
-                                                               class="like"><?php echo __('Like', 'photo-gallery-wp'); ?></label>
-                                                        <input class="" type="number"
-                                                               id="like_<?php echo $rowimages->id; ?>"
-                                                               name="like_<?php echo $rowimages->id; ?>"
-                                                               value="<?php echo str_replace('__5_5_5__', '%', $rowimages->like); ?>">
-                                                        <label for="dislike_<?php echo $rowimages->id; ?>"
-                                                               class="dislike"><?php echo __('Dislike', 'photo-gallery-wp'); ?></label>
-                                                        <input class="" num="<?php echo $rowimages->id; ?>"
-                                                               type="number" id="dislike_<?php echo $rowimages->id; ?>"
-                                                               name="dislike_<?php echo $rowimages->id; ?>"
-                                                               value="<?php echo str_replace('__5_5_5__', '%', $rowimages->dislike); ?>">
-                                                    </div>
-                                                    <div class="heart_wrapper">
-                                                        <label
-                                                                for="like_<?php echo $rowimages->id; ?>"><?php echo __('Ratings:', 'photo-gallery-wp'); ?></label>
-                                                        <label for="like_<?php echo $rowimages->id; ?>"
-                                                               class="like"><?php echo __('Hearts', 'photo-gallery-wp'); ?></label>
-                                                        <input class="" num="<?php echo $rowimages->id; ?>"
-                                                               type="number" id="like_<?php echo $rowimages->id; ?>"
-                                                               name="like_<?php echo $rowimages->id; ?>"
-                                                               value="<?php echo str_replace('__5_5_5__', '%', $rowimages->like); ?>">
-                                                    </div>
-                                                </div>
+                                                                  name="im_description<?php echo $val->id; ?>"><?php echo str_replace('__5_5_5__', '%', $val->description) ?></textarea>
+                                            </div>
+                                            <div class="remove-ph-gallery-wp-image-container">
+                                                <a id="remove_image<?php echo $val->id; ?>"
+                                                   class="button remove-image"
+                                                   data-image-id="<?php echo $val->id; ?>"
+                                                   data-gallery-id="<?php echo $album_row->id; ?>"
+                                                   data-nonce-value="<?php echo $album_nonce_remove_gallery; ?>">Remove
+                                                    Gallery from album</a>
+                                            </div>
+                                        </div>
 
-                                                <div class="clear"></div>
-                                            </li>
-                                            <?php
-                                            break;
-                                        case 'video':
-                                            ?>
+                                        <div class="clear"></div>
+                                    </li>
 
-                                            <li <?php if ($i % 2 == 0) {
-                                                echo "class='has-background'";
-                                            }
-                                            $i++; ?> >
-                                                <input class="order_by" type="hidden"
-                                                       name="order_by_<?php echo $rowimages->id; ?>"
-                                                       value="<?php echo $rowimages->ordering; ?>"/>
-                                                <?php if (strpos($rowimages->image_url, 'youtube') !== false || strpos($rowimages->image_url, 'youtu') !== false) {
-                                                    $liclass = "youtube";
-                                                    $video_thumb = photo_gallery_wp_get_video_id_from_url($rowimages->image_url);
-                                                    $video_thumb_url = $video_thumb[0];
-                                                    $thumburl = '<img src="http://img.youtube.com/vi/' . $video_thumb_url . '/mqdefault.jpg" alt="" class="video-thumb-img" />';
-                                                } else if (strpos($rowimages->image_url, 'vimeo') !== false) {
-                                                    $liclass = "vimeo";
-                                                    $vimeo = $rowimages->image_url;
-                                                    $vimeo_explode = explode("/", $vimeo);
-                                                    $imgid = end($vimeo_explode);
-                                                    $hash = unserialize(wp_remote_fopen("http://vimeo.com/api/v2/video/" . $imgid . ".php"));
-                                                    $imgsrc = $hash[0]['thumbnail_large'];
-                                                    $thumburl = '<img src="' . $imgsrc . '" alt="" class="video-thumb-img" />';
-                                                }
-                                                ?>
-                                                <div class="ph-gallery-wp-image-container">
-                                                    <?php echo $thumburl; ?>
-                                                    <div class="play-icon <?php echo $liclass; ?>"></div>
-                                                    <div>
-                                                        <input type="hidden" name="imagess<?php echo $rowimages->id; ?>"
-                                                               value="<?php echo esc_attr($rowimages->image_url); ?>"/>
-                                                    </div>
-                                                </div>
-                                                <div class="ph-gallery-wp-image-options">
-                                                    <div>
-                                                        <input class="text_area" type="text"
-                                                               placeholder="<?php echo __('Title:', 'photo-gallery-wp'); ?>"
-                                                               id="titleimage<?php echo $rowimages->id; ?>"
-                                                               name="titleimage<?php echo $rowimages->id; ?>"
-                                                               id="titleimage<?php echo $rowimages->id; ?>"
-                                                               value="<?php echo esc_attr(str_replace('__5_5_5__', '%', $rowimages->name)); ?>">
-                                                    </div>
-                                                    <div class="description-block">
-														<textarea id="im_description<?php echo $rowimages->id; ?>"
-                                                                  placeholder="<?php echo __('Description:', 'photo-gallery-wp'); ?>"
-                                                                  name="im_description<?php echo $rowimages->id; ?>"><?php echo esc_html(str_replace('__5_5_5__', '%', $rowimages->description)); ?></textarea>
-                                                    </div>
-                                                    <div class="link-block">
-                                                        <input class="text_area url-input" type="text"
-                                                               placeholder="<?php echo __('URL:', 'photo-gallery-wp'); ?>"
-                                                               id="sl_url<?php echo $rowimages->id; ?>"
-                                                               name="sl_url<?php echo $rowimages->id; ?>"
-                                                               value="<?php echo str_replace('__5_5_5__', '%', $rowimages->sl_url); ?>">
-                                                        <label class="long"
-                                                               for="sl_link_target<?php echo $rowimages->id; ?>">
-                                                            <span><?php echo __('Open in new tab', 'photo-gallery-wp'); ?></span>
-                                                            <input type="hidden"
-                                                                   name="sl_link_target<?php echo $rowimages->id; ?>"
-                                                                   value=""/>
-                                                            <input <?php if ($rowimages->link_target == 'on') {
-                                                                echo 'checked="checked"';
-                                                            } ?> class="link_target" type="checkbox"
-                                                                 id="sl_link_target<?php echo $rowimages->id; ?>"
-                                                                 name="sl_link_target<?php echo $rowimages->id; ?>"/>
-                                                        </label>
-                                                    </div>
-                                                    <div class="remove-ph-gallery-wp-image-container">
-                                                        <a data-image-id="<?php echo $rowimages->id; ?>"
-                                                           data-nonce-value="<?php echo $gallery_nonce_remove_image; ?>"
-                                                           data-gallery-id="<?php echo $row->id; ?>"
-                                                           id="remove_image<?php echo $rowimages->id; ?>"
-                                                           class="button remove-image"><?php echo __('Remove Video', 'photo-gallery-wp'); ?></a>
-                                                    </div>
-                                                    <div class="like_dislike_wrapper">
-                                                        <label
-                                                                for="like_<?php echo $rowimages->id; ?>"><?php echo __('Ratings:', 'photo-gallery-wp'); ?></label>
-                                                        <label for="like_<?php echo $rowimages->id; ?>"
-                                                               class="like"><?php echo __('Like', 'photo-gallery-wp'); ?></label>
-                                                        <input class="" type="number"
-                                                               id="like_<?php echo $rowimages->id; ?>"
-                                                               name="like_<?php echo $rowimages->id; ?>"
-                                                               value="<?php echo str_replace('__5_5_5__', '%', $rowimages->like); ?>">
-                                                        <label for="dislike_<?php echo $rowimages->id; ?>"
-                                                               class="dislike"><?php echo __('Dislike', 'photo-gallery-wp'); ?></label>
-                                                        <input class="" num="<?php echo $rowimages->id; ?>"
-                                                               type="number" id="dislike_<?php echo $rowimages->id; ?>"
-                                                               name="dislike_<?php echo $rowimages->id; ?>"
-                                                               value="<?php echo str_replace('__5_5_5__', '%', $rowimages->dislike); ?>">
-                                                    </div>
-                                                    <div class="heart_wrapper">
-                                                        <label
-                                                                for="like_<?php echo $rowimages->id; ?>"><?php echo __('Ratings:', 'photo-gallery-wp'); ?></label>
-                                                        <label for="like_<?php echo $rowimages->id; ?>"
-                                                               class="like"><?php echo __('Hearts', 'photo-gallery-wp'); ?></label>
-                                                        <input class="" num="<?php echo $rowimages->id; ?>"
-                                                               type="number" id="like_<?php echo $rowimages->id; ?>"
-                                                               name="like_<?php echo $rowimages->id; ?>"
-                                                               value="<?php echo str_replace('__5_5_5__', '%', $rowimages->like); ?>">
-                                                    </div>
-                                                </div>
-                                                <div class="clear"></div>
-                                            </li>
-                                            <?php
-                                            break;
-                                    } ?>
+
                                 <?php } ?>
+
+
                             </ul>
                         </div>
 
@@ -312,16 +148,9 @@ if (isset($_GET["addslide"])) {
                         <div id="side-sortables" class="meta-box-sortables ui-sortable">
                             <div id="gallery-unique-options" class="postbox">
                                 <h3 class="hndle">
-                                    <span><?php echo __('Image Gallery Custom Options', 'photo-gallery-wp'); ?></span>
+                                    <span><?php echo __('Album Custom Options', 'photo-gallery-wp'); ?></span>
                                 </h3>
                                 <ul id="ph-gallery-wp-unique-options-list">
-                                    <li>
-                                        <label
-                                                for="huge_it_gallery_name"><?php echo __('Gallery name', 'photo-gallery-wp'); ?></label>
-                                        <input type="text" name="name" id="huge_it_gallery_name"
-                                               value="<?php echo esc_html(stripslashes($row->name)); ?>"
-                                               onkeyup="name_changeRight(this)">
-                                    </li>
                                     <?php //ns code start ?>
                                     <li>
                                         <label
@@ -339,7 +168,21 @@ if (isset($_GET["addslide"])) {
                                         <?php echo esc_html(stripslashes($album_row->description)); ?>
                                         </textarea>
                                     </li>
-                                    <?php //ns code end ?>
+
+                                    <li>
+                                        <label
+                                                for="photo_gallery_wp_sl_effects"><?php echo __('Select style', 'photo-gallery-wp'); ?></label>
+                                        <select name="photo_gallery_wp_sl_effects" id="photo_gallery_wp_sl_effects">
+                                            <option <?php if ($album_row->photo_gallery_wp_sl_effects == '0') {
+                                                echo 'selected';
+                                            } ?>
+                                                    value="0"><?php echo __('Gallery/Content-Popup', 'photo-gallery-wp'); ?></option>
+                                            <option <?php if ($row->photo_gallery_wp_sl_effects == '1') {
+                                                echo 'selected';
+                                            } ?>
+                                                    value="1"><?php echo __('Content Slider', 'photo-gallery-wp'); ?></option>
+                                        </select>
+                                    </li>
 
 
                                     <li>

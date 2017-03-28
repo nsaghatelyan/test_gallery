@@ -144,8 +144,17 @@ class Photo_Gallery_WP_Albums
         $count_ord = count($images);
         $query = $wpdb->prepare("SELECT name,ordering FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys WHERE sl_width=%d  ORDER BY `ordering` ", $row->sl_width);
         $ord_elem = $wpdb->get_results($query);
+
         $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_images where gallery_id = %d order by ordering ASC  ", $row->id);
         $rowim = $wpdb->get_results($query);
+
+
+        // get Album's galleries list
+        $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys where id_album = %d order by ordering ASC  ", $album_row->id);
+        $row_galleries = $wpdb->get_results($query);
+
+        debug::trace($album_row);
+
         if (isset($_GET["addslide"])) {
             if ($_GET["addslide"] == 1) {
                 $table_name = $wpdb->prefix . "photo_gallery_wp_images";
@@ -156,8 +165,11 @@ INSERT INTO
                 $wpdb->query($sql_2);
             }
         }
-        $query = "SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys order by id ASC";
+        $query = "SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_albums order by id ASC";
         $rowsld = $wpdb->get_results($query);
+
+//        debug::trace($rowsld);
+
         $paramssld = photo_gallery_wp_get_general_options();
 
         $query = "SELECT * FROM " . $wpdb->prefix . "posts where post_type = 'post' and post_status = 'publish' order by id ASC";
@@ -173,7 +185,7 @@ INSERT INTO
                 $postsbycat = $rowsposts1;
             }
         }
-        require_once(PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . 'photo-gallery-wp-admin-gallery-images-list-html.php');
+        require_once(PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . 'photo-gallery-wp-admin-album-galleries-list-html.php');
     }
 
 

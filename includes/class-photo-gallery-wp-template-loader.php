@@ -1,6 +1,6 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
 }
 
 class Photo_Gallery_WP_Template_Loader
@@ -23,7 +23,7 @@ class Photo_Gallery_WP_Template_Loader
         global $post;
         global $wpdb;
 
-        if (!is_null($albums)) {
+        /*if (!is_null($albums)) {
             foreach ($albums as $key => $val) {
                 $album_params[$key] = array(
                     "album_id" => $val->id,
@@ -33,9 +33,8 @@ class Photo_Gallery_WP_Template_Loader
 
             $album_num = $val->content_per_page;
             $album_total = intval(((count($albums) - 1) / $album_num) + 1);
-        }
+        }*/
 
-        debug::trace($album_params);
 
         $galleryID = $gallery[0]->id;
         $view = $gallery[0]->photo_gallery_wp_sl_effects;
@@ -48,26 +47,26 @@ class Photo_Gallery_WP_Template_Loader
         $huge_it_ip = photo_gallery_wp_get_ip();
         $pID = $post->ID;
 
-        $slidertitle=$gallery[0]->name;
-        $sliderheight=$gallery[0]->sl_height - 2*Photo_Gallery_WP()->settings->slider_slideshow_border_size;
-        $sliderwidth=$gallery[0]->sl_width - 2*Photo_Gallery_WP()->settings->slider_slideshow_border_size;
-        $slidereffect=$gallery[0]->gallery_list_effects_s;
-        $slidepausetime=($gallery[0]->description+$gallery[0]->param);
-        $sliderpauseonhover=$gallery[0]->pause_on_hover;
-        $sliderposition=$gallery[0]->sl_position;
-        $slidechangespeed=$gallery[0]->param;
+        $slidertitle = $gallery[0]->name;
+        $sliderheight = $gallery[0]->sl_height - 2 * Photo_Gallery_WP()->settings->slider_slideshow_border_size;
+        $sliderwidth = $gallery[0]->sl_width - 2 * Photo_Gallery_WP()->settings->slider_slideshow_border_size;
+        $slidereffect = $gallery[0]->gallery_list_effects_s;
+        $slidepausetime = ($gallery[0]->description + $gallery[0]->param);
+        $sliderpauseonhover = $gallery[0]->pause_on_hover;
+        $sliderposition = $gallery[0]->sl_position;
+        $slidechangespeed = $gallery[0]->param;
         $trim_slider_title_position = trim(Photo_Gallery_WP()->settings->slider_title_position);
         $slideshow_title_position = explode('-', $trim_slider_title_position);
         $trim_slider_description_position = trim(Photo_Gallery_WP()->settings->slider_description_position);
         $slideshow_description_position = explode('-', $trim_slider_description_position);
-        $has_youtube  = 'false';
-        $has_vimeo    = 'false';
+        $has_youtube = 'false';
+        $has_vimeo = 'false';
 
-        foreach ( $images as $image ) {
-            if ( strpos( $image->image_url, 'youtu' ) !== false ) {
+        foreach ($images as $image) {
+            if (strpos($image->image_url, 'youtu') !== false) {
                 $has_youtube = 'true';
             }
-            if ( strpos( $image->image_url, 'vimeo' ) !== false ) {
+            if (strpos($image->image_url, 'vimeo') !== false) {
                 $has_vimeo = 'true';
             }
         }
@@ -139,5 +138,5 @@ class Photo_Gallery_WP_Template_Loader
         }
 
 
-	}
+    }
 }
