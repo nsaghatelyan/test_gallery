@@ -20,6 +20,20 @@ function photo_gallery_wp_get_gallery_id()
     return $id;
 }
 
+function photo_gallery_wp_get_album_id()
+{
+    if (isset($_GET['page']) && $_GET['page'] == 'photo_gallery_wp_albums') {
+        if (isset($_GET["id"])) {
+            $id = intval($_GET["id"]);
+        } else {
+            $id = 0;
+        }
+    }
+
+    return $id;
+}
+
+
 /**
  * Get $_GET['task']
  *
@@ -36,6 +50,19 @@ function photo_gallery_wp_get_gallery_task()
     }
     return $task;
 }
+
+function photo_gallery_wp_get_album_task()
+{
+    if (isset($_GET['page']) && $_GET['page'] == 'photo_gallery_wp_albums') {
+        if (isset($_GET["task"])) {
+            $task = esc_html($_GET["task"]);
+        } else {
+            $task = '';
+        }
+    }
+    return $task;
+}
+
 
 /**
  * @param $catt

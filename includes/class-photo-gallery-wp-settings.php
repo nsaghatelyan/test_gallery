@@ -64,7 +64,10 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'title' => __( 'Masonry', 'photo-gallery-wp' )
             ),
             'mosaic' => array(
-            'title' => __( 'Mosaic', 'photo-gallery-wp' )
+                'title' => __('Mosaic', 'photo-gallery-wp')
+            ),
+            'albums' => array(
+                'title' => __('Albums', 'photo-gallery-wp')
             )
         );
     }
@@ -263,6 +266,28 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'panel' => 'mosaic',
                 'title' => __( 'Title Styles', 'photo-gallery-wp' ),
             ),
+
+            //ns code started hear
+            'album_styles' => array(
+                'panel' => 'albums',
+                'title' => __('Album styles', 'photo-gallery-wp')
+            ),
+            'album_sorting' => array(
+                'panel' => 'albums',
+                'title' => __('Album sorting', 'photo-gallery-wp')
+            ),
+            'album_onhover_effects' => array(
+                'panel' => 'albums',
+                'title' => __('Album on hover effect', 'photo-gallery-wp')
+            ),
+            'album_thumbnail_size' => array(
+                'panel' => 'albums',
+                'title' => __('Album thumbnail size', 'photo-gallery-wp')
+            ),
+            'album_content_style' => array(
+                'panel' => 'albums',
+                'title' => __('Album content style', 'photo-gallery-wp')
+            )
         );
     }
 
@@ -280,6 +305,7 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
         $controls_slider = $this->controls_slider();
         $controls_masonry = $this->controls_masonry();
         $controls_mosaic = $this->controls_mosaic();
+        $controls_albums = $this->controls_albums();
 
         foreach ($controls_gallery_content_pop_up as $control_id => $control) {
             $this->controls[$control_id] = $control;
@@ -303,6 +329,9 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
             $this->controls[$control_id] = $control;
         }
         foreach ($controls_mosaic as $control_id => $control) {
+            $this->controls[$control_id] = $control;
+        }
+        foreach ($controls_albums as $control_id => $control) {
             $this->controls[$control_id] = $control;
         }
 
@@ -2643,6 +2672,91 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
         );
     }
 
+///ns code started hear
+    private function controls_albums()
+    {
+        return array(
+            'album_style' => array(
+                'section' => 'album_styles',
+                'type' => 'select',
+                'default' => $this->album_styles,
+                'label' => __('Album style', 'photo-gallery-wp'),
+                'help' => __('album_style', 'photo-gallery-wp'),
+                'choices' => array(
+                    '1' => 'view 1',
+                    '2' => 'view 2'
+                )
+            ),
+
+            'album_sorting' => array(
+                'section' => 'album_sorting',
+                'type' => 'select',
+                'default' => $this->album_sorting,
+                'label' => __('Album sorting', 'photo-gallery-wp'),
+                'help' => __('album_sorting', 'photo-gallery-wp'),
+                'choices' => array(
+                    '0' => 'by date',
+                    '1' => 'by name'
+                )
+            ),
+            'album_onhover_effects' => array(
+                'section' => 'album_onhover_effects',
+                'type' => 'select',
+                'default' => $this->album_onhover_effects,
+                'label' => __('On hover effect', 'photo-gallery-wp'),
+                'help' => __('album_onhover_effects', 'photo-gallery-wp'),
+                'choices' => array(
+                    '0' => 'effect 1',
+                    '1' => 'effect 2',
+                    '2' => 'effect 3',
+                    '3' => 'effect 4',
+                    '4' => 'effect 5'
+                )
+            ),
+            'album_thumbnail_width_size' => array(
+                'section' => 'album_thumbnail_size',
+                'type' => 'number',
+                'default' => $this->album_thumbnail_width_size,
+                'label' => __('Thumbnail width in px', 'photo-gallery-wp')
+            ),
+            'album_thumbnail_height_size' => array(
+                'section' => 'album_thumbnail_size',
+                'type' => 'number',
+                'default' => $this->album_thumbnail_height_size,
+                'label' => __('Thumbnail height in px', 'photo-gallery-wp')
+            ),
+            'album_show_title' => array(
+                'section' => 'album_content_style',
+                'type' => 'checkbox',
+                'default' => $this->album_show_title,
+                'label' => __('Show title', 'photo-gallery-wp'),
+                'help' => __('show_title', 'photo-gallery-wp')
+            ),
+            'album_show_description' => array(
+                'section' => 'album_content_style',
+                'type' => 'checkbox',
+                'default' => $this->album_show_description,
+                'label' => __('Show description', 'photo-gallery-wp'),
+                'help' => __('show_description', 'photo-gallery-wp')
+            ),
+            'album_show_image_count' => array(
+                'section' => 'album_content_style',
+                'type' => 'checkbox',
+                'default' => $this->album_show_image_count,
+                'label' => __('Show images count', 'photo-gallery-wp'),
+                'help' => __('show_images_count', 'photo-gallery-wp')
+            ),
+            'album_show_sharing_buttons' => array(
+                'section' => 'album_content_style',
+                'type' => 'checkbox',
+                'default' => $this->album_show_sharing_buttons,
+                'label' => __('Show sharing buttons', 'photo-gallery-wp'),
+                'help' => __('show_sharing_buttons', 'photo-gallery-wp')
+            ),
+
+        );
+    }
+
 
     /**
      * Radio buttons
@@ -2667,7 +2781,8 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                     foreach( $control['choices'] as $key ){
                         ?>
                         <li style="display: inline-block" >
-                            <input type="radio" value="<?php echo $key ?>" <?php checked($default, $key); ?> id="<?php echo $id.'-'.$key; ?>" name="wpdev_options[<?php echo $id; ?>]"  />
+                            <input type="radio" value="<?php echo $key ?>" <?php checked($default, $key); ?> 
+			    id="<?php echo $id.'-'.$key; ?>" name="wpdev_options[<?php echo $id; ?>]"  />
                             <label for="<?php echo $id.'-'.$key; ?>"><span class="radicon"></span></label>
                         </li>
                         <?php if ($key % 3 == 0) {

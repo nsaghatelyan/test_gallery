@@ -126,7 +126,10 @@ class Photo_Gallery_WP_Galleries
             }
         }
         $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys WHERE id= %d", $id);
+        $query2 = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_albums WHERE id= %d", $id);
+
         $row = $wpdb->get_row($query);
+        $album_row = $wpdb->get_row($query2);
         if (!isset($row->gallery_list_effects_s)) {
             return 'id not found';
         }
@@ -222,7 +225,18 @@ INSERT INTO
                     }
                 }
 
-                $wpdb->update($wpdb->prefix . "photo_gallery_wp_gallerys",$data,$where,$format,$where_format );
+                if (isset($_POST["album_name"]) && $_POST["album_name"] != "") {
+                    $album_data = array(
+                        "name" => sanitize_text_field($_POST["album_name"]),
+                        "description" => sanitize_text_field($_POST["album_description"])
+                    );
+
+                    $album_format = array('%s', '%s');
+
+                    $wpdb->update($wpdb->prefix . "photo_gallery_wp_albums", $album_data, $where, $album_format, $where_format);
+                }
+
+                $wpdb->update($wpdb->prefix . "photo_gallery_wp_gallerys", $data, $where, $format, $where_format);
             }
         }
         // End Created By Karen S.

@@ -85,7 +85,8 @@ class Photo_Gallery_WP_Widget extends WP_Widget {
 				$query     = "SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys ";
 				$rowwidget = $wpdb->get_results( $query );
 				foreach ( $rowwidget as $rowwidgetecho ) { ?>
-					<option <?php selected( $selected_gallery, $rowwidgetecho->id, true); ?> value="<?php echo $rowwidgetecho->id; ?>"><?php echo $rowwidgetecho->name; ?></option>
+					<option <?php selected( $selected_gallery, $rowwidgetecho->id, true); ?> 
+					value="<?php echo $rowwidgetecho->id; ?>"><?php echo $rowwidgetecho->name; ?></option>
 				<?php } ?>
 			</select>
 		</p>

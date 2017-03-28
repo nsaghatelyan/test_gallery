@@ -4,30 +4,32 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-class Photo_Gallery_WP__Shortcode {
+class Photo_Gallery_WP__Shortcode
+{
 
-	/**
-	 * Photo_Gallery_WP__Shortcode constructor.
-	 */
-	public function __construct() {
-		add_shortcode( 'photo_gallery_wp', array( $this, 'run_shortcode' ) );
-		add_action( 'admin_footer', array( $this, 'inline_popup_content' ) );
-		add_action( 'media_buttons_context', array( $this, 'add_editor_media_button' ) );
+    /**
+     * Photo_Gallery_WP__Shortcode constructor.
+     */
+    public function __construct()
+    {
+        add_shortcode('photo_gallery_wp', array($this, 'run_shortcode'));
+        add_shortcode('photo_gallery_wp_album', array($this, 'run_shortcode_album'));
+        add_action('admin_footer', array($this, 'inline_popup_content'));
+        add_action('media_buttons_context', array($this, 'add_editor_media_button'));
+    }
 
-	}
-
-	/**
-	 * Run the shortcode on front-end
-	 *
-	 * @param $attrs
-	 *
-	 * @return string
-	 */
-	public function run_shortcode( $attrs ) {
-		$attrs = shortcode_atts( array(
-			'id' => 'photo gallery wp',
-
-		), $attrs );
+    /**
+     * Run the shortcode on front-end
+     *
+     * @param $attrs
+     *
+     * @return string
+     */
+    public function run_shortcode($attrs)
+    {
+        $attrs = shortcode_atts(array(
+            'id' => 'photo gallery wp',
+        ), $attrs);
 
 		global $wpdb;
 		$query        = $wpdb->prepare( "SELECT photo_gallery_wp_sl_effects FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys WHERE id=%d", $attrs['id'] );
@@ -51,18 +53,88 @@ class Photo_Gallery_WP__Shortcode {
 		return $this->init_frontend( $attrs['id'] );
 	}
 
-	/**
-	 * Show published galleries in frontend
-	 *
-	 * @param $id
-	 *
-	 * @return string
-	 */
-	protected function init_frontend( $id ) {
-		global $wpdb;
+    public function run_shortcode_album($attrs)
+    {
 
-		$query  = $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_images where gallery_id = '%d' order by ordering ASC", $id );
-		$images = $wpdb->get_results( $query );
+        $id_array = explode(",", $attrs["id"]);
+        $attrs = shortcode_atts(array(
+            'id' => 'photo gallery wp',
+        ), $attrs);
+
+
+        global $wpdb;
+
+
+        $query = $wpdb->prepare("SELECT photo_gallery_wp_sl_effects FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys WHERE id=%d", $attrs['id']);
+        $gallery_view = $wpdb->get_var($query);
+        $query = $wpdb->prepare("SELECT image_url FROM " . $wpdb->prefix . "photo_gallery_wp_images WHERE gallery_id=%d ORDER BY `id` DESC LIMIT 1", $attrs['id']);
+        $images = $wpdb->get_col($query);
+
+
+        $has_youtube = false;
+        $has_vimeo = false;
+        foreach ($images as $image_row) {
+            if (strpos($image_row, 'youtu') !== false) {
+                $has_youtube = true;
+            }
+            if (strpos($image_row, 'vimeo') !== false) {
+                $has_vimeo = true;
+            }
+        }
+
+        do_action('Photo_Gallery_WP_Shortcode_scripts', $attrs['id'], $gallery_view, $has_youtube, $has_vimeo);
+        do_action('Photo_gallery_wp_localize_scripts', $attrs['id']);
+
+        return $this->init_frontend($id_array);
+    }
+
+    /**
+     * Show published galleries in frontend
+     *
+     * @param $id
+     *
+     * @return string
+     */
+    protected function init_frontend($id_array)
+    {
+        global $wpdb;
+        $format = '';
+
+
+        if (count($id_array) == 1) {
+            $id = $id_array[0];
+        } else {
+            $id = implode(",", $id_array);
+        }
+
+        $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_images where gallery_id IN (" . $id . ") order by ordering ASC", "");
+        $images = $wpdb->get_results($query);
+
+        $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys where id IN (" . $id . ") order by id ASC", "");
+        $gallery = $wpdb->get_results($query);
+
+        $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_albums where id IN (" . $id . ") order by id ASC", "");
+        $albums = $wpdb->get_results($query);
+
+
+        foreach ($gallery as $val) {
+            $val->album = $albums;
+        }
+
+
+        ob_start();
+
+        Photo_Gallery_WP()->template_loader->load_front_end($images, $gallery, $albums);
+
+        return ob_get_clean();
+    }
+
+    protected function album_init_frontend($id)
+    {
+        global $wpdb;
+
+        $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_images where gallery_id = '%d' order by ordering ASC", $id);
+        $images = $wpdb->get_results($query);
 
 		$query   = $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys where id = '%d' order by id ASC", $id );
 		$gallery = $wpdb->get_results( $query );

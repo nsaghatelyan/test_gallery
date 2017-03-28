@@ -312,49 +312,69 @@ if ( isset( $_GET["addslide"] ) ) {
 											   value="<?php echo esc_html( stripslashes( $row->name ) ); ?>"
 											   onkeyup="name_changeRight(this)">
 									</li>
-									<li>
-										<label
-											for="photo_gallery_wp_sl_effects"><?php echo __( 'Select View', 'photo-gallery-wp' ); ?></label>
-										<select name="photo_gallery_wp_sl_effects" id="photo_gallery_wp_sl_effects">
-											<option <?php if ( $row->photo_gallery_wp_sl_effects == '0' ) {
-												echo 'selected';
-											} ?>
-												value="0"><?php echo __( 'Gallery/Content-Popup', 'photo-gallery-wp' ); ?></option>
-											<option <?php if ( $row->photo_gallery_wp_sl_effects == '1' ) {
-												echo 'selected';
-											} ?>
-												value="1"><?php echo __( 'Content Slider', 'photo-gallery-wp' ); ?></option>
-											<option <?php if ( $row->photo_gallery_wp_sl_effects == '5' ) {
-												echo 'selected';
-											} ?>
-												value="5"><?php echo __( 'Lightbox-Gallery', 'photo-gallery-wp' ); ?></option>
-											<option <?php if ( $row->photo_gallery_wp_sl_effects == '3' ) {
-												echo 'selected';
-											} ?> value="3"><?php echo __( 'Slider', 'photo-gallery-wp' ); ?></option>
-											<option <?php if ( $row->photo_gallery_wp_sl_effects == '4' ) {
-												echo 'selected';
-											} ?>
-												value="4"><?php echo __( 'Thumbnails View', 'photo-gallery-wp' ); ?></option>
-											<option <?php if ( $row->photo_gallery_wp_sl_effects == '6' ) {
-												echo 'selected';
-											} ?> value="6"><?php echo __( 'Justified', 'photo-gallery-wp' ); ?></option>
-											<option <?php if ( $row->photo_gallery_wp_sl_effects == '7' ) {
-												echo 'selected';
-											} ?> value="7"><?php echo __( 'Masonry', 'photo-gallery-wp' ); ?></option>
-											<option <?php if ( $row->photo_gallery_wp_sl_effects == '8' ) {
-												echo 'selected';
-											} ?> value="8"><?php echo __( 'Mosaic', 'photo-gallery-wp' ); ?></option>
-										</select>
-									</li>
-									<div id="ph-gallery-wp-current-options-0"
-										 class="ph-gallery-wp-current-options <?php if ( $row->photo_gallery_wp_sl_effects == 0 ) {
-											 echo ' active';
-										 } ?>">
-										<ul id="view7">
-											<li>
-												<label
-													for="display_type"><?php echo __( 'Displaying Content', 'photo-gallery-wp' ); ?></label>
-												<select id="display_type" name="display_type">
+                                    <?php //ns code start ?>
+                                    <li>
+                                        <label
+                                                for="huge_it_gallery_album_name"><?php echo __('Album name', 'photo-gallery-wp'); ?></label>
+                                        <input type="text" name="album_name" id="huge_it_gallery_album_name"
+                                               value="<?php echo esc_html(stripslashes($album_row->name)); ?>"
+                                               onkeyup="name_changeRight(this)">
+                                    </li>
+                                    <li>
+                                        <label
+                                                for="huge_it_gallery_album_description"><?php echo __('Album description', 'photo-gallery-wp'); ?></label>
+                                        <textarea type="text" name="album_description"
+                                                  id="huge_it_gallery_album_description"
+                                                  onkeyup="name_changeRight(this)">
+                                        <?php echo esc_html(stripslashes($album_row->description)); ?>
+                                        </textarea>
+                                    </li>
+                                    <?php //ns code end ?>
+
+
+                                    <li>
+                                        <label
+                                                for="photo_gallery_wp_sl_effects"><?php echo __('Select View', 'photo-gallery-wp'); ?></label>
+                                        <select name="photo_gallery_wp_sl_effects" id="photo_gallery_wp_sl_effects">
+                                            <option <?php if ($row->photo_gallery_wp_sl_effects == '0') {
+                                                echo 'selected';
+                                            } ?>
+                                                    value="0"><?php echo __('Gallery/Content-Popup', 'photo-gallery-wp'); ?></option>
+                                            <option <?php if ($row->photo_gallery_wp_sl_effects == '1') {
+                                                echo 'selected';
+                                            } ?>
+                                                    value="1"><?php echo __('Content Slider', 'photo-gallery-wp'); ?></option>
+                                            <option <?php if ($row->photo_gallery_wp_sl_effects == '5') {
+                                                echo 'selected';
+                                            } ?>
+                                                    value="5"><?php echo __('Lightbox-Gallery', 'photo-gallery-wp'); ?></option>
+                                            <option <?php if ($row->photo_gallery_wp_sl_effects == '3') {
+                                                echo 'selected';
+                                            } ?> value="3"><?php echo __('Slider', 'photo-gallery-wp'); ?></option>
+                                            <option <?php if ($row->photo_gallery_wp_sl_effects == '4') {
+                                                echo 'selected';
+                                            } ?>
+                                                    value="4"><?php echo __('Thumbnails View', 'photo-gallery-wp'); ?></option>
+                                            <option <?php if ($row->photo_gallery_wp_sl_effects == '6') {
+                                                echo 'selected';
+                                            } ?> value="6"><?php echo __('Justified', 'photo-gallery-wp'); ?></option>
+                                            <option <?php if ($row->photo_gallery_wp_sl_effects == '7') {
+                                                echo 'selected';
+                                            } ?> value="7"><?php echo __('Masonry', 'photo-gallery-wp'); ?></option>
+                                            <option <?php if ($row->photo_gallery_wp_sl_effects == '8') {
+                                                echo 'selected';
+                                            } ?> value="8"><?php echo __('Mosaic', 'photo-gallery-wp'); ?></option>
+                                        </select>
+                                    </li>
+                                    <div id="ph-gallery-wp-current-options-0"
+                                         class="ph-gallery-wp-current-options <?php if ($row->photo_gallery_wp_sl_effects == 0) {
+                                             echo ' active';
+                                         } ?>">
+                                        <ul id="view7">
+                                            <li>
+                                                <label
+                                                        for="display_type"><?php echo __('Displaying Content', 'photo-gallery-wp'); ?></label>
+                                                <select id="display_type" name="display_type">
 
 													<option <?php if ( $row->display_type == 0 ) {
 														echo 'selected';
@@ -660,15 +680,51 @@ if ( isset( $_GET["addslide"] ) ) {
 											</li>
 										</ul>
 									</div>
-									<div id="ph-gallery-wp-current-options-7"
-										 class="ph-gallery-wp-current-options <?php if ( $row->photo_gallery_wp_sl_effects == 7 ) {
-											 echo ' active';
-										 } ?>">
-										<ul id="view7">
-											<li>
-												<label
-													for="display_type"><?php echo __( 'Displaying Content', 'photo-gallery-wp' ); ?></label>
-												<select id="display_type" name="display_type">
+                                    <?php //ns code ?>
+                                    <div id="ph-gallery-wp-current-options-7"
+                                         class="ph-gallery-wp-current-options <?php if ($row->photo_gallery_wp_sl_effects == 7) {
+                                             echo ' active';
+                                         } ?>">
+                                        <ul id="view7">
+                                            <li>
+                                                <label
+                                                        for="display_type"><?php echo __('Displaying Content', 'photo-gallery-wp'); ?></label>
+                                                <select id="display_type" name="display_type">
+
+                                                    <option <?php if ($row->display_type == 0) {
+                                                        echo 'selected';
+                                                    } ?>
+                                                            value="0"><?php echo __('Pagination', 'photo-gallery-wp'); ?></option>
+                                                    <option <?php if ($row->display_type == 1) {
+                                                        echo 'selected';
+                                                    } ?>
+                                                            value="1"><?php echo __('Load More', 'photo-gallery-wp'); ?></option>
+                                                    <option <?php if ($row->display_type == 2) {
+                                                        echo 'selected';
+                                                    } ?>
+                                                            value="2"><?php echo __('Show All', 'photo-gallery-wp'); ?></option>
+                                                </select>
+                                            </li>
+                                            <li id="content_per_page">
+                                                <label
+                                                        for="content_per_page"><?php echo __('Images Per Page', 'photo-gallery-wp'); ?></label>
+                                                <input type="text" name="content_per_page" id="content_per_page"
+                                                       value="<?php echo esc_attr($row->content_per_page); ?>"
+                                                       class="text_area"/>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <?php //ns code end ?>
+                                    <div id="ph-gallery-wp-current-options-7"
+                                         class="ph-gallery-wp-current-options <?php if ($row->photo_gallery_wp_sl_effects == 7) {
+                                             echo ' active';
+                                         } ?>">
+                                        <ul id="view7">
+                                            <li>
+                                                <label
+                                                        for="display_type"><?php echo __('Displaying Content', 'photo-gallery-wp'); ?></label>
+                                                <select id="display_type" name="display_type">
 
 													<option <?php if ( $row->display_type == 0 ) {
 														echo 'selected';

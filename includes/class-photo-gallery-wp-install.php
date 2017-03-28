@@ -51,6 +51,7 @@ CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "photo_gallery_wp_like_dislike` 
         $sql_photo_gallery_wp_gallerys     = "
 CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "photo_gallery_wp_gallerys` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id_album` int(11) unsigned,
   `name` varchar(200) NOT NULL,
   `sl_height` int(11) unsigned DEFAULT NULL,
   `sl_width` int(11) unsigned DEFAULT NULL,
@@ -67,6 +68,22 @@ CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "photo_gallery_wp_gallerys` (
   UNIQUE KEY `id` (`id`)
 )   DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ";
 
+        $sql_photo_gallery_wp_albums = "
+CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "photo_gallery_wp_albums` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) NOT NULL,
+  `sl_height` int(11) unsigned DEFAULT NULL,
+  `sl_width` int(11) unsigned DEFAULT NULL,
+  `gallery_list_effects_s` text,
+  `description` text,
+  `sl_position` text NOT NULL,
+  `ordering` int(11) NOT NULL,
+  `published` text,
+  `photo_gallery_wp_sl_effects` text NOT NULL,
+  `gallery_loader_type` tinyint DEFAULT 1,
+  PRIMARY KEY (`id`)
+)   DEFAULT CHARSET=utf8";
+
         $table_name = $wpdb->prefix . "photo_gallery_wp_images";
         $sql_2      = "
 INSERT INTO 
@@ -80,19 +97,27 @@ INSERT INTO
 (7, 'ipsum dolor', '1', '<h6>Lorem Ipsum</h6><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p><p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', '" . PHOTO_GALLERY_WP_IMAGES_URL . "/front_images/projects/7.jpg" . "', 'http://huge-it.com/fields/order-website-maintenance/', 'image', 'on', 6, 1, NULL),
 (8, 'Photo with exposure', '1', '<h6>Lorem Ipsum </h6><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p><p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><ul><li>lorem ipsum</li><li>dolor sit amet</li><li>lorem ipsum</li><li>dolor sit amet</li></ul>', '" . PHOTO_GALLERY_WP_IMAGES_URL . "/front_images/projects/8.jpg" . "', 'http://huge-it.com/fields/order-website-maintenance/', 'image', 'on', 7, 1, NULL),
 (9, 'Lorem Ipsum', '1', '<h6>Lorem Ipsum </h6><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p><p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><ul><li>lorem ipsum</li><li>dolor sit amet</li><li>lorem ipsum</li><li>dolor sit amet</li></ul>', '" . PHOTO_GALLERY_WP_IMAGES_URL . "/front_images/projects/9.jpg" . "', 'http://huge-it.com/fields/order-website-maintenance/', 'image', 'on', 7, 1, NULL)";
+
+        $album_table_name = $wpdb->prefix . "photo_gallery_wp_albums";
         $table_name = $wpdb->prefix . "photo_gallery_wp_gallerys";
-        $sql_3      = "
-INSERT INTO `$table_name` (`id`, `name`, `sl_height`, `sl_width`, `pause_on_hover`, `gallery_list_effects_s`, `description`, `param`, `sl_position`, `ordering`, `published`, `photo_gallery_wp_sl_effects`) VALUES
-(1, 'My First Gallery', 375, 600, 'on', 'random', '4000', '1000', 'center', 1, '300', '5')";
-        $wpdb->query( $sql_photo_gallery_wp_images );
-        $wpdb->query( $sql_photo_gallery_wp_gallerys );
-        $wpdb->query( $sql_photo_gallery_wp_like_dislike );
+        $sql_3 = "
+INSERT INTO `$album_table_name` (`id`, `name`, `sl_height`, `sl_width`, `gallery_list_effects_s`, `description`, `sl_position`, `ordering`, `published`, `photo_gallery_wp_sl_effects`) VALUES
+(1, 'My First Album', 375, 600, 'random', '4000', 'center', 1, '300', '5')";
+
+        $sql_3_2 = "
+        INSERT INTO `$table_name` (`id`, `id_album`, `name`, `sl_height`, `sl_width`, `pause_on_hover`, `gallery_list_effects_s`, `description`, `param`, `sl_position`, `ordering`, `published`, `photo_gallery_wp_sl_effects`) VALUES
+(1, 1, 'My First Gallery', 375, 600, 'on', 'random', '4000', '1000', 'center', 1, '300', '5')";
+        $wpdb->query($sql_photo_gallery_wp_images);
+        $wpdb->query($sql_photo_gallery_wp_gallerys);
+        $wpdb->query($sql_photo_gallery_wp_like_dislike);
+        $wpdb->query($sql_photo_gallery_wp_albums);
 
         if ( ! $wpdb->get_var( "select count(*) from " . $wpdb->prefix . "photo_gallery_wp_images" ) ) {
             $wpdb->query( $sql_2 );
         }
-        if ( ! $wpdb->get_var( "select count(*) from " . $wpdb->prefix . "photo_gallery_wp_gallerys" ) ) {
-            $wpdb->query( $sql_3 );
+        if (!$wpdb->get_var("select count(*) from " . $wpdb->prefix . "photo_gallery_wp_gallerys")) {
+            $wpdb->query($sql_3);
+            $wpdb->query($sql_3_2);
         }
         ////////////////////////////////////////
         $imagesAllFieldsInArray2 = $wpdb->get_results( "DESCRIBE " . $wpdb->prefix . "photo_gallery_wp_gallerys", ARRAY_A );

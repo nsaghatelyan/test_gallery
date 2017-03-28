@@ -893,18 +893,18 @@ class Photo_Gallery_WP_Ajax
                     <?php
                     switch ( $imagerowstype ) {
                         case 'image': ?>
-                            <a href="<?php echo $row->image_url; ?>" class="ph-lightbox">
-                                <img src="<?php echo $row->image_url; ?>" alt="">
+                            <a href="<?php echo esc_url($row->image_url); ?>" class="ph-lightbox">
+ +                                <img src="<?php echo esc_url($row->image_url); ?>" alt="">
                             </a>
                             <?php if ( Photo_Gallery_WP()->settings->masonry_title_show_title == 'yes' ) { ?>
                                 <div class="title-masonry-image">
-                                    <a title="<?php echo $row->name; ?>" href="<?php echo $row->sl_url; ?>"
-                                       target="_blank"><?php echo $row->name; ?></a>
+                                    <a href="<?php echo esc_url($row->image_url); ?>" class="ph-lightbox">
+ +                                <img src="<?php echo esc_url($row->image_url); ?>" alt="">
                                 </div>
                             <?php }
                             break;
                         case 'video':
-                            $videourl = photo_gallery_wp_get_video_id_from_url( $row->image_url );
+                            $videourl = photo_gallery_wp_get_video_id_from_url( esc_url($row->image_url) );
                             if ( $videourl[1] == 'youtube' ) {
                                 ?>
                                 <a href="<?php echo $row->image_url; ?>" class="ph-lightbox">

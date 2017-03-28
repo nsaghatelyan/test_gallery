@@ -5,12 +5,28 @@
     var $ = jQuery;
     var shortcode = null;
     $(document).ready(function () {
-        jQuery('.ph-gallery-wp_galleryinsert').on('click', function() {
+        jQuery('.ph-gallery-wp_galleryinsert').on('click', function () {
             if (shortcode != null) {
                 window.send_to_editor('[photo_gallery_wp id="' + shortcode + '"]');
                 tb_remove();
             } else {
                 alert("Select one please");
+            }
+        });
+
+        jQuery('.ph-gallery-wp_albuminsert').on('click', function () {
+            var id_array = [];
+            $(".gallery_item").each(function () {
+                if (jQuery(this).prop("checked") === true) {
+                    id_array.push(jQuery(this).val());
+                }
+            });
+
+            if (id_array.length > 0) {
+                window.send_to_editor('[photo_gallery_album_wp id="' + id_array.join() + '"]');
+                tb_remove();
+            } else {
+                alert("Select at least one please");
             }
         });
 
@@ -28,8 +44,8 @@
         });
 
         $('.ph-g-wp-gallery-tbl').click(function () {
-           $('.ph-g-wp-gallery-tbl-selected').removeClass('ph-g-wp-gallery-tbl-selected');
-           $(this).addClass('ph-g-wp-gallery-tbl-selected');
+            $('.ph-g-wp-gallery-tbl-selected').removeClass('ph-g-wp-gallery-tbl-selected');
+            $(this).addClass('ph-g-wp-gallery-tbl-selected');
             shortcode = $(this).attr('data-shortcode');
         });
         $('.ph-g-wp-thumb-div').click(function () {

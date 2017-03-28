@@ -74,11 +74,13 @@ class Photo_Gallery_WP_Admin
     protected function init()
     {
         $this->galleries = new Photo_Gallery_WP_Galleries();
+	$this->albums = new Photo_Gallery_WP_Albums();
         $this->featured_plugins = new Photo_Gallery_WP_Featured_Plugins();
-        $this->albums = new Photo_Gallery_WP_Albums();
+       
     }
 
-    public function admin_menu_after_settings(){
+    public function admin_menu_after_settings()
+    {
         ++$this->settings_page_count;
         if( $this->settings_page_count !== 2 )
             return;
@@ -102,7 +104,10 @@ class Photo_Gallery_WP_Admin
             Photo_Gallery_WP()->admin->galleries,
             'load_gallery_page'
         ));
-
+        $this->pages[] = add_submenu_page('photo_gallery_wp_gallery', __('Albums', 'photo-gallery-wp'), __('Albums', 'photo-gallery-wp'), 'manage_options', 'photo_gallery_wp_albums', array(
+            Photo_Gallery_WP()->admin->albums,
+            'load_album_page'
+        ));
     }
 
 
@@ -115,15 +120,26 @@ class Photo_Gallery_WP_Admin
                 wp_die('Security check fail');
             }
         }
+
+        if (isset($_REQUEST['photo_gallery_wp_nonce_add_album'])) {
+            $photo_gallery_wp_nonce_add_album = $_REQUEST['photo_gallery_wp_nonce_add_album'];
+            if (!wp_verify_nonce($photo_gallery_wp_nonce_add_album, 'photo_gallery_wp_nonce_add_album')) {
+                wp_die('Security check fail');
+            }
+        }
+
         global $wpdb;
         if (isset($_GET['task'])) {
             $task = sanitize_text_field($_GET['task']);
             if ($task == 'add_cat') {
+
+                $album_id = $this->add_album();
+
                 $table_name = $wpdb->prefix . "photo_gallery_wp_gallerys";
                 $sql_2 = "
 INSERT INTO 
-`" . $table_name . "` ( `name`, `sl_height`, `sl_width`, `pause_on_hover`, `gallery_list_effects_s`, `description`, `param`, `sl_position`, `ordering`, `published`, `photo_gallery_wp_sl_effects`) VALUES
-( 'New gallery', '375', '600', 'on', 'cubeH', '4000', '1000', 'center', '1', '300', '4')";
+`" . $table_name . "` ( `id_album`,`name`, `sl_height`, `sl_width`, `pause_on_hover`, `gallery_list_effects_s`, `description`, `param`, `sl_position`, `ordering`, `published`, `photo_gallery_wp_sl_effects`) VALUES
+( '" . $album_id . "','New gallery', '375', '600', 'on', 'cubeH', '4000', '1000', 'center', '1', '300', '4')";
                 $wpdb->query($sql_2);
                 $query = "SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys order by id ASC";
                 $rowsldcc = $wpdb->get_results($query);
@@ -137,6 +153,34 @@ INSERT INTO
                 }
             }
         }
+
+        if (isset($_GET['task'])) {
+            $task = sanitize_text_field($_GET['task']);
+        }
+
+
+    }
+
+    public function add_album()
+    {
+        global $wpdb;
+        $table_name = $wpdb->prefix . "photo_gallery_wp_albums";
+        $sql = "
+INSERT INTO 
+`" . $table_name . "` ( `name`, `sl_height`, `sl_width`, `gallery_list_effects_s`, `description`, `sl_position`, `ordering`, `published`, `photo_gallery_wp_sl_effects`) VALUES
+( 'New Album', '375', '600', 'cubeH', '4000', 'center', '1', '300', '4')";
+        $wpdb->query($sql);
+        $query = "SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_albums order by id DESC LIMIT 1";
+        $rowsldcc = $wpdb->get_results($query);
+
+        return $rowsldcc[0]->id;
+
+        /* foreach ($rowsldcc as $key => $rowsldccs) {
+             if ($last_key == $key) {
+ //                header('Location: admin.php?page=photo_gallery_wp_albums&id=' . $rowsldccs->id . '&task=apply');
+                 return $rowsldcc->id;
+             }
+         }*/
     }
 
     public function wp_loaded_video()
