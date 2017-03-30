@@ -22,6 +22,7 @@
                 }
             });
 
+
             if (id_array.length > 0) {
                 window.send_to_editor('[photo_gallery_album_wp id="' + id_array.join() + '"]');
                 tb_remove();

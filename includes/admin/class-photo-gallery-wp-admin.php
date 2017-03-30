@@ -65,7 +65,8 @@ class Photo_Gallery_WP_Admin
         add_action('wp_loaded', array($this, 'wp_loaded_video'));
         add_action('wp_loaded', array($this, 'wp_loaded_duplicate_gallery'));
         add_action('wp_loaded', array($this, 'wp_loaded_remove_photo_gallery_wp'));
-        add_action( 'wpdev_settings_photo_gallery_wp_admin_menu', array( $this, 'admin_menu_after_settings' ) );
+        add_action('wp_loaded', array($this, 'wp_loaded_remove_photo_gallery_album_wp'));
+        add_action('wpdev_settings_photo_gallery_wp_admin_menu', array($this, 'admin_menu_after_settings'));
     }
 
     /**
@@ -74,15 +75,15 @@ class Photo_Gallery_WP_Admin
     protected function init()
     {
         $this->galleries = new Photo_Gallery_WP_Galleries();
-	$this->albums = new Photo_Gallery_WP_Albums();
+        $this->albums = new Photo_Gallery_WP_Albums();
         $this->featured_plugins = new Photo_Gallery_WP_Featured_Plugins();
-       
+
     }
 
     public function admin_menu_after_settings()
     {
         ++$this->settings_page_count;
-        if( $this->settings_page_count !== 2 )
+        if ($this->settings_page_count !== 2)
             return;
         $this->pages['featured_plugins'] = add_submenu_page('photo_gallery_wp_gallery', __('Featured Plugins', 'photo-gallery-wp'), __('Featured Plugins', 'photo-gallery-wp'), 'manage_options', 'huge_it_ph_gallery_featured_plugins', array(
             Photo_Gallery_WP()->admin->featured_plugins,
@@ -133,13 +134,12 @@ class Photo_Gallery_WP_Admin
             $task = sanitize_text_field($_GET['task']);
             if ($task == 'add_cat') {
 
-                $album_id = $this->add_album();
 
                 $table_name = $wpdb->prefix . "photo_gallery_wp_gallerys";
                 $sql_2 = "
 INSERT INTO 
 `" . $table_name . "` ( `id_album`,`name`, `sl_height`, `sl_width`, `pause_on_hover`, `gallery_list_effects_s`, `description`, `param`, `sl_position`, `ordering`, `published`, `photo_gallery_wp_sl_effects`) VALUES
-( '" . $album_id . "','New gallery', '375', '600', 'on', 'cubeH', '4000', '1000', 'center', '1', '300', '4')";
+( '0','New gallery', '375', '600', 'on', 'cubeH', '4000', '1000', 'center', '1', '300', '4')";
                 $wpdb->query($sql_2);
                 $query = "SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys order by id ASC";
                 $rowsldcc = $wpdb->get_results($query);
@@ -151,6 +151,11 @@ INSERT INTO
                         header('Location: admin.php?page=photo_gallery_wp_gallery&id=' . $rowsldccs->id . '&task=apply');
                     }
                 }
+            }
+
+            if ($task == 'add_new_album') {
+                $album_id = $this->add_album();
+                header('Location: admin.php?page=photo_gallery_wp_albums&id=' . $album_id . '&task=edit_cat');
             }
         }
 
@@ -174,13 +179,6 @@ INSERT INTO
         $rowsldcc = $wpdb->get_results($query);
 
         return $rowsldcc[0]->id;
-
-        /* foreach ($rowsldcc as $key => $rowsldccs) {
-             if ($last_key == $key) {
- //                header('Location: admin.php?page=photo_gallery_wp_albums&id=' . $rowsldccs->id . '&task=apply');
-                 return $rowsldcc->id;
-             }
-         }*/
     }
 
     public function wp_loaded_video()
@@ -312,6 +310,33 @@ INSERT INTO
                 setcookie('gallery_deleted', 'success', time() + 2);
             }
             wp_redirect('admin.php?page=photo_gallery_wp_gallery');
+        }
+    }
+
+    public function wp_loaded_remove_photo_gallery_album_wp()
+    {
+        if (isset($_GET["task"]) && $_GET["task"] == 'remove_photo_gallery_album_wp') {
+
+            debug::trace($_GET["task"]);
+
+            $id = absint($_GET["id"]);
+            if (isset($_REQUEST['photo_gallery_wp_nonce_remove_album'])) {
+                $photo_gallery_wp_nonce_remove_album = $_REQUEST['photo_gallery_wp_nonce_remove_album'];
+                if (!wp_verify_nonce($photo_gallery_wp_nonce_remove_album, 'photo_gallery_wp_nonce_remove_album' . $id)) {
+                    wp_die('Security check fail');
+                }
+            }
+            global $wpdb;
+            $sql_remove_album = $wpdb->prepare("DELETE FROM " . $wpdb->prefix . "photo_gallery_wp_albums WHERE id = %d", $id);
+            $sql_update_gallery = $wpdb->prepare("UPDATE " . $wpdb->prefix . "photo_gallery_wp_gallerys SET id_album = 0 WHERE id_album = %d", $id);
+            if (!$wpdb->query($sql_remove_album)) {
+                setcookie('album_deleted', 'fail', time() + 2);
+            } else {
+                $wpdb->query($sql_update_gallery);
+                $wpdb->query($sql_remove_album);
+                setcookie('album_deleted', 'success', time() + 2);
+            }
+            wp_redirect('admin.php?page=photo_gallery_wp_albums');
         }
     }
 }

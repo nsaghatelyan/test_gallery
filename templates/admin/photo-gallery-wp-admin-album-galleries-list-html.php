@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) {
 global $wpdb;
 
 $gallery_wp_nonce = wp_create_nonce('huge_it_gallery_nonce');
-$photo_gallery_wp_nonce_add_galery = wp_create_nonce('photo_gallery_wp_nonce_add_galery');
+$photo_gallery_wp_nonce_add_album = wp_create_nonce('photo_gallery_wp_nonce_add_album');
 if (isset($_GET['id']) && $_GET['id'] != '') {
     $id = intval($_GET['id']);
 }
@@ -23,7 +23,7 @@ if (isset($_GET["addslide"])) {
     <div class="wrap">
         <?php $path_site = plugins_url("../images", __FILE__); ?>
         <div style="clear: both;"></div>
-        <form action="admin.php?page=photo_gallery_wp_gallery&id=<?php echo $row->id; ?>" method="post"
+        <form action="admin.php?page=photo_gallery_wp_albums&id=<?php echo $row->id; ?>&task=save" method="post"
               name="adminForm" id="adminForm">
             <input type="hidden" class="changedvalues" value="" name="changedvalues" size="80">
             <div id="poststuff">
@@ -52,7 +52,7 @@ if (isset($_GET["addslide"])) {
                         }
                         ?>
                         <li class="add-new">
-                            <a onclick="window.location.href='admin.php?page=photo_gallery_wp_albums&amp;task=add_cat&photo_gallery_wp_nonce_add_galery=<?php echo $photo_gallery_wp_nonce_add_galery; ?>'">+</a>
+                            <a onclick="window.location.href='admin.php?page=photo_gallery_wp_albums&amp;task=add_new_album&photo_gallery_wp_nonce_add_album=<?php echo $photo_gallery_wp_nonce_add_album; ?>'">+</a>
                         </li>
                     </ul>
                 </div>
@@ -67,11 +67,31 @@ if (isset($_GET["addslide"])) {
                                     <input type="hidden" name="imagess" id="_unique_name"/>
                                     <input type="hidden" name="photo_gallery_wp_admin_image_hover_preview" value="off"/>
                                 </div>
-                                <div class="huge-it-newuploader uploader  add-new-image">
-                                    <input type="button" class="button wp-media-buttons-icon button-primary"
-                                           name="_unique_name_button"
-                                           id="_unique_name_button" value="Add Gallery"/>
-                                </div>
+                                <!-- <div class="huge-it-newuploader uploader  add-new-image">
+                                     <input type="button" class="button wp-media-buttons-icon button-primary"
+                                            name="_unique_name_button"
+                                            id="_unique_name_button" value="Add Gallery"/>
+                                 </div>-->
+                            </div>
+                            <div>
+                                <h4>Add galleries</h4>
+                                <ul>
+                                    <?php
+                                    foreach ($all_galleries as $val) {
+                                        ?>
+
+                                        <li>
+                                            <label for="unplugged-<?= $val->id ?>"><input id="unplugged-<?= $val->id ?>"
+                                                                                          type="checkbox"
+                                                                                          name="unplugged[]"
+                                                                                          value="<?= $val->id ?>"><?= $val->name ?>
+                                            </label>
+                                        </li>
+
+                                        <?php
+                                    }
+                                    ?>
+                                </ul>
                             </div>
 
                             <ul id="ph-gallery-wp-images-list">
@@ -91,43 +111,34 @@ if (isset($_GET["addslide"])) {
                                                value="<?php echo $val->ordering; ?>"/>
                                         <div class="ph-gallery-wp-image-container">
                                             <div class="ph-gallery-wp-list-img-wrapper">
-                                                <img src="<?php echo $val->image_url; ?>"/>
+                                                <img src="<?php echo $val->img_url; ?>"/>
                                             </div>
                                             <div>
                                                 <input type="hidden" name="imagess<?php echo $val->id; ?>"
                                                        id="_unique_name<?php echo $val->id; ?>"
                                                        value="<?php echo esc_attr($val->image_url); ?>"/>
                                                 <span class="wp-media-buttons-icon"></span>
-                                                <div class="huge-it-editnewuploader uploader button<?php echo $val->id; ?> add-new-image">
-                                                    <input type="button"
-                                                           class="button<?php echo $val->id; ?> wp-media-buttons-icon ph-gallery-wp-edit-image-icon"
-                                                           name="_unique_name_button<?php echo $val->id; ?>"
-                                                           id="_unique_name_button<?php echo $val->id; ?>"
-                                                           value="Edit image"/>
-                                                </div>
                                             </div>
                                         </div>
                                         <div class="ph-gallery-wp-image-options">
                                             <div>
-                                                <input class="text_area" type="text"
-                                                       placeholder="<?php echo __('Title:', 'photo-gallery-wp'); ?>"
-                                                       id="titleimage<?php echo $val->id; ?>"
-                                                       name="titleimage<?php echo $val->id; ?>"
-                                                       id="titleimage<?php echo $val->id; ?>"
-                                                       value="<?php echo esc_attr(str_replace('__5_5_5__', '%', $val->name)); ?>">
+                                                <h3>
+                                                    <a href="?page=photo_gallery_wp_gallery&task=edit_cat&id=<?= $val->id ?>"><?= $val->name ?></a>
+                                                </h3>
                                             </div>
                                             <div class="description-block">
-														<textarea id="im_description<?php echo $val->id; ?>"
-                                                                  placeholder="<?php echo __('Description:', 'photo-gallery-wp'); ?>"
-                                                                  name="im_description<?php echo $val->id; ?>"><?php echo str_replace('__5_5_5__', '%', $val->description) ?></textarea>
+                                                <?= $val->description; ?>
                                             </div>
+
                                             <div class="remove-ph-gallery-wp-image-container">
-                                                <a id="remove_image<?php echo $val->id; ?>"
-                                                   class="button remove-image"
-                                                   data-image-id="<?php echo $val->id; ?>"
-                                                   data-gallery-id="<?php echo $album_row->id; ?>"
-                                                   data-nonce-value="<?php echo $album_nonce_remove_gallery; ?>">Remove
-                                                    Gallery from album</a>
+                                                <a
+                                                        href="?page=photo_gallery_wp_albums&task=delete_gallery&gallery_id=<?= $val->id ?>&id=<?= $album_row->id ?>"
+                                                        id="remove_image<?php echo $val->id; ?>"
+                                                        class="button remove-image"
+                                                        data-image-id="<?php echo $val->id; ?>"
+                                                        data-gallery-id="<?php echo $album_row->id; ?>"
+                                                        data-nonce-value="<?php echo $album_nonce_remove_gallery; ?>">
+                                                    <?= __('Remove Gallery from album', 'gallery-images') ?></a>
                                             </div>
                                         </div>
 
@@ -176,47 +187,11 @@ if (isset($_GET["addslide"])) {
                                             <option <?php if ($album_row->photo_gallery_wp_sl_effects == '0') {
                                                 echo 'selected';
                                             } ?>
-                                                    value="0"><?php echo __('Gallery/Content-Popup', 'photo-gallery-wp'); ?></option>
+                                                    value="0"><?php echo __('Popup', 'photo-gallery-wp'); ?></option>
                                             <option <?php if ($row->photo_gallery_wp_sl_effects == '1') {
                                                 echo 'selected';
                                             } ?>
-                                                    value="1"><?php echo __('Content Slider', 'photo-gallery-wp'); ?></option>
-                                        </select>
-                                    </li>
-
-
-                                    <li>
-                                        <label
-                                                for="photo_gallery_wp_sl_effects"><?php echo __('Select View', 'photo-gallery-wp'); ?></label>
-                                        <select name="photo_gallery_wp_sl_effects" id="photo_gallery_wp_sl_effects">
-                                            <option <?php if ($row->photo_gallery_wp_sl_effects == '0') {
-                                                echo 'selected';
-                                            } ?>
-                                                    value="0"><?php echo __('Gallery/Content-Popup', 'photo-gallery-wp'); ?></option>
-                                            <option <?php if ($row->photo_gallery_wp_sl_effects == '1') {
-                                                echo 'selected';
-                                            } ?>
-                                                    value="1"><?php echo __('Content Slider', 'photo-gallery-wp'); ?></option>
-                                            <option <?php if ($row->photo_gallery_wp_sl_effects == '5') {
-                                                echo 'selected';
-                                            } ?>
-                                                    value="5"><?php echo __('Lightbox-Gallery', 'photo-gallery-wp'); ?></option>
-                                            <option <?php if ($row->photo_gallery_wp_sl_effects == '3') {
-                                                echo 'selected';
-                                            } ?> value="3"><?php echo __('Slider', 'photo-gallery-wp'); ?></option>
-                                            <option <?php if ($row->photo_gallery_wp_sl_effects == '4') {
-                                                echo 'selected';
-                                            } ?>
-                                                    value="4"><?php echo __('Thumbnails View', 'photo-gallery-wp'); ?></option>
-                                            <option <?php if ($row->photo_gallery_wp_sl_effects == '6') {
-                                                echo 'selected';
-                                            } ?> value="6"><?php echo __('Justified', 'photo-gallery-wp'); ?></option>
-                                            <option <?php if ($row->photo_gallery_wp_sl_effects == '7') {
-                                                echo 'selected';
-                                            } ?> value="7"><?php echo __('Masonry', 'photo-gallery-wp'); ?></option>
-                                            <option <?php if ($row->photo_gallery_wp_sl_effects == '8') {
-                                                echo 'selected';
-                                            } ?> value="8"><?php echo __('Mosaic', 'photo-gallery-wp'); ?></option>
+                                                    value="1"><?php echo __('Open in new page', 'photo-gallery-wp'); ?></option>
                                         </select>
                                     </li>
                                     <div id="ph-gallery-wp-current-options-0"
@@ -624,28 +599,11 @@ if (isset($_GET["addslide"])) {
                                                value="<?php echo esc_html(stripslashes($row->param)); ?>"
                                                class="text_area"/>
                                     </li>
-                                    <li class="rating-li">
-                                        <label for="rating"><?php echo __('Ratings', 'photo-gallery-wp'); ?></label>
-                                        <select id="rating" name="rating">
-
-                                            <option <?php if ($row->rating == 'off') {
-                                                echo 'selected';
-                                            } ?> value="off"><?php echo __('Off', 'photo-gallery-wp'); ?></option>
-                                            <option <?php if ($row->rating == 'dislike') {
-                                                echo 'selected';
-                                            } ?>
-                                                    value="dislike"><?php echo __('Like/Dislike', 'photo-gallery-wp'); ?></option>
-                                            <option <?php if ($row->rating == 'heart') {
-                                                echo 'selected';
-                                            } ?> value="heart"><?php echo __('Heart', 'photo-gallery-wp'); ?></option>
-
-                                        </select>
-                                    </li>
                                 </ul>
                                 <div id="major-publishing-actions">
                                     <div id="publishing-action">
                                         <input type="button" onclick="galleryImgSubmitButton('apply')"
-                                               value="Save gallery"
+                                               value="Save Album"
                                                id="save-buttom" class="button button-primary button-large">
                                     </div>
                                     <div class="clear"></div>
@@ -659,13 +617,13 @@ if (isset($_GET["addslide"])) {
                                             <h4><?php echo __('Shortcode', 'photo-gallery-wp'); ?></h4>
                                             <p><?php echo __('Copy &amp; paste the shortcode directly into any WordPress post or page.', 'photo-gallery-wp'); ?></p>
                                             <textarea class="full"
-                                                      readonly="readonly">[photo_gallery_wp id="<?php echo $row->id; ?>
+                                                      readonly="readonly">[photo_gallery_album_wp id="<?php echo $album_row->id; ?>
                                                 "]</textarea>
                                         </li>
                                         <li rel="tab-2">
                                             <h4><?php echo __('Template Include', 'photo-gallery-wp'); ?></h4>
                                             <p><?php echo __('Copy &amp; paste this code into a template file to include the slideshow within your theme.', 'photo-gallery-wp'); ?></p>
-                                            <textarea class="full" readonly="readonly">&lt;?php echo do_shortcode("[photo_gallery_wp id='<?php echo $row->id; ?>
+                                            <textarea class="full" readonly="readonly">&lt;?php echo do_shortcode("[photo_gallery_album_wp id='<?php echo $album_row->id; ?>
                                                 ']"); ?&gt;</textarea>
                                         </li>
                                     </ul>

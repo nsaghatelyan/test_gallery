@@ -23,17 +23,19 @@ class Photo_Gallery_WP_Template_Loader
         global $post;
         global $wpdb;
 
-        /*if (!is_null($albums)) {
+        if (!is_null($albums)) {
             foreach ($albums as $key => $val) {
                 $album_params[$key] = array(
                     "album_id" => $val->id,
                     "album_view" => $val->gallery_list_effects_s,
+                    "album_title" => $val->name,
+                    "album_desc" => $val->description
                 );
             }
 
-            $album_num = $val->content_per_page;
-            $album_total = intval(((count($albums) - 1) / $album_num) + 1);
-        }*/
+            $albumID = $albums[0]->id;
+            $album_view = $albums[0]->gallery_list_effects_s;
+        }
 
 
         $galleryID = $gallery[0]->id;
@@ -90,8 +92,14 @@ class Photo_Gallery_WP_Template_Loader
             $count_page = 9999;
         }
 
-        if (isset($albums_params)) {
-
+        if (isset($album_params) && !empty($album_params)) {
+            switch ($view) {
+                case 0:
+                    $view_slug = photo_gallery_wp_get_view_slag_by_id($galleryID);
+                    require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'album-popup' . DIRECTORY_SEPARATOR . 'album-popup-view.php';
+                    require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'album-popup' . DIRECTORY_SEPARATOR . 'album-popup-view.css.php';
+                    break;
+            }
         } else {
             switch ($view) {
                 case 0:

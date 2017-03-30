@@ -2,6 +2,8 @@
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
+
+
 global $wpdb;
 $gallery_wp_nonce = wp_create_nonce('huge_it_gallery_nonce');
 $photo_gallery_wp_nonce_add_album = wp_create_nonce('photo_gallery_wp_nonce_add_album');
@@ -13,7 +15,7 @@ $huge_it_gallery_nonce_remove_album = wp_create_nonce('huge_it_gallery_nonce_rem
     <div id="poststuff">
         <div id="ph-gallery-wp-gallerys-list-page">
             <h2>Huge-IT <?php echo __('Albums', 'photo-gallery-wp'); ?>
-                <a onclick="window.location.href='admin.php?page=photo_gallery_wp_albums&task=add_album&photo_gallery_wp_nonce_add_album=<?php echo $photo_gallery_wp_nonce_add_album; ?>'"
+                <a onclick="window.location.href='admin.php?page=photo_gallery_wp_albums&task=add_new_album&photo_gallery_wp_nonce_add_album=<?php echo $photo_gallery_wp_nonce_add_album; ?>'"
                    class="add-new-h2"><?php echo __('Add New Album', 'photo-gallery-wp'); ?></a>
             </h2>
             <div class="photo_gallery_wp_search_pagination_banner">
@@ -99,7 +101,7 @@ $huge_it_gallery_nonce_remove_album = wp_create_nonce('huge_it_gallery_nonce_rem
                         <span><?php echo __('Name', 'photo-gallery-wp'); ?></span><span
                                 class="sorting-indicator"></span></th>
                     <th scope="col" id="prod_count" style="width:40px;">
-                        <span><?php echo __('Images', 'photo-gallery-wp'); ?></span><span
+                        <span><?php echo __('Galleries', 'photo-gallery-wp'); ?></span><span
                                 class="sorting-indicator"></span></th>
                     <th style="width:40px"><span><?php echo __('Delete', 'gallery-images'); ?></span><span
                                 class="sorting-indicator"></span></th>
@@ -116,10 +118,11 @@ $huge_it_gallery_nonce_remove_album = wp_create_nonce('huge_it_gallery_nonce_rem
                         <td>
                             <a href="admin.php?page=photo_gallery_wp_albums&task=edit_cat&id=<?= $item->id ?>&huge_it_gallery_nonce=<?= wp_create_nonce('huge_it_gallery_nonce') ?>"><?= esc_html(stripslashes($item->name)); ?></a>
                         </td>
-                        <td> (<?= $item->images_count ?>)</td>
+                        <td> (<?= $item->galleries_count ?>)</td>
                         <td>
-                            <a href="admin.php?page=photo_gallery_wp_albums&task=remove_photo_gallery_wp&id=<?= $item->id ?>&photo_gallery_wp_nonce_remove_gallery=<?= wp_create_nonce('photo_gallery_wp_nonce_remove_gallery' . $item->id) ?>"
-                               class="ph-gallery-wp-delete-link"><span class="ph-gallery-wp-delete-icon"></span></a>
+                            <a href="admin.php?page=photo_gallery_wp_albums&task=remove_photo_gallery_album_wp&id=<?= $item->id ?>&photo_gallery_wp_nonce_remove_album=<?= wp_create_nonce('photo_gallery_wp_nonce_remove_album' . $item->id) ?>"
+                               class="ph-gallery-wp-delete-link album-delete-link"><span
+                                        class="ph-gallery-wp-delete-icon"></span></a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

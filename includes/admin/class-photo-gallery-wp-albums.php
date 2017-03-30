@@ -12,6 +12,8 @@ class Photo_Gallery_WP_Albums
      * Added By Karen
      * Return Albums page
      */
+
+
     public function albums()
     {
         echo "Albums Page";
@@ -20,6 +22,7 @@ class Photo_Gallery_WP_Albums
     public function load_album_page()
     {
         global $wpdb;
+
         if (isset($_GET['page']) && $_GET['page'] == 'photo_gallery_wp_albums') {
             $task = photo_gallery_wp_get_album_task();
             $id = photo_gallery_wp_get_album_id();
@@ -36,6 +39,7 @@ class Photo_Gallery_WP_Albums
                         wp_die('Security check fail');
                     }
                 }
+
                 if ($id) {
                     $this->edit_album($id);
                 } else {
@@ -46,7 +50,14 @@ class Photo_Gallery_WP_Albums
                 break;
             case 'save':
                 if ($id) {
+
                     $this->save_album_data($id);
+                }
+                break;
+            case 'delete_gallery':
+                if ($id) {
+                    $this->delete_gallery($_GET["gallery_id"]);
+                    $this->edit_album($id);
                 }
                 break;
             case 'apply':
@@ -65,6 +76,18 @@ class Photo_Gallery_WP_Albums
                 $this->show_albums_page();
                 break;
         }
+    }
+
+    public function delete_gallery($id)
+    {
+        global $wpdb;
+
+        $data = array("id_album" => 0);
+        $format = array("%d");
+        $where = array('id' => $id);
+        $where_format = array("%d");
+
+        $wpdb->update($wpdb->prefix . "photo_gallery_wp_gallerys", $data, $where, $format, $where_format);
     }
 
     public function show_albums_page()
@@ -104,7 +127,7 @@ class Photo_Gallery_WP_Albums
 
         global $wpdb;
 //        $query = "SELECT galleries.*, COUNT(images.id) as images_count FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys AS galleries LEFT JOIN " . $wpdb->prefix . "photo_gallery_wp_images AS images ON galleries.id = images.gallery_id " . $where . " GROUP BY galleries.id LIMIT %d OFFSET %d";
-        $query = "SELECT albums.*, COUNT(images.id) as images_count FROM " . $wpdb->prefix . "photo_gallery_wp_albums AS albums LEFT JOIN " . $wpdb->prefix . "photo_gallery_wp_images AS images ON albums.id = images.gallery_id" . $where . " GROUP BY albums.id LIMIT %d OFFSET %d";
+        $query = "SELECT albums.*, COUNT(galleries.id) as galleries_count FROM " . $wpdb->prefix . "photo_gallery_wp_albums AS albums LEFT JOIN " . $wpdb->prefix . "photo_gallery_wp_gallerys AS galleries ON albums.id = galleries.id_album" . $where . " GROUP BY albums.id LIMIT %d OFFSET %d";
         $albums = $wpdb->get_results($wpdb->prepare($query, $params));
 
         require_once(PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . 'photo-gallery-wp-admin-albums-list.php');
@@ -132,13 +155,14 @@ class Photo_Gallery_WP_Albums
                 }
             }
         }
+
         $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys WHERE id= %d", $id);
         $query2 = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_albums WHERE id= %d", $id);
         $row = $wpdb->get_row($query);
         $album_row = $wpdb->get_row($query2);
-        if (!isset($row->gallery_list_effects_s)) {
-            return 'id not found';
-        }
+        /* if (!isset($row->gallery_list_effects_s)) {
+             return 'id not found';
+         }*/
         $images = explode(";;;", $row->gallery_list_effects_s);
         $par = explode('	', $row->param);
         $count_ord = count($images);
@@ -152,8 +176,15 @@ class Photo_Gallery_WP_Albums
         // get Album's galleries list
         $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys where id_album = %d order by ordering ASC  ", $album_row->id);
         $row_galleries = $wpdb->get_results($query);
+        foreach ($row_galleries as $val) {
+            $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_images where gallery_id = %d order by ordering ASC  LIMIT 1", $val->id);
+            $img = $wpdb->get_results($query);
+            $val->img_url = $img[0]->image_url;
+        }
 
-        debug::trace($album_row);
+        //get all galleries list which not in current album
+        $query = $wpdb->prepare("SELECT id,name FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys where id_album != %d order by ordering ASC  ", $album_row->id);
+        $all_galleries = $wpdb->get_results($query);
 
         if (isset($_GET["addslide"])) {
             if ($_GET["addslide"] == 1) {
@@ -168,7 +199,6 @@ INSERT INTO
         $query = "SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_albums order by id ASC";
         $rowsld = $wpdb->get_results($query);
 
-//        debug::trace($rowsld);
 
         $paramssld = photo_gallery_wp_get_general_options();
 
@@ -197,7 +227,7 @@ INSERT INTO
 
             return false;
         }
-        if (!(isset($_POST['sl_width']) && isset($_POST["name"]))) {
+        if (!(isset($_POST['sl_width']) && isset($_POST["album_name"]))) {
             echo '';
         }
         if (isset($_POST['photo_gallery_wp_admin_image_hover_preview'])) {
@@ -205,40 +235,45 @@ INSERT INTO
             update_option('photo_gallery_wp_admin_image_hover_preview', $img_hover_preview);
         }
         // Created By Karen S.
-        if (isset($_POST["name"])) {
-            if ($_POST["name"] != '') {
-                $data = array(
-                    "name" => sanitize_text_field($_POST["name"]),
-                    "sl_width" => sanitize_text_field($_POST["sl_width"]),
-                    "sl_height" => sanitize_text_field($_POST["sl_height"]),
-                    "gallery_list_effects_s" => sanitize_text_field($_POST["gallery_list_effects_s"]),
-                    "description" => sanitize_text_field($_POST["sl_pausetime"]),
-                    "sl_position" => sanitize_text_field($_POST["sl_position"]),
-                    "photo_gallery_wp_sl_effects" => sanitize_text_field($_POST["photo_gallery_wp_sl_effects"]),
-                    "ordering" => '1'
-                );
-                $format = array("%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s");
-                $where = array('id' => $id);
-                $where_format = array('%d');
-                if (isset($_POST["display_type"]) && isset($_POST["content_per_page"])) {
-                    $data['content_per_page'] = sanitize_text_field($_POST["content_per_page"]);
-                    $data['display_type'] = sanitize_text_field($_POST["display_type"]);
-                    array_push($format, '%s', '%s');
-                }
-                $data['gallery_loader_type'] = 0;
-                array_push($format, '%s');
-                if (isset($_POST['show-hide-loading']) && $_POST['show-hide-loading'] == 1) {
-                    if (isset($_POST['gallery_loader_type']) && in_array($_POST['gallery_loader_type'], array(1, 2, 3, 4))) {
-                        $data['gallery_loader_type'] = $_POST["gallery_loader_type"];
-                    }
-                }
-
-                $wpdb->update($wpdb->prefix . "photo_gallery_wp_albums", $data, $where, $format, $where_format);
+        if (isset($_POST["album_name"]) && $_POST["album_name"]) {
+            $data = array(
+                "name" => sanitize_text_field($_POST["album_name"]),
+//                "sl_width" => sanitize_text_field($_POST["sl_width"]),
+//                "sl_height" => sanitize_text_field($_POST["sl_height"]),
+//                "gallery_list_effects_s" => sanitize_text_field($_POST["gallery_list_effects_s"]),
+                "description" => sanitize_text_field($_POST["album_description"]),
+//                "sl_position" => sanitize_text_field($_POST["sl_position"]),
+//                "photo_gallery_wp_sl_effects" => sanitize_text_field($_POST["photo_gallery_wp_sl_effects"]),
+//                "ordering" => '1'
+            );
+            $format = array("%s", "%s");
+            $where = array('id' => $id);
+            $where_format = array('%d');
+            /*if (isset($_POST["display_type"]) && isset($_POST["content_per_page"])) {
+                $data['content_per_page'] = sanitize_text_field($_POST["content_per_page"]);
+                $data['display_type'] = sanitize_text_field($_POST["display_type"]);
+                array_push($format, '%s', '%s');
             }
+            $data['gallery_loader_type'] = 0;
+            array_push($format, '%s');
+            if (isset($_POST['show-hide-loading']) && $_POST['show-hide-loading'] == 1) {
+                if (isset($_POST['gallery_loader_type']) && in_array($_POST['gallery_loader_type'], array(1, 2, 3, 4))) {
+                    $data['gallery_loader_type'] = $_POST["gallery_loader_type"];
+                }
+            }*/
+
+            $wpdb->update($wpdb->prefix . "photo_gallery_wp_albums", $data, $where, $format, $where_format);
         }
         // End Created By Karen S.
         $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_albums WHERE id = %d", $id);
         $row = $wpdb->get_row($query);
+
+        if (isset($_POST["unplugged"]) && !empty($_POST{"unplugged"})) {
+            foreach ($_POST["unplugged"] as $item) {
+                $new_id = sanitize_text_field($item);
+                $wpdb->update($wpdb->prefix . "photo_gallery_wp_gallerys", array("id_album" => $id), array("id" => $new_id), array("%d"), array("%d"));
+            }
+        }
 
         ?>
         <div class="updated"><p><strong><?php _e('Item Saved'); ?></strong></p></div>
