@@ -23,6 +23,9 @@ class Photo_Gallery_WP_Template_Loader
         global $post;
         global $wpdb;
 
+
+        $album_view = null;
+
         if (!is_null($albums)) {
             foreach ($albums as $key => $val) {
                 $album_params[$key] = array(
@@ -34,13 +37,16 @@ class Photo_Gallery_WP_Template_Loader
             }
 
             $albumID = $albums[0]->id;
-            $album_view = $albums[0]->gallery_list_effects_s;
+//            $album_view = $albums[0]->gallery_list_effects_s;
+            $album_view = Photo_Gallery_WP()->settings->album_style;
         }
 
 
         $galleryID = $gallery[0]->id;
         $view = $gallery[0]->photo_gallery_wp_sl_effects;
         $disp_type = $gallery[0]->display_type;
+
+
         $num = $gallery[0]->content_per_page;
         $loading_type = $gallery[0]->gallery_loader_type;
         $like_dislike = $gallery[0]->rating;
@@ -93,58 +99,62 @@ class Photo_Gallery_WP_Template_Loader
         }
 
         if (isset($album_params) && !empty($album_params)) {
-            switch ($view) {
-                case 0:
+            switch ($album_view) {
+                case 1:
                     $view_slug = photo_gallery_wp_get_view_slag_by_id($galleryID);
                     require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'album-popup' . DIRECTORY_SEPARATOR . 'album-popup-view.php';
                     require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'album-popup' . DIRECTORY_SEPARATOR . 'album-popup-view.css.php';
                     break;
-            }
-        } else {
-            switch ($view) {
-                case 0:
+                case 2:
                     $view_slug = photo_gallery_wp_get_view_slag_by_id($galleryID);
-                    require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'content-popup' . DIRECTORY_SEPARATOR . 'content-popup-view.php';
-                    require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'content-popup' . DIRECTORY_SEPARATOR . 'content-popup-view.css.php';
-                    break;
-                case 1:
-                    $view_slug = photo_gallery_wp_get_view_slag_by_id($galleryID);
-                    require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'content-slider' . DIRECTORY_SEPARATOR . 'content-slider-view.php';
-                    require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'content-slider' . DIRECTORY_SEPARATOR . 'content-slider-view.css.php';
-                    break;
-                case 3:
-                    $view_slug = photo_gallery_wp_get_view_slag_by_id($galleryID);
-                    require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'slider' . DIRECTORY_SEPARATOR . 'slider-view.php';
-                    require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'slider' . DIRECTORY_SEPARATOR . 'slider-view.css.php';
-                    break;
-                case 4:
-                    $view_slug = photo_gallery_wp_get_view_slag_by_id($galleryID);
-                    require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'thumbnails' . DIRECTORY_SEPARATOR . 'thumbnails-view.php';
-                    require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'thumbnails' . DIRECTORY_SEPARATOR . 'thumbnails-view.css.php';
-                    break;
-                case 5:
-                    $view_slug = photo_gallery_wp_get_view_slag_by_id($galleryID);
-                    require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'lightbox-gallery' . DIRECTORY_SEPARATOR . 'lightbox-gallery-view.php';
-                    require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'lightbox-gallery' . DIRECTORY_SEPARATOR . 'lightbox-gallery-view.css.php';
-                    break;
-                case 6:
-                    $view_slug = photo_gallery_wp_get_view_slag_by_id($galleryID);
-                    require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'justified' . DIRECTORY_SEPARATOR . 'justified-view.php';
-                    require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'justified' . DIRECTORY_SEPARATOR . 'justified-view.css.php';
-                    break;
-                case 7:
-                    $view_slug = photo_gallery_wp_get_view_slag_by_id($galleryID);
-                    require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'masonry' . DIRECTORY_SEPARATOR . 'masonry-gallery-view.php';
-                    require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'masonry' . DIRECTORY_SEPARATOR . 'masonry-gallery-view-css.php';
-                    break;
-                case 8:
-                    $view_slug = photo_gallery_wp_get_view_slag_by_id($galleryID);
-                    require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'mosaic' . DIRECTORY_SEPARATOR . 'mosaic-gallery-view.php';
-                    require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'mosaic' . DIRECTORY_SEPARATOR . 'mosaic-gallery-view-css.php';
+                    require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'album-page' . DIRECTORY_SEPARATOR . 'album-page-view.php';
+                    require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'album-page' . DIRECTORY_SEPARATOR . 'album-page-view.css.php';
                     break;
             }
         }
 
-
+        switch ($view) {
+            case 0:
+                $view_slug = photo_gallery_wp_get_view_slag_by_id($galleryID);
+                require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'content-popup' . DIRECTORY_SEPARATOR . 'content-popup-view.php';
+                require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'content-popup' . DIRECTORY_SEPARATOR . 'content-popup-view.css.php';
+                break;
+            case 1:
+                $view_slug = photo_gallery_wp_get_view_slag_by_id($galleryID);
+                require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'content-slider' . DIRECTORY_SEPARATOR . 'content-slider-view.php';
+                require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'content-slider' . DIRECTORY_SEPARATOR . 'content-slider-view.css.php';
+                break;
+            case 3:
+                $view_slug = photo_gallery_wp_get_view_slag_by_id($galleryID);
+                require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'slider' . DIRECTORY_SEPARATOR . 'slider-view.php';
+                require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'slider' . DIRECTORY_SEPARATOR . 'slider-view.css.php';
+                break;
+            case 4:
+                $view_slug = photo_gallery_wp_get_view_slag_by_id($galleryID);
+                require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'thumbnails' . DIRECTORY_SEPARATOR . 'thumbnails-view.php';
+                require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'thumbnails' . DIRECTORY_SEPARATOR . 'thumbnails-view.css.php';
+                break;
+            case 5:
+                $view_slug = photo_gallery_wp_get_view_slag_by_id($galleryID);
+                require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'lightbox-gallery' . DIRECTORY_SEPARATOR . 'lightbox-gallery-view.php';
+                require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'lightbox-gallery' . DIRECTORY_SEPARATOR . 'lightbox-gallery-view.css.php';
+                break;
+            case 6:
+                $view_slug = photo_gallery_wp_get_view_slag_by_id($galleryID);
+                require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'justified' . DIRECTORY_SEPARATOR . 'justified-view.php';
+                require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'justified' . DIRECTORY_SEPARATOR . 'justified-view.css.php';
+                break;
+            case 7:
+                $view_slug = photo_gallery_wp_get_view_slag_by_id($galleryID);
+                require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'masonry' . DIRECTORY_SEPARATOR . 'masonry-gallery-view.php';
+                require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'masonry' . DIRECTORY_SEPARATOR . 'masonry-gallery-view-css.php';
+                break;
+            case 8:
+                $view_slug = photo_gallery_wp_get_view_slag_by_id($galleryID);
+                require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'mosaic' . DIRECTORY_SEPARATOR . 'mosaic-gallery-view.php';
+                require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'mosaic' . DIRECTORY_SEPARATOR . 'mosaic-gallery-view-css.php';
+                break;
+        }
     }
+
 }

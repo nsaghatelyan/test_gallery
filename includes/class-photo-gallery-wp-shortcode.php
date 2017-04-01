@@ -101,11 +101,17 @@ class Photo_Gallery_WP__Shortcode
         global $wpdb;
         $format = '';
 
-        if (count($id_array) == 1) {
-            $id = $id_array[0];
+
+        if (is_array($id_array)) {
+            if (count($id_array) == 1) {
+                $id = $id_array[0];
+            } else {
+                $id = implode(",", $id_array);
+            }
         } else {
-            $id = implode(",", $id_array);
+            $id = $id_array;
         }
+
 
         $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_images where gallery_id IN (" . $id . ") order by ordering ASC", "");
         $images = $wpdb->get_results($query);
@@ -119,21 +125,23 @@ class Photo_Gallery_WP__Shortcode
         $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys where id_album IN (" . $id . ") order by id ASC", "");
         $album_galleries = $wpdb->get_results($query);
 
+        $album_image_count = 0;
         foreach ($album_galleries as $val) {
-            $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_images where gallery_id = '%d' order by ordering ASC LIMIT 1", $val->id);
+            $query = $wpdb->prepare("SELECT id,gallery_id, name, description, image_url FROM " . $wpdb->prefix . "photo_gallery_wp_images where gallery_id = '%d' order by ordering ASC", $val->id);
             $val->image_url = $wpdb->get_results($query)[0]->image_url;
+            $val->image_count = count($wpdb->get_results($query));
+            $val->images = $wpdb->get_results($query);
+            $album_image_count = $album_image_count + $val->image_count;
         }
 
         foreach ($albums as $val) {
             $val->image_url = $album_galleries[0]->image_url;
+            $val->image_count = $album_image_count;
             $val->galleries = $album_galleries;
         }
         /*foreach ($gallery as $val) {
             $val->album = $albums;
         }*/
-
-        debug::trace($albums);
-
 
         ob_start();
 

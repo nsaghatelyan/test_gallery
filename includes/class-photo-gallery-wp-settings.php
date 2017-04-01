@@ -4,29 +4,31 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
 {
     public $plugin_id = 'photo_gallery_wp';
 
-    public function __construct(){
+    public function __construct()
+    {
         $config = array(
             'menu_slug' => 'photo_gallery_wp_general_options',
             'parent_slug' => 'photo_gallery_wp_gallery',
-            'page_title' => __( 'General Options', 'photo-gallery-wp' ),
-            'title' => __('Photo Gallery WP General Options','photo-gallery-wp'),
-            'menu_title'=> __( 'General Options', 'photo-gallery-wp' ),
+            'page_title' => __('General Options', 'photo-gallery-wp'),
+            'title' => __('Photo Gallery WP General Options', 'photo-gallery-wp'),
+            'menu_title' => __('General Options', 'photo-gallery-wp'),
         );
         $this->init();
         $this->init_panels();
         $this->init_sections();
         $this->init_controls();
 
-        parent::__construct( $config);
-        
-        $this->add_css( 'wpdev-custom-styles', Photo_Gallery_WP()->plugin_url().'/assets/style/wpdev-custom.css' );
-        $this->add_js( 'wpdev-custom-js', Photo_Gallery_WP()->plugin_url().'/assets/js/wpdev-custom.js' );
+        parent::__construct($config);
+
+        $this->add_css('wpdev-custom-styles', Photo_Gallery_WP()->plugin_url() . '/assets/style/wpdev-custom.css');
+        $this->add_js('wpdev-custom-js', Photo_Gallery_WP()->plugin_url() . '/assets/js/wpdev-custom.js');
     }
 
     /**
      * Initialize user defined variables
      */
-    public function init(){
+    public function init()
+    {
         $this->init_gallery_content_pop_up();
         $this->init_content_slider();
         $this->init_lightbox_gallery();
@@ -35,33 +37,35 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
         $this->init_controls_slider();
         $this->init_controls_masonry();
         $this->init_controls_mosaic();
+        $this->init_controls_albums();
     }
 
     /**
      *
      */
-    public function init_panels(){
+    public function init_panels()
+    {
         $this->panels = array(
             'gallery_content_pop_up' => array(
-                'title' => __('Gallery / Content Pop Up','photo-gallery-wp'),
+                'title' => __('Gallery / Content Pop Up', 'photo-gallery-wp'),
             ),
-            'content_slider' => array (
-                'title' => __( 'Content Slider', 'photo-gallery-wp' ),
+            'content_slider' => array(
+                'title' => __('Content Slider', 'photo-gallery-wp'),
             ),
-            'lightbox_gallery' => array (
-                'title' => __( 'Lightbox-Gallery', 'photo-gallery-wp' ),
+            'lightbox_gallery' => array(
+                'title' => __('Lightbox-Gallery', 'photo-gallery-wp'),
             ),
-            'slider' => array (
-                'title' => __( 'Slider', 'photo-gallery-wp' ),
+            'slider' => array(
+                'title' => __('Slider', 'photo-gallery-wp'),
             ),
-            'thumbnails' => array (
-                'title' => __( 'Thumbnails', 'photo-gallery-wp' ),
+            'thumbnails' => array(
+                'title' => __('Thumbnails', 'photo-gallery-wp'),
             ),
-            'justified' => array (
-                'title' => __( 'Justified', 'photo-gallery-wp' ),
+            'justified' => array(
+                'title' => __('Justified', 'photo-gallery-wp'),
             ),
             'masonry' => array(
-                'title' => __( 'Masonry', 'photo-gallery-wp' )
+                'title' => __('Masonry', 'photo-gallery-wp')
             ),
             'mosaic' => array(
                 'title' => __('Mosaic', 'photo-gallery-wp')
@@ -72,199 +76,200 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
         );
     }
 
-    public function init_sections(){
+    public function init_sections()
+    {
         $this->sections = array(
             'content_styles' => array(
                 'panel' => 'gallery_content_pop_up',
-                'title' => __( 'Content Styles', 'photo-gallery-wp' ),
+                'title' => __('Content Styles', 'photo-gallery-wp'),
             ),
             'element_styles' => array(
                 'panel' => 'gallery_content_pop_up',
-                'title' => __( 'Element Styles', 'photo-gallery-wp' ),
+                'title' => __('Element Styles', 'photo-gallery-wp'),
             ),
             'popup_styles' => array(
                 'panel' => 'gallery_content_pop_up',
-                'title' => __( 'Popup Styles', 'photo-gallery-wp' ),
+                'title' => __('Popup Styles', 'photo-gallery-wp'),
             ),
             'pagination_styles' => array(
                 'panel' => 'gallery_content_pop_up',
-                'title' => __( 'Pagination Styles', 'photo-gallery-wp' ),
+                'title' => __('Pagination Styles', 'photo-gallery-wp'),
             ),
             'load_more_styles' => array(
                 'panel' => 'gallery_content_pop_up',
-                'title' => __( 'Load More Styles', 'photo-gallery-wp' ),
+                'title' => __('Load More Styles', 'photo-gallery-wp'),
             ),
             'element_title' => array(
                 'panel' => 'gallery_content_pop_up',
-                'title' => __( 'Element Title', 'photo-gallery-wp' ),
+                'title' => __('Element Title', 'photo-gallery-wp'),
             ),
             'element_link_button' => array(
                 'panel' => 'gallery_content_pop_up',
-                'title' => __( 'Element Link Button', 'photo-gallery-wp' ),
+                'title' => __('Element Link Button', 'photo-gallery-wp'),
             ),
             'popup_title' => array(
                 'panel' => 'gallery_content_pop_up',
-                'title' => __( 'Popup Title', 'photo-gallery-wp' ),
+                'title' => __('Popup Title', 'photo-gallery-wp'),
             ),
             'popup_description' => array(
                 'panel' => 'gallery_content_pop_up',
-                'title' => __( 'Popup Description', 'photo-gallery-wp' ),
+                'title' => __('Popup Description', 'photo-gallery-wp'),
             ),
             'popup_link_button' => array(
                 'panel' => 'gallery_content_pop_up',
-                'title' => __( 'Popup Link Button', 'photo-gallery-wp' ),
+                'title' => __('Popup Link Button', 'photo-gallery-wp'),
             ),
             'rating_styles' => array(
                 'panel' => 'gallery_content_pop_up',
-                'title' => __( 'Ratings Styles', 'photo-gallery-wp' ),
+                'title' => __('Ratings Styles', 'photo-gallery-wp'),
             ),
-            'content_slider_container' => array (
+            'content_slider_container' => array(
                 'panel' => 'content_slider',
-                'title' => __( 'Slider Container', 'photo-gallery-wp' ),
+                'title' => __('Slider Container', 'photo-gallery-wp'),
             ),
-            'content_slider_link_button' => array (
+            'content_slider_link_button' => array(
                 'panel' => 'content_slider',
-                'title' => __( 'Link Button', 'photo-gallery-wp' ),
+                'title' => __('Link Button', 'photo-gallery-wp'),
             ),
-            'content_slider_title' => array (
+            'content_slider_title' => array(
                 'panel' => 'content_slider',
-                'title' => __( 'Title', 'photo-gallery-wp' ),
+                'title' => __('Title', 'photo-gallery-wp'),
             ),
-            'content_slider_description' => array (
+            'content_slider_description' => array(
                 'panel' => 'content_slider',
-                'title' => __( 'Description', 'photo-gallery-wp' ),
+                'title' => __('Description', 'photo-gallery-wp'),
             ),
-            'content_slider_rating_styles' => array (
+            'content_slider_rating_styles' => array(
                 'panel' => 'content_slider',
-                'title' => __( 'Ratings Styles', 'photo-gallery-wp' ),
+                'title' => __('Ratings Styles', 'photo-gallery-wp'),
             ),
-            'lightbox_gallery_content_styles' => array (
+            'lightbox_gallery_content_styles' => array(
                 'panel' => 'lightbox_gallery',
-                'title' => __( 'Content Styles', 'photo-gallery-wp' ),
+                'title' => __('Content Styles', 'photo-gallery-wp'),
             ),
-            'lightbox_gallery_load_more_styles' => array (
+            'lightbox_gallery_load_more_styles' => array(
                 'panel' => 'lightbox_gallery',
-                'title' => __( 'Load More Styles', 'photo-gallery-wp' ),
+                'title' => __('Load More Styles', 'photo-gallery-wp'),
             ),
-            'lightbox_gallery_image' => array (
+            'lightbox_gallery_image' => array(
                 'panel' => 'lightbox_gallery',
-                'title' => __( 'Image', 'photo-gallery-wp' ),
+                'title' => __('Image', 'photo-gallery-wp'),
             ),
-            'lightbox_gallery_title' => array (
+            'lightbox_gallery_title' => array(
                 'panel' => 'lightbox_gallery',
-                'title' => __( 'Title', 'photo-gallery-wp' ),
+                'title' => __('Title', 'photo-gallery-wp'),
             ),
-            'lightbox_gallery_pagination_styles' => array (
+            'lightbox_gallery_pagination_styles' => array(
                 'panel' => 'lightbox_gallery',
-                'title' => __( 'Pagination Styles', 'photo-gallery-wp' ),
+                'title' => __('Pagination Styles', 'photo-gallery-wp'),
             ),
-            'lightbox_gallery_rating_styles' => array (
+            'lightbox_gallery_rating_styles' => array(
                 'panel' => 'lightbox_gallery',
-                'title' => __( 'Ratings Styles', 'photo-gallery-wp' ),
+                'title' => __('Ratings Styles', 'photo-gallery-wp'),
             ),
-            'thumbnails_container_slider' => array (
+            'thumbnails_container_slider' => array(
                 'panel' => 'thumbnails',
-                'title' => __( 'Container Style', 'photo-gallery-wp' ),
+                'title' => __('Container Style', 'photo-gallery-wp'),
             ),
-            'thumbnails_title' => array (
+            'thumbnails_title' => array(
                 'panel' => 'thumbnails',
-                'title' => __( 'Title', 'photo-gallery-wp' ),
+                'title' => __('Title', 'photo-gallery-wp'),
             ),
-            'thumbnails_load_more_styles' => array (
+            'thumbnails_load_more_styles' => array(
                 'panel' => 'thumbnails',
-                'title' => __( 'Load More Styles', 'photo-gallery-wp' ),
+                'title' => __('Load More Styles', 'photo-gallery-wp'),
             ),
-            'thumbnails_image' => array (
+            'thumbnails_image' => array(
                 'panel' => 'thumbnails',
-                'title' => __( 'Image', 'photo-gallery-wp' ),
+                'title' => __('Image', 'photo-gallery-wp'),
             ),
-            'thumbnails_pagination_style' => array (
+            'thumbnails_pagination_style' => array(
                 'panel' => 'thumbnails',
-                'title' => __( 'Pagination Styles', 'photo-gallery-wp' ),
+                'title' => __('Pagination Styles', 'photo-gallery-wp'),
             ),
-            'thumbnails_rating_styles' => array (
+            'thumbnails_rating_styles' => array(
                 'panel' => 'thumbnails',
-                'title' => __( 'Ratings Styles', 'photo-gallery-wp' ),
+                'title' => __('Ratings Styles', 'photo-gallery-wp'),
             ),
-            'justified_element_styles' => array (
+            'justified_element_styles' => array(
                 'panel' => 'justified',
-                'title' => __( 'Element Styles', 'photo-gallery-wp' ),
+                'title' => __('Element Styles', 'photo-gallery-wp'),
             ),
-            'justified_load_more_styles' => array (
+            'justified_load_more_styles' => array(
                 'panel' => 'justified',
-                'title' => __( 'Load More Styles', 'photo-gallery-wp' ),
+                'title' => __('Load More Styles', 'photo-gallery-wp'),
             ),
-            'justified_element_title' => array (
+            'justified_element_title' => array(
                 'panel' => 'justified',
-                'title' => __( 'Element Title', 'photo-gallery-wp' ),
+                'title' => __('Element Title', 'photo-gallery-wp'),
             ),
-            'justified_pagination_style' => array (
+            'justified_pagination_style' => array(
                 'panel' => 'justified',
-                'title' => __( 'Pagination Styles', 'photo-gallery-wp' ),
+                'title' => __('Pagination Styles', 'photo-gallery-wp'),
             ),
-            'justified_rating_styles' => array (
+            'justified_rating_styles' => array(
                 'panel' => 'justified',
-                'title' => __( 'Ratings Styles', 'photo-gallery-wp' ),
+                'title' => __('Ratings Styles', 'photo-gallery-wp'),
             ),
-            'slider_options' => array (
+            'slider_options' => array(
                 'panel' => 'slider',
-                'title' => __( 'Slider options', 'photo-gallery-wp' ),
+                'title' => __('Slider options', 'photo-gallery-wp'),
             ),
-            'slider_arrows' => array (
+            'slider_arrows' => array(
                 'panel' => 'slider',
-                'title' => __( 'Arrows', 'photo-gallery-wp' ),
+                'title' => __('Arrows', 'photo-gallery-wp'),
             ),
-            'slider_thumbnail' => array (
+            'slider_thumbnail' => array(
                 'panel' => 'slider',
-                'title' => __( 'Thumbnails', 'photo-gallery-wp' ),
+                'title' => __('Thumbnails', 'photo-gallery-wp'),
             ),
-            'slider_bullet' => array (
+            'slider_bullet' => array(
                 'panel' => 'slider',
-                'title' => __( 'Bullets', 'photo-gallery-wp' ),
+                'title' => __('Bullets', 'photo-gallery-wp'),
             ),
-            'slider_title' => array (
+            'slider_title' => array(
                 'panel' => 'slider',
-                'title' => __( 'Title', 'photo-gallery-wp' ),
+                'title' => __('Title', 'photo-gallery-wp'),
             ),
-            'slider_description' => array (
+            'slider_description' => array(
                 'panel' => 'slider',
-                'title' => __( 'Description', 'photo-gallery-wp' ),
+                'title' => __('Description', 'photo-gallery-wp'),
             ),
-            'masonry_content_styles' => array (
+            'masonry_content_styles' => array(
                 'panel' => 'masonry',
-                'title' => __( 'Content Styles', 'photo-gallery-wp' ),
+                'title' => __('Content Styles', 'photo-gallery-wp'),
             ),
-            'masonry_image_styles' => array (
+            'masonry_image_styles' => array(
                 'panel' => 'masonry',
-                'title' => __( 'Image Styles', 'photo-gallery-wp' ),
+                'title' => __('Image Styles', 'photo-gallery-wp'),
             ),
-            'masonry_title_styles' => array (
+            'masonry_title_styles' => array(
                 'panel' => 'masonry',
-                'title' => __( 'Title Styles', 'photo-gallery-wp' ),
+                'title' => __('Title Styles', 'photo-gallery-wp'),
             ),
-            'masonry_rating_styles' => array (
+            'masonry_rating_styles' => array(
                 'panel' => 'masonry',
-                'title' => __( 'Ratings Styles', 'photo-gallery-wp' ),
+                'title' => __('Ratings Styles', 'photo-gallery-wp'),
             ),
-            'masonry_load_more_styles' => array (
+            'masonry_load_more_styles' => array(
                 'panel' => 'masonry',
-                'title' => __( 'Load More Styles', 'photo-gallery-wp' ),
+                'title' => __('Load More Styles', 'photo-gallery-wp'),
             ),
-            'masonry_pagination_styles' => array (
+            'masonry_pagination_styles' => array(
                 'panel' => 'masonry',
-                'title' => __( 'Pagination Styles', 'photo-gallery-wp' ),
+                'title' => __('Pagination Styles', 'photo-gallery-wp'),
             ),
-            'mosaic_content_styles' => array (
+            'mosaic_content_styles' => array(
                 'panel' => 'mosaic',
-                'title' => __( 'Content Styles', 'photo-gallery-wp' ),
+                'title' => __('Content Styles', 'photo-gallery-wp'),
             ),
-            'mosaic_image_styles' => array (
+            'mosaic_image_styles' => array(
                 'panel' => 'mosaic',
-                'title' => __( 'Image Styles', 'photo-gallery-wp' ),
+                'title' => __('Image Styles', 'photo-gallery-wp'),
             ),
-            'mosaic_title_styles' => array (
+            'mosaic_title_styles' => array(
                 'panel' => 'mosaic',
-                'title' => __( 'Title Styles', 'photo-gallery-wp' ),
+                'title' => __('Title Styles', 'photo-gallery-wp'),
             ),
 
             //ns code started hear
@@ -272,6 +277,12 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'panel' => 'albums',
                 'title' => __('Album styles', 'photo-gallery-wp')
             ),
+
+            'album_count_style' => array(
+                'panel' => 'albums',
+                'title' => __('Images count style')
+            ),
+
             'album_sorting' => array(
                 'panel' => 'albums',
                 'title' => __('Album sorting', 'photo-gallery-wp')
@@ -374,11 +385,11 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
 
     private function controls_slider()
     {
-        return array (
+        return array(
             'slider_show_arrows' => array(
                 'section' => 'slider_arrows',
                 'type' => 'select',
-                'choices' => array (
+                'choices' => array(
                     2 => 'Always',
                     1 => 'On Hover',
                     0 => 'Never',
@@ -414,35 +425,35 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'width' => 80,
                 'height' => 80,
                 'choices' => array(
-                    'arrows-0.png' => PHOTO_GALLERY_WP_IMAGES_URL.'/slider/arrows/arrows-0.png',
-                    'arrows-1.png' => PHOTO_GALLERY_WP_IMAGES_URL.'/slider/arrows/arrows-1.png',
-                    'arrows-2.png' => PHOTO_GALLERY_WP_IMAGES_URL.'/slider/arrows/arrows-2.png',
-                    'arrows-3.png' => PHOTO_GALLERY_WP_IMAGES_URL.'/slider/arrows/arrows-3.png',
-                    'arrows-4.png' => PHOTO_GALLERY_WP_IMAGES_URL.'/slider/arrows/arrows-4.png',
-                    'arrows-5.png' => PHOTO_GALLERY_WP_IMAGES_URL.'/slider/arrows/arrows-5.png',
-                    'arrows-6.png' => PHOTO_GALLERY_WP_IMAGES_URL.'/slider/arrows/arrows-6.png',
-                    'arrows-7.png' => PHOTO_GALLERY_WP_IMAGES_URL.'/slider/arrows/arrows-7.png',
-                    'arrows-8.png' => PHOTO_GALLERY_WP_IMAGES_URL.'/slider/arrows/arrows-8.png',
-                    'arrows-9.png' => PHOTO_GALLERY_WP_IMAGES_URL.'/slider/arrows/arrows-9.png',
-                    'arrows-10.png' => PHOTO_GALLERY_WP_IMAGES_URL.'/slider/arrows/arrows-10.png',
-                    'arrows-11.png' => PHOTO_GALLERY_WP_IMAGES_URL.'/slider/arrows/arrows-11.png',
-                    'arrows-12.png' => PHOTO_GALLERY_WP_IMAGES_URL.'/slider/arrows/arrows-12.png',
-                    'arrows-13.png' => PHOTO_GALLERY_WP_IMAGES_URL.'/slider/arrows/arrows-13.png',
-                    'arrows-14.png' => PHOTO_GALLERY_WP_IMAGES_URL.'/slider/arrows/arrows-14.png',
-                    'arrows-15.png' => PHOTO_GALLERY_WP_IMAGES_URL.'/slider/arrows/arrows-15.png',
-                    'arrows-16.png' => PHOTO_GALLERY_WP_IMAGES_URL.'/slider/arrows/arrows-16.png',
-                    'arrows-17.png' => PHOTO_GALLERY_WP_IMAGES_URL.'/slider/arrows/arrows-17.png',
-                    'arrows-18.png' => PHOTO_GALLERY_WP_IMAGES_URL.'/slider/arrows/arrows-18.png',
-                    'arrows-19.png' => PHOTO_GALLERY_WP_IMAGES_URL.'/slider/arrows/arrows-19.png',
-                    'arrows-20.png' => PHOTO_GALLERY_WP_IMAGES_URL.'/slider/arrows/arrows-20.png',
-                    'arrows-21.png' => PHOTO_GALLERY_WP_IMAGES_URL.'/slider/arrows/arrows-21.png',
-                    'arrows-34.png' => PHOTO_GALLERY_WP_IMAGES_URL.'/slider/arrows/arrows-34.png',
+                    'arrows-0.png' => PHOTO_GALLERY_WP_IMAGES_URL . '/slider/arrows/arrows-0.png',
+                    'arrows-1.png' => PHOTO_GALLERY_WP_IMAGES_URL . '/slider/arrows/arrows-1.png',
+                    'arrows-2.png' => PHOTO_GALLERY_WP_IMAGES_URL . '/slider/arrows/arrows-2.png',
+                    'arrows-3.png' => PHOTO_GALLERY_WP_IMAGES_URL . '/slider/arrows/arrows-3.png',
+                    'arrows-4.png' => PHOTO_GALLERY_WP_IMAGES_URL . '/slider/arrows/arrows-4.png',
+                    'arrows-5.png' => PHOTO_GALLERY_WP_IMAGES_URL . '/slider/arrows/arrows-5.png',
+                    'arrows-6.png' => PHOTO_GALLERY_WP_IMAGES_URL . '/slider/arrows/arrows-6.png',
+                    'arrows-7.png' => PHOTO_GALLERY_WP_IMAGES_URL . '/slider/arrows/arrows-7.png',
+                    'arrows-8.png' => PHOTO_GALLERY_WP_IMAGES_URL . '/slider/arrows/arrows-8.png',
+                    'arrows-9.png' => PHOTO_GALLERY_WP_IMAGES_URL . '/slider/arrows/arrows-9.png',
+                    'arrows-10.png' => PHOTO_GALLERY_WP_IMAGES_URL . '/slider/arrows/arrows-10.png',
+                    'arrows-11.png' => PHOTO_GALLERY_WP_IMAGES_URL . '/slider/arrows/arrows-11.png',
+                    'arrows-12.png' => PHOTO_GALLERY_WP_IMAGES_URL . '/slider/arrows/arrows-12.png',
+                    'arrows-13.png' => PHOTO_GALLERY_WP_IMAGES_URL . '/slider/arrows/arrows-13.png',
+                    'arrows-14.png' => PHOTO_GALLERY_WP_IMAGES_URL . '/slider/arrows/arrows-14.png',
+                    'arrows-15.png' => PHOTO_GALLERY_WP_IMAGES_URL . '/slider/arrows/arrows-15.png',
+                    'arrows-16.png' => PHOTO_GALLERY_WP_IMAGES_URL . '/slider/arrows/arrows-16.png',
+                    'arrows-17.png' => PHOTO_GALLERY_WP_IMAGES_URL . '/slider/arrows/arrows-17.png',
+                    'arrows-18.png' => PHOTO_GALLERY_WP_IMAGES_URL . '/slider/arrows/arrows-18.png',
+                    'arrows-19.png' => PHOTO_GALLERY_WP_IMAGES_URL . '/slider/arrows/arrows-19.png',
+                    'arrows-20.png' => PHOTO_GALLERY_WP_IMAGES_URL . '/slider/arrows/arrows-20.png',
+                    'arrows-21.png' => PHOTO_GALLERY_WP_IMAGES_URL . '/slider/arrows/arrows-21.png',
+                    'arrows-34.png' => PHOTO_GALLERY_WP_IMAGES_URL . '/slider/arrows/arrows-34.png',
                 )
             ),
             'slider_show_thumbnails' => array(
                 'section' => 'slider_thumbnail',
                 'type' => 'select',
-                'choices' => array (
+                'choices' => array(
                     2 => 'Always',
                     1 => 'On Hover',
                     0 => 'Never',
@@ -454,7 +465,7 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
             'slider_thumbnails_position' => array(
                 'section' => 'slider_thumbnail',
                 'type' => 'select',
-                'choices' => array (
+                'choices' => array(
                     'default' => 'Default',
                     'show_all' => 'Show All',
                 ),
@@ -465,7 +476,7 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
             'slider_show_bullets' => array(
                 'section' => 'slider_bullet',
                 'type' => 'select',
-                'choices' => array (
+                'choices' => array(
                     2 => 'Always',
                     1 => 'On Hover',
                     0 => 'Never',
@@ -477,7 +488,7 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
             'slider_bullets_position' => array(
                 'section' => 'slider_bullet',
                 'type' => 'radio_position',
-                'choices' => array (1,2,3,4,5,6,7,8,9,),
+                'choices' => array(1, 2, 3, 4, 5, 6, 7, 8, 9,),
                 'default' => $this->slider_bullets_position,
                 'label' => __('Position', 'photo-gallery-wp'),
                 'help' => __('slider_bullets_position', 'photo-gallery-wp')
@@ -549,7 +560,7 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'type' => 'simple_slider',
                 'default' => $this->slider_title_opacity,
                 'label' => __('Opacity(%)', 'photo-gallery-wp'),
-                'choices' => range(0,100)
+                'choices' => range(0, 100)
             ),
             'slider_title_border' => array(
                 'section' => 'slider_title',
@@ -615,7 +626,7 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'type' => 'simple_slider',
                 'default' => $this->slider_description_opacity,
                 'label' => __('Opacity(%)', 'photo-gallery-wp'),
-                'choices' => range(0,100)
+                'choices' => range(0, 100)
             ),
             'slider_description_border' => array(
                 'section' => 'slider_description',
@@ -697,7 +708,7 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
 
     private function controls_justified()
     {
-        return array (
+        return array(
             'view8_element_height' => array(
                 'section' => 'justified_element_styles',
                 'type' => 'number',
@@ -755,7 +766,7 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'help' => __('video_view8_loadmore_position', 'photo-gallery-wp'),
                 'choices' => array(
                     'left' => 'Left',
-                    'center'=> 'Center',
+                    'center' => 'Center',
                     'right' => 'Right'
                 )
             ),
@@ -803,10 +814,10 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'width' => 30,
                 'height' => 30,
                 'choices' => array(
-                    1 => PHOTO_GALLERY_WP_IMAGES_URL.'/front_images/arrows/loading1.gif',
-                    2 => PHOTO_GALLERY_WP_IMAGES_URL.'/front_images/arrows/loading4.gif',
-                    3 => PHOTO_GALLERY_WP_IMAGES_URL.'/front_images/arrows/loading36.gif',
-                    4 => PHOTO_GALLERY_WP_IMAGES_URL.'/front_images/arrows/loading51.gif',
+                    1 => PHOTO_GALLERY_WP_IMAGES_URL . '/front_images/arrows/loading1.gif',
+                    2 => PHOTO_GALLERY_WP_IMAGES_URL . '/front_images/arrows/loading4.gif',
+                    3 => PHOTO_GALLERY_WP_IMAGES_URL . '/front_images/arrows/loading36.gif',
+                    4 => PHOTO_GALLERY_WP_IMAGES_URL . '/front_images/arrows/loading51.gif',
                 )
             ),
             'view8_element_show_caption' => array(
@@ -840,7 +851,7 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
             'view8_element_title_overlay_transparency' => array(
                 'section' => 'justified_element_title',
                 'type' => 'simple_slider',
-                'choices' => array(0,10,20,30,40,50,60,70,80,90,100),
+                'choices' => array(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100),
                 'default' => $this->view8_element_title_overlay_transparency,
                 'label' => __('Elements Title Overlay Opacity', 'photo-gallery-wp'),
                 'help' => __('view8_element_title_overlay_transparency', 'photo-gallery-wp')
@@ -878,7 +889,7 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'type' => 'select',
                 'choices' => array(
                     'left' => 'Left',
-                    'center'=> 'Center',
+                    'center' => 'Center',
                     'right' => 'Right'
                 ),
                 'default' => $this->video_view8_paginator_position,
@@ -902,7 +913,7 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
             'just_likedislike_bg_trans' => array(
                 'section' => 'justified_rating_styles',
                 'type' => 'simple_slider',
-                'choices' => array(0,10,20,30,40,50,60,70,80,90,100),
+                'choices' => array(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100),
                 'default' => $this->just_likedislike_bg_trans,
                 'label' => __('Ratings Background Color Opacity', 'photo-gallery-wp'),
                 'help' => __('just_likedislike_bg_trans', 'photo-gallery-wp')
@@ -996,7 +1007,7 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
 
     private function controls_thumbnails()
     {
-        return array (
+        return array(
             'thumb_box_padding' => array(
                 'section' => 'thumbnails_container_slider',
                 'type' => 'number',
@@ -1049,7 +1060,7 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
             'thumb_title_background_transparency' => array(
                 'section' => 'thumbnails_title',
                 'type' => 'simple_slider',
-                'choices' => array(0,10,20,30,40,50,60,70,80,90,100),
+                'choices' => array(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100),
                 'default' => $this->thumb_title_background_transparency,
                 'label' => __('Title Background Opacity', 'photo-gallery-wp'),
                 'help' => __('thumb_title_background_transparency', 'photo-gallery-wp')
@@ -1073,7 +1084,7 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'type' => 'select',
                 'choices' => array(
                     'left' => 'Left',
-                    'center'=> 'Center',
+                    'center' => 'Center',
                     'right' => 'Right'
                 ),
                 'default' => $this->video_view7_loadmore_position,
@@ -1117,10 +1128,10 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'width' => 30,
                 'height' => 30,
                 'choices' => array(
-                    1 => PHOTO_GALLERY_WP_IMAGES_URL.'/front_images/arrows/loading1.gif',
-                    2 => PHOTO_GALLERY_WP_IMAGES_URL.'/front_images/arrows/loading4.gif',
-                    3 => PHOTO_GALLERY_WP_IMAGES_URL.'/front_images/arrows/loading36.gif',
-                    4 => PHOTO_GALLERY_WP_IMAGES_URL.'/front_images/arrows/loading51.gif',
+                    1 => PHOTO_GALLERY_WP_IMAGES_URL . '/front_images/arrows/loading1.gif',
+                    2 => PHOTO_GALLERY_WP_IMAGES_URL . '/front_images/arrows/loading4.gif',
+                    3 => PHOTO_GALLERY_WP_IMAGES_URL . '/front_images/arrows/loading36.gif',
+                    4 => PHOTO_GALLERY_WP_IMAGES_URL . '/front_images/arrows/loading51.gif',
                 )
             ),
             'image_natural_size_thumbnail' => array(
@@ -1209,7 +1220,7 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'type' => 'select',
                 'choices' => array(
                     'left' => 'Left',
-                    'center'=> 'Center',
+                    'center' => 'Center',
                     'right' => 'Right'
                 ),
                 'default' => $this->video_ht_view7_paginator_position,
@@ -1236,7 +1247,7 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'default' => $this->thumb_likedislike_bg_trans,
                 'label' => __('Ratings Background Color Opacity', 'photo-gallery-wp'),
                 'help' => __('thumb_likedislike_bg_trans', 'photo-gallery-wp'),
-                'choices' => array(0,10,20,30,40,50,60,70,80,90,100)
+                'choices' => array(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
             ),
             'thumb_likedislike_font_color' => array(
                 'section' => 'thumbnails_rating_styles',
@@ -1321,7 +1332,7 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
 
     private function controls_lightbox_gallery()
     {
-        return array (
+        return array(
             'view6_content_in_center' => array(
                 'section' => 'lightbox_gallery_content_styles',
                 'type' => 'checkbox',
@@ -1372,7 +1383,7 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'help' => __('video_view4_loadmore_position', 'photo-gallery-wp'),
                 'choices' => array(
                     'left' => 'Left',
-                    'center'=> 'Center',
+                    'center' => 'Center',
                     'right' => 'Right'
                 )
             ),
@@ -1420,10 +1431,10 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'width' => 30,
                 'height' => 30,
                 'choices' => array(
-                    1 => PHOTO_GALLERY_WP_IMAGES_URL.'/front_images/arrows/loading1.gif',
-                    2 => PHOTO_GALLERY_WP_IMAGES_URL.'/front_images/arrows/loading4.gif',
-                    3 => PHOTO_GALLERY_WP_IMAGES_URL.'/front_images/arrows/loading36.gif',
-                    4 => PHOTO_GALLERY_WP_IMAGES_URL.'/front_images/arrows/loading51.gif',
+                    1 => PHOTO_GALLERY_WP_IMAGES_URL . '/front_images/arrows/loading1.gif',
+                    2 => PHOTO_GALLERY_WP_IMAGES_URL . '/front_images/arrows/loading4.gif',
+                    3 => PHOTO_GALLERY_WP_IMAGES_URL . '/front_images/arrows/loading36.gif',
+                    4 => PHOTO_GALLERY_WP_IMAGES_URL . '/front_images/arrows/loading51.gif',
                 )
             ),
             'view6_title_font_size' => array(
@@ -1460,7 +1471,7 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'default' => $this->view6_title_background_transparency,
                 'label' => __('Title Background Opacity', 'photo-gallery-wp'),
                 'help' => __('view6_title_background_transparency', 'photo-gallery-wp'),
-                'choices' => array(0,10,20,30,40,50,60,70,80,90,100)
+                'choices' => array(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
             ),
             'video_view4_paginator_fontsize' => array(
                 'section' => 'lightbox_gallery_pagination_styles',
@@ -1520,7 +1531,7 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'section' => 'lightbox_gallery_rating_styles',
                 'type' => 'simple_slider',
                 'default' => $this->lightbox_likedislike_bg_trans,
-                "choices" => array(0,10,20,30,40,50,60,70,80,90,100),
+                "choices" => array(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100),
                 'label' => __('Ratings Background Color Opacity', 'photo-gallery-wp'),
                 'help' => __('lightbox_likedislike_bg_trans', 'photo-gallery-wp')
             ),
@@ -1604,7 +1615,7 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
 
     private function controls_content_slider()
     {
-        return array (
+        return array(
             'view5_main_image_border_width_in_px' => array(
                 'section' => 'content_slider_container',
                 'type' => 'number',
@@ -1740,7 +1751,7 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'type' => 'simple_slider',
                 'default' => $this->contentsl_likedislike_bg_trans,
                 'label' => __('Ratings Background Color Opacity', 'photo-gallery-wp'),
-                'choices' => array(0,10,20,30,40,50,60,70,80,90,100)
+                'choices' => array(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
             ),
             'contentsl_likedislike_font_color' => array(
                 'section' => 'content_slider_rating_styles',
@@ -1781,68 +1792,70 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
         );
     }
 
-    private function init_gallery_content_pop_up() {
-        $this->view2_content_in_center = $this->get_option("view2_content_in_center",'no');
+    private function init_gallery_content_pop_up()
+    {
+        $this->view2_content_in_center = $this->get_option("view2_content_in_center", 'no');
         $this->image_natural_size_contentpopup = $this->get_option("image_natural_size_contentpopup", 'resize');
-        $this->view2_element_width = $this->get_option("view2_element_width",240);
-        $this->view2_element_height = $this->get_option("view2_element_height",160);
-        $this->view2_element_border_width = $this->get_option("view2_element_border_width",1);
-        $this->view2_element_border_color = $this->get_option("view2_element_border_color",'DEDEDE');
-        $this->view2_element_overlay_color = $this->get_option("view2_element_overlay_color",'FFFFFF');
-        $this->view2_element_overlay_transparency = $this->get_option("view2_element_overlay_transparency",'70');
-        $this->view2_zoombutton_style = $this->get_option("view2_zoombutton_style",'light');
-        $this->view2_popup_full_width = $this->get_option("view2_popup_full_width",'yes');
-        $this->view2_popup_background_color = $this->get_option("view2_popup_background_color",'FFFFFF');
-        $this->view2_popup_overlay_color = $this->get_option("view2_popup_overlay_color",'000000');
-        $this->view2_show_separator_lines = $this->get_option("view2_show_separator_lines",'yes');
-        $this->light_box_arrowkey = $this->get_option("light_box_arrowkey",'no');
-        $this->video_view1_paginator_fontsize = $this->get_option("video_view1_paginator_fontsize",'22');
-        $this->video_view1_paginator_color = $this->get_option("video_view1_paginator_color",'222222');
-        $this->video_view1_paginator_icon_size = $this->get_option("video_view1_paginator_icon_size",'22');
-        $this->video_view1_paginator_icon_color = $this->get_option("video_view1_paginator_icon_color",'FF2C2C');
-        $this->video_view1_loadmore_text = $this->get_option("video_view1_loadmore_text",'Load More');
-        $this->video_view1_loadmore_fontsize = $this->get_option("video_view1_loadmore_fontsize",22);
-        $this->video_view1_loadmore_font_color = $this->get_option("video_view1_loadmore_font_color",'FFFFFF');
-        $this->video_view1_loadmore_font_color_hover = $this->get_option("video_view1_loadmore_font_color_hover",'F2F2F2');
-        $this->video_view1_button_color = $this->get_option("video_view1_button_color",'FF2C2C');
-        $this->video_view1_button_color_hover = $this->get_option("video_view1_button_color_hover",'991A1A');
-        $this->view2_element_title_font_size = $this->get_option("view2_element_title_font_size",18);
-        $this->view2_element_title_font_color = $this->get_option("view2_element_title_font_color",'222222');
-        $this->view2_element_background_color = $this->get_option("view2_element_background_color",'F9F9F9');
-        $this->view2_element_show_linkbutton = $this->get_option("view2_element_show_linkbutton",'yes');
-        $this->view2_element_linkbutton_text = $this->get_option("view2_element_linkbutton_text",'View More');
-        $this->view2_element_linkbutton_font_size = $this->get_option("view2_element_linkbutton_font_size",14);
-        $this->view2_element_linkbutton_color = $this->get_option("view2_element_linkbutton_color",'FFFFFF');
-        $this->view2_element_linkbutton_background_color = $this->get_option("view2_element_linkbutton_background_color",'2ea2cd');
-        $this->view2_popup_title_font_size = $this->get_option("view2_popup_title_font_size",18);
-        $this->view2_popup_title_font_color = $this->get_option("view2_popup_title_font_color",'222222');
-        $this->view2_show_popup_linkbutton = $this->get_option("view2_show_popup_linkbutton",'yes');
-        $this->view2_popup_linkbutton_text = $this->get_option("view2_popup_linkbutton_text",'Load More');
-        $this->view2_popup_linkbutton_font_size = $this->get_option("view2_popup_linkbutton_font_size",14);
-        $this->view2_popup_linkbutton_color = $this->get_option("view2_popup_linkbutton_color",'FFFFFF');
-        $this->view2_popup_linkbutton_font_hover_color = $this->get_option("view2_popup_linkbutton_font_hover_color",'FFFFFF');
-        $this->view2_popup_linkbutton_background_color = $this->get_option("view2_popup_linkbutton_background_color",'2ea2cd');
-        $this->view2_popup_linkbutton_background_hover_color = $this->get_option("view2_popup_linkbutton_background_hover_color",'0074a2');
-        $this->popup_rating_count = $this->get_option("popup_rating_count",'yes');
-        $this->popup_likedislike_bg = $this->get_option("popup_likedislike_bg",'7993A3');
-        $this->popup_likedislike_font_color = $this->get_option("popup_likedislike_font_color",'454545');
-        $this->popup_active_font_color = $this->get_option("popup_active_font_color",'000000');
-        $this->popup_likedislike_thumb_color = $this->get_option("popup_likedislike_thumb_color",'2EC7E6');
-        $this->popup_likedislike_thumb_active_color = $this->get_option("popup_likedislike_thumb_active_color",'2883C9');
-        $this->popup_heart_likedislike_thumb_color = $this->get_option("popup_heart_likedislike_thumb_color",'84E0E3');
-        $this->view2_popup_overlay_transparency_color = $this->get_option("view2_popup_overlay_transparency_color",'70');
-        $this->view2_popup_closebutton_style = $this->get_option("view2_popup_closebutton_style",'dark');
-        $this->video_view1_loadmore_position = $this->get_option("video_view1_loadmore_position",'center');
-        $this->video_view1_loading_type = $this->get_option("video_view1_loading_type",'2');
-        $this->popup_likedislike_bg_trans = $this->get_option("popup_likedislike_bg_trans",'0');
-        $this->popup_heart_likedislike_thumb_active_color = $this->get_option("popup_heart_likedislike_thumb_active_color",'46B4E3');
-        $this->video_view1_paginator_position = $this->get_option("video_view1_paginator_position",'left');
-        $this->view2_show_description = $this->get_option("view2_show_description",'yes');
-        $this->view2_description_font_size = $this->get_option("view2_description_font_size",14);
-        $this->view2_description_color = $this->get_option("view2_description_color",'222222');
+        $this->view2_element_width = $this->get_option("view2_element_width", 240);
+        $this->view2_element_height = $this->get_option("view2_element_height", 160);
+        $this->view2_element_border_width = $this->get_option("view2_element_border_width", 1);
+        $this->view2_element_border_color = $this->get_option("view2_element_border_color", 'DEDEDE');
+        $this->view2_element_overlay_color = $this->get_option("view2_element_overlay_color", 'FFFFFF');
+        $this->view2_element_overlay_transparency = $this->get_option("view2_element_overlay_transparency", '70');
+        $this->view2_zoombutton_style = $this->get_option("view2_zoombutton_style", 'light');
+        $this->view2_popup_full_width = $this->get_option("view2_popup_full_width", 'yes');
+        $this->view2_popup_background_color = $this->get_option("view2_popup_background_color", 'FFFFFF');
+        $this->view2_popup_overlay_color = $this->get_option("view2_popup_overlay_color", '000000');
+        $this->view2_show_separator_lines = $this->get_option("view2_show_separator_lines", 'yes');
+        $this->light_box_arrowkey = $this->get_option("light_box_arrowkey", 'no');
+        $this->video_view1_paginator_fontsize = $this->get_option("video_view1_paginator_fontsize", '22');
+        $this->video_view1_paginator_color = $this->get_option("video_view1_paginator_color", '222222');
+        $this->video_view1_paginator_icon_size = $this->get_option("video_view1_paginator_icon_size", '22');
+        $this->video_view1_paginator_icon_color = $this->get_option("video_view1_paginator_icon_color", 'FF2C2C');
+        $this->video_view1_loadmore_text = $this->get_option("video_view1_loadmore_text", 'Load More');
+        $this->video_view1_loadmore_fontsize = $this->get_option("video_view1_loadmore_fontsize", 22);
+        $this->video_view1_loadmore_font_color = $this->get_option("video_view1_loadmore_font_color", 'FFFFFF');
+        $this->video_view1_loadmore_font_color_hover = $this->get_option("video_view1_loadmore_font_color_hover", 'F2F2F2');
+        $this->video_view1_button_color = $this->get_option("video_view1_button_color", 'FF2C2C');
+        $this->video_view1_button_color_hover = $this->get_option("video_view1_button_color_hover", '991A1A');
+        $this->view2_element_title_font_size = $this->get_option("view2_element_title_font_size", 18);
+        $this->view2_element_title_font_color = $this->get_option("view2_element_title_font_color", '222222');
+        $this->view2_element_background_color = $this->get_option("view2_element_background_color", 'F9F9F9');
+        $this->view2_element_show_linkbutton = $this->get_option("view2_element_show_linkbutton", 'yes');
+        $this->view2_element_linkbutton_text = $this->get_option("view2_element_linkbutton_text", 'View More');
+        $this->view2_element_linkbutton_font_size = $this->get_option("view2_element_linkbutton_font_size", 14);
+        $this->view2_element_linkbutton_color = $this->get_option("view2_element_linkbutton_color", 'FFFFFF');
+        $this->view2_element_linkbutton_background_color = $this->get_option("view2_element_linkbutton_background_color", '2ea2cd');
+        $this->view2_popup_title_font_size = $this->get_option("view2_popup_title_font_size", 18);
+        $this->view2_popup_title_font_color = $this->get_option("view2_popup_title_font_color", '222222');
+        $this->view2_show_popup_linkbutton = $this->get_option("view2_show_popup_linkbutton", 'yes');
+        $this->view2_popup_linkbutton_text = $this->get_option("view2_popup_linkbutton_text", 'Load More');
+        $this->view2_popup_linkbutton_font_size = $this->get_option("view2_popup_linkbutton_font_size", 14);
+        $this->view2_popup_linkbutton_color = $this->get_option("view2_popup_linkbutton_color", 'FFFFFF');
+        $this->view2_popup_linkbutton_font_hover_color = $this->get_option("view2_popup_linkbutton_font_hover_color", 'FFFFFF');
+        $this->view2_popup_linkbutton_background_color = $this->get_option("view2_popup_linkbutton_background_color", '2ea2cd');
+        $this->view2_popup_linkbutton_background_hover_color = $this->get_option("view2_popup_linkbutton_background_hover_color", '0074a2');
+        $this->popup_rating_count = $this->get_option("popup_rating_count", 'yes');
+        $this->popup_likedislike_bg = $this->get_option("popup_likedislike_bg", '7993A3');
+        $this->popup_likedislike_font_color = $this->get_option("popup_likedislike_font_color", '454545');
+        $this->popup_active_font_color = $this->get_option("popup_active_font_color", '000000');
+        $this->popup_likedislike_thumb_color = $this->get_option("popup_likedislike_thumb_color", '2EC7E6');
+        $this->popup_likedislike_thumb_active_color = $this->get_option("popup_likedislike_thumb_active_color", '2883C9');
+        $this->popup_heart_likedislike_thumb_color = $this->get_option("popup_heart_likedislike_thumb_color", '84E0E3');
+        $this->view2_popup_overlay_transparency_color = $this->get_option("view2_popup_overlay_transparency_color", '70');
+        $this->view2_popup_closebutton_style = $this->get_option("view2_popup_closebutton_style", 'dark');
+        $this->video_view1_loadmore_position = $this->get_option("video_view1_loadmore_position", 'center');
+        $this->video_view1_loading_type = $this->get_option("video_view1_loading_type", '2');
+        $this->popup_likedislike_bg_trans = $this->get_option("popup_likedislike_bg_trans", '0');
+        $this->popup_heart_likedislike_thumb_active_color = $this->get_option("popup_heart_likedislike_thumb_active_color", '46B4E3');
+        $this->video_view1_paginator_position = $this->get_option("video_view1_paginator_position", 'left');
+        $this->view2_show_description = $this->get_option("view2_show_description", 'yes');
+        $this->view2_description_font_size = $this->get_option("view2_description_font_size", 14);
+        $this->view2_description_color = $this->get_option("view2_description_color", '222222');
     }
 
-    private function init_controls_masonry() {
+    private function init_controls_masonry()
+    {
         $this->masonry_show_content_in_the_center = $this->get_option("masonry_show_content_in_the_center", 'no');
         $this->masonry_image_width_in_px = $this->get_option("masonry_image_width_in_px", '260');
         $this->masonry_image_margin_in_px = $this->get_option("masonry_image_margin_in_px", '0');
@@ -1878,9 +1891,10 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
         $this->masonry_pagination_position = $this->get_option("masonry_pagination_position", 'center');
     }
 
-    private function init_controls_mosaic() {
+    private function init_controls_mosaic()
+    {
         $this->mosaic_show_content_in_the_center = $this->get_option("mosaic_show_content_in_the_center", 'no');
-        $this->mosaic_show_content_by = $this->get_option( 'mosaic_show_content_by', 'count' );
+        $this->mosaic_show_content_by = $this->get_option('mosaic_show_content_by', 'count');
         $this->mosaic_image_max_width_in_px = $this->get_option("mosaic_image_max_width_in_px", '150');
         $this->mosaic_image_column_count = $this->get_option("mosaic_image_column_count", '5');
         $this->mosaic_image_border_width_in_px = $this->get_option("mosaic_image_border_width_in_px", '0');
@@ -1896,8 +1910,14 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
         $this->mosaic_title_font_hover_color = $this->get_option("mosaic_title_font_hover_color", 'ffffff');
     }
 
-    private function controls_mosaic(){
-        return array (
+    private function init_controls_albums()
+    {
+        $this->album_images_count_style = $this->get_option("album_count_style", "3");
+    }
+
+    private function controls_mosaic()
+    {
+        return array(
             'mosaic_show_content_in_the_center' => array(
                 'section' => 'mosaic_content_styles',
                 'type' => 'checkbox',
@@ -1908,10 +1928,10 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'section' => 'mosaic_image_styles',
                 'type' => 'select',
                 'default' => $this->mosaic_show_content_by,
-                'label' => __( 'Show Content by', 'photo-gallery-wp' ),
+                'label' => __('Show Content by', 'photo-gallery-wp'),
                 'choices' => array(
-                    'count' => __( 'Columns count', 'photo-gallery-wp' ),
-                    'width' => __( 'Width', 'photo-gallery-wp' )
+                    'count' => __('Columns count', 'photo-gallery-wp'),
+                    'width' => __('Width', 'photo-gallery-wp')
                 )
             ),
             'mosaic_image_max_width_in_px' => array(
@@ -1919,14 +1939,14 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'type' => 'number',
                 'default' => $this->mosaic_image_max_width_in_px,
                 'label' => __('Image Max Width in px', 'photo-gallery-wp'),
-                'html_class' => ( $this->mosaic_show_content_by !== 'width' ? array('hidden') : array() )
+                'html_class' => ($this->mosaic_show_content_by !== 'width' ? array('hidden') : array())
             ),
             'mosaic_image_column_count' => array(
                 'section' => 'mosaic_image_styles',
                 'type' => 'number',
                 'default' => $this->mosaic_image_column_count,
                 'label' => __('Column count', 'photo-gallery-wp'),
-                'html_class' => ( $this->mosaic_show_content_by !== 'count' ? array('hidden') : array() )
+                'html_class' => ($this->mosaic_show_content_by !== 'count' ? array('hidden') : array())
             ),
             'mosaic_image_margin_bottom_in_px' => array(
                 'section' => 'mosaic_image_styles',
@@ -1993,13 +2013,14 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'type' => 'simple_slider',
                 'default' => $this->mosaic_title_background_opacity,
                 'label' => __('Title Background Opacity', 'photo-gallery-wp'),
-                'choices' => range(0,100)
+                'choices' => range(0, 100)
             ),
         );
     }
 
-    private function controls_masonry(){
-        return array (
+    private function controls_masonry()
+    {
+        return array(
             'masonry_show_content_in_the_center' => array(
                 'section' => 'masonry_content_styles',
                 'type' => 'checkbox',
@@ -2071,7 +2092,7 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'type' => 'simple_slider',
                 'default' => $this->masonry_title_background_opacity,
                 'label' => __('Title Background Opacity', 'photo-gallery-wp'),
-                'choices' => range(0,100)
+                'choices' => range(0, 100)
             ),
             'masonry_rating_icons_color' => array(
                 'section' => 'masonry_rating_styles',
@@ -2090,7 +2111,7 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'type' => 'simple_slider',
                 'default' => $this->masonry_ratings_background_color_opacity,
                 'label' => __('Ratings Background Color Opacity', 'photo-gallery-wp'),
-                'choices' => range(0,100)
+                'choices' => range(0, 100)
             ),
             'masonry_rating_font_color' => array(
                 'section' => 'masonry_rating_styles',
@@ -2142,7 +2163,7 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'choices' => array(
                     'left' => 'Left',
                     'right' => 'Right',
-                    'center'=> 'Center'
+                    'center' => 'Center'
                 )
             ),
             'masonry_load_more_font_size_in_px' => array(
@@ -2183,10 +2204,10 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'width' => 30,
                 'height' => 30,
                 'choices' => array(
-                    1 => PHOTO_GALLERY_WP_IMAGES_URL.'/front_images/arrows/loading1.gif',
-                    2 => PHOTO_GALLERY_WP_IMAGES_URL.'/front_images/arrows/loading4.gif',
-                    3 => PHOTO_GALLERY_WP_IMAGES_URL.'/front_images/arrows/loading36.gif',
-                    4 => PHOTO_GALLERY_WP_IMAGES_URL.'/front_images/arrows/loading51.gif',
+                    1 => PHOTO_GALLERY_WP_IMAGES_URL . '/front_images/arrows/loading1.gif',
+                    2 => PHOTO_GALLERY_WP_IMAGES_URL . '/front_images/arrows/loading4.gif',
+                    3 => PHOTO_GALLERY_WP_IMAGES_URL . '/front_images/arrows/loading36.gif',
+                    4 => PHOTO_GALLERY_WP_IMAGES_URL . '/front_images/arrows/loading51.gif',
                 )
             ),
             'masonry_pagination_font_size_in_px' => array(
@@ -2221,7 +2242,7 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'choices' => array(
                     'left' => 'Left',
                     'right' => 'Right',
-                    'center'=> 'Center'
+                    'center' => 'Center'
                 )
             ),
         );
@@ -2229,7 +2250,7 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
 
     private function controls_gallery_content_pop_up()
     {
-        return array (
+        return array(
             'view2_content_in_center' => array(
                 'section' => 'content_styles',
                 'type' => 'checkbox',
@@ -2286,7 +2307,7 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
             'view2_element_overlay_transparency' => array(
                 'section' => 'element_styles',
                 'type' => 'simple_slider',
-                'choices' => array (0,10,20,30,40,50,60,70,80,90,100),
+                'choices' => array(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100),
                 'default' => $this->view2_element_overlay_transparency,
                 'label' => __('Elements Image Overlay Opacity', 'photo-gallery-wp'),
                 'help' => __('view2_element_overlay_transparency', 'photo-gallery-wp')
@@ -2600,7 +2621,7 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'default' => $this->view2_popup_overlay_transparency_color,
                 'label' => __('Popup Overlay Opacity', 'photo-gallery-wp'),
                 'help' => __('view2_popup_overlay_transparency_color', 'photo-gallery-wp'),
-                'choices' => array(0,10,20,30,40,50,60,70,80,90,100)
+                'choices' => array(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
             ),
             'view2_popup_closebutton_style' => array(
                 'section' => 'popup_styles',
@@ -2622,7 +2643,7 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'choices' => array(
                     'left' => 'Left',
                     'right' => 'Rigth',
-                    'center'=> 'Center'
+                    'center' => 'Center'
                 )
             ),
             'popup_likedislike_bg_trans' => array(
@@ -2631,7 +2652,7 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'default' => $this->popup_likedislike_bg_trans,
                 'label' => __('Ratings Background Color Opacity', 'photo-gallery-wp'),
                 'help' => __('popup_likedislike_bg_trans', 'photo-gallery-wp'),
-                'choices' => array(0,10,20,30,40,50,60,70,80,90,100)
+                'choices' => array(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
             ),
             'video_view1_loading_type' => array(
                 'section' => 'load_more_styles',
@@ -2642,10 +2663,10 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'width' => 30,
                 'height' => 30,
                 'choices' => array(
-                    1 => PHOTO_GALLERY_WP_IMAGES_URL.'/front_images/arrows/loading1.gif',
-                    2 => PHOTO_GALLERY_WP_IMAGES_URL.'/front_images/arrows/loading4.gif',
-                    3 => PHOTO_GALLERY_WP_IMAGES_URL.'/front_images/arrows/loading36.gif',
-                    4 => PHOTO_GALLERY_WP_IMAGES_URL.'/front_images/arrows/loading51.gif',
+                    1 => PHOTO_GALLERY_WP_IMAGES_URL . '/front_images/arrows/loading1.gif',
+                    2 => PHOTO_GALLERY_WP_IMAGES_URL . '/front_images/arrows/loading4.gif',
+                    3 => PHOTO_GALLERY_WP_IMAGES_URL . '/front_images/arrows/loading36.gif',
+                    4 => PHOTO_GALLERY_WP_IMAGES_URL . '/front_images/arrows/loading51.gif',
                 )
             ),
             'view2_show_description' => array(
@@ -2683,8 +2704,24 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'label' => __('Album style', 'photo-gallery-wp'),
                 'help' => __('album_style', 'photo-gallery-wp'),
                 'choices' => array(
-                    '1' => 'view 1',
-                    '2' => 'view 2'
+                    '1' => 'popup view',
+                    '2' => 'page view'
+                )
+            ),
+            'album_count_style' => array(
+                'section' => 'album_count_style',
+                'type' => 'image_radio',
+                'default' => $this->album_images_count_style,
+                'label' => __('Images count Styles', 'photo-gallery-wp'),
+                'help' => __('Images_count_styles', 'photo-gallery-wp'),
+                'width' => 80,
+                'height' => 80,
+                'choices' => array(
+                    '0' => PHOTO_GALLERY_WP_IMAGES_URL . '/albums/count/count-0.png',
+                    '1' => PHOTO_GALLERY_WP_IMAGES_URL . '/albums/count/count-1.png',
+                    '2' => PHOTO_GALLERY_WP_IMAGES_URL . '/albums/count/count-2.png',
+                    '3' => PHOTO_GALLERY_WP_IMAGES_URL . '/albums/count/count-3.png',
+                    '4' => PHOTO_GALLERY_WP_IMAGES_URL . '/albums/count/count-4.png',
                 )
             ),
 
@@ -2764,26 +2801,27 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
      * @param $id
      * @param $control
      */
-    protected function control_radio_position( $id, $control ){
-        $default = ( isset( $control['default'] ) ? $control['default'] : "" );
+    protected function control_radio_position($id, $control)
+    {
+        $default = (isset($control['default']) ? $control['default'] : "");
 
-        $label_str       = ( isset( $control['label'] ) ? '<span class="control-title" > ' . $control['label'] : '' );
-        $label_str      .= isset( $control['help'] ) ? '<div class="wpdev_settings_help">&#63;<div class="wpdev_settings_help_block"><span class="pnt"></span><p>'. $control['help'] .'</p></div></div></span>' : '</span>';
+        $label_str = (isset($control['label']) ? '<span class="control-title" > ' . $control['label'] : '');
+        $label_str .= isset($control['help']) ? '<div class="wpdev_settings_help">&#63;<div class="wpdev_settings_help_block"><span class="pnt"></span><p>' . $control['help'] . '</p></div></div></span>' : '</span>';
 
         echo $label_str;
         ?>
         <div class="radio-block">
             <?php
-            if( isset( $control['choices'] ) && !empty( $control['choices'] ) ){
+            if (isset($control['choices']) && !empty($control['choices'])) {
                 ?>
                 <ul>
                     <?php
-                    foreach( $control['choices'] as $key ){
+                    foreach ($control['choices'] as $key) {
                         ?>
-                        <li style="display: inline-block" >
-                            <input type="radio" value="<?php echo $key ?>" <?php checked($default, $key); ?> 
-			    id="<?php echo $id.'-'.$key; ?>" name="wpdev_options[<?php echo $id; ?>]"  />
-                            <label for="<?php echo $id.'-'.$key; ?>"><span class="radicon"></span></label>
+                        <li style="display: inline-block">
+                            <input type="radio" value="<?php echo $key ?>" <?php checked($default, $key); ?>
+                                   id="<?php echo $id . '-' . $key; ?>" name="wpdev_options[<?php echo $id; ?>]"/>
+                            <label for="<?php echo $id . '-' . $key; ?>"><span class="radicon"></span></label>
                         </li>
                         <?php if ($key % 3 == 0) {
                             echo "<br />";

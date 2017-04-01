@@ -885,7 +885,6 @@ if(Photo_Gallery_WP()->settings->popup_rating_count=='no'){
     background-size: 60px auto;
 }
 
-
 /* ==========================================================================
    Envira Gallery Styles
    ========================================================================== */
@@ -931,21 +930,27 @@ if(Photo_Gallery_WP()->settings->popup_rating_count=='no'){
     -webkit-transition: none;
     -moz-transition: none;
     -o-transition: none;
-    -ms-transition: none; }
+    -ms-transition: none;
+}
 
 /**
 * Tags Addon
 */
 .envira-tags-filter-list {
     clear: both;
-    margin: 0 0 10px 0; }
+    margin: 0 0 10px 0;
+}
+
 .envira-tags-filter-list li.envira-tags-filter,
 .envira-tags-filter-list li.envira-tag-filter {
     float: left;
-    margin: 0 20px 10px 0; }
+    margin: 0 20px 10px 0;
+}
+
 .envira-tags-filter-list .envira-tag-filter-link {
     font-size: 13px;
-    font-weight: bold; }
+    font-weight: bold;
+}
 
 /**
 * Breadcrumbs Addon
@@ -955,15 +960,19 @@ if(Photo_Gallery_WP()->settings->popup_rating_count=='no'){
     margin: 0 0 20px 0;
     padding: 10px;
     background: #eee;
-    clear: both; }
+    clear: both;
+}
+
 .envira-breadcrumbs a {
-    text-decoration: none; }
+    text-decoration: none;
+}
 
 /**
 * WooCommerce Addon
 */
 .envira-hidden {
-    display: none; }
+    display: none;
+}
 
 /**
 * Main Wrapper
@@ -979,11 +988,17 @@ if(Photo_Gallery_WP()->settings->popup_rating_count=='no'){
     */
     /**
     * Inner Wrapper
-    */ }
+    */
+}
+
 .envira-gallery-wrap .envira-pagination {
-    margin: 0 0 20px 0; }
+    margin: 0 0 20px 0;
+}
+
 .envira-gallery-wrap .envira-gallery-description {
-    clear: both; }
+    clear: both;
+}
+
 .envira-gallery-wrap .envira-gallery-public {
     width: 100%;
     margin: 0 auto 20px auto;
@@ -1010,9 +1025,13 @@ if(Photo_Gallery_WP()->settings->popup_rating_count=='no'){
     /**
     * Optional: CSS Animations
     * - if enabled, .envira-gallery-css-animations is added to .envira-gallery-public
-    */ }
+    */
+}
+
 .envira-gallery-wrap .envira-gallery-public.envira-clear {
-    clear: both; }
+    clear: both;
+}
+
 .envira-gallery-wrap .envira-gallery-public.envira-clear:after {
     clear: both;
     content: '.';
@@ -1021,12 +1040,16 @@ if(Photo_Gallery_WP()->settings->popup_rating_count=='no'){
     line-height: 0;
     overflow: auto;
     visibility: hidden;
-    zoom: 1; }
+    zoom: 1;
+}
+
 .envira-gallery-wrap .envira-gallery-public .envira-gallery-item-inner {
     position: relative;
     /**
     * Dynamic Positioning
-    */ }
+    */
+}
+
 .envira-gallery-wrap .envira-gallery-public .envira-gallery-item-inner .envira-gallery-position-overlay {
     box-sizing: border-box;
     position: absolute;
@@ -1043,25 +1066,35 @@ if(Photo_Gallery_WP()->settings->popup_rating_count=='no'){
     */
     /**
     * Bottom Right
-    */ }
+    */
+}
+
 .envira-gallery-wrap .envira-gallery-public .envira-gallery-item-inner .envira-gallery-position-overlay.envira-gallery-top-left {
     top: 0;
     left: 0;
-    padding: 5px 0 0 5px; }
+    padding: 5px 0 0 5px;
+}
+
 .envira-gallery-wrap .envira-gallery-public .envira-gallery-item-inner .envira-gallery-position-overlay.envira-gallery-top-right {
     top: 0;
     right: 0;
     padding: 5px 5px 0 0;
-    text-align: right; }
+    text-align: right;
+}
+
 .envira-gallery-wrap .envira-gallery-public .envira-gallery-item-inner .envira-gallery-position-overlay.envira-gallery-bottom-left {
     bottom: 0;
     left: 0;
-    padding: 0 0 5px 5px; }
+    padding: 0 0 5px 5px;
+}
+
 .envira-gallery-wrap .envira-gallery-public .envira-gallery-item-inner .envira-gallery-position-overlay.envira-gallery-bottom-right {
     bottom: 0;
     right: 0;
     padding: 0 5px 5px 0;
-    text-align: right; }
+    text-align: right;
+}
+
 .envira-gallery-wrap .envira-gallery-public .envira-gallery-item {
     float: left;
     /**
@@ -1072,54 +1105,88 @@ if(Photo_Gallery_WP()->settings->popup_rating_count=='no'){
     */
     /**
     * Videos
-    */ }
+    */
+}
+
 .envira-gallery-wrap .envira-gallery-public .envira-gallery-item > .envira-gallery-link {
     display: block;
     outline: none;
     border: 0 none;
-    position: relative; }
+    position: relative;
+}
+
 .envira-gallery-wrap .envira-gallery-public .envira-gallery-item img {
     float: none;
     display: block;
     margin: 0 auto;
     padding: 0;
-    max-width: 100%; }
+    max-width: 100%;
+}
+
 .envira-gallery-wrap .envira-gallery-public .envira-gallery-item iframe, .envira-gallery-wrap .envira-gallery-public .envira-gallery-item video {
     display: block;
     margin: 0 auto;
-    width: 100%; }
+    width: 100%;
+}
+
 .envira-gallery-wrap .envira-gallery-public.envira-gallery-1-columns .envira-gallery-item {
     clear: both;
-    width: 100%; }
+    width: 100%;
+}
+
 .envira-gallery-wrap .envira-gallery-public.envira-gallery-2-columns .envira-gallery-item {
-    width: 50%; }
+    width: 50%;
+}
+
 .envira-gallery-wrap .envira-gallery-public.envira-gallery-2-columns .envira-gallery-item:nth-child(2n+1) {
-    clear: both; }
+    clear: both;
+}
+
 .envira-gallery-wrap .envira-gallery-public.envira-gallery-3-columns .envira-gallery-item {
-    width: 33.33%; }
+    width: 33.33%;
+}
+
 .envira-gallery-wrap .envira-gallery-public.envira-gallery-3-columns .envira-gallery-item:nth-child(3n+1) {
-    clear: both; }
+    clear: both;
+}
+
 .envira-gallery-wrap .envira-gallery-public.envira-gallery-4-columns .envira-gallery-item {
     width: 25%;
     margin: 0;
     padding: 0;
-    box-sizing: border-box; }
+    box-sizing: border-box;
+}
+
 .envira-gallery-wrap .envira-gallery-public.envira-gallery-4-columns .envira-gallery-item:nth-child(4n+1) {
-    clear: both; }
+    clear: both;
+}
+
 .envira-gallery-wrap .envira-gallery-public.envira-gallery-5-columns .envira-gallery-item {
-    width: 20%; }
+    width: 20%;
+}
+
 .envira-gallery-wrap .envira-gallery-public.envira-gallery-5-columns .envira-gallery-item:nth-child(5n+1) {
-    clear: both; }
+    clear: both;
+}
+
 .envira-gallery-wrap .envira-gallery-public.envira-gallery-6-columns .envira-gallery-item {
-    width: 16.66%; }
+    width: 16.66%;
+}
+
 .envira-gallery-wrap .envira-gallery-public.envira-gallery-6-columns .envira-gallery-item:nth-child(6n+1) {
-    clear: both; }
+    clear: both;
+}
+
 .envira-gallery-wrap .envira-gallery-public.enviratope .envira-gallery-item {
-    clear: none !important; }
+    clear: none !important;
+}
+
 .envira-gallery-wrap .envira-gallery-public.envira-gallery-css-animations {
     /**
     * Gallery Item
-    */ }
+    */
+}
+
 .envira-gallery-wrap .envira-gallery-public.envira-gallery-css-animations .envira-gallery-item {
     /**
     * Image
@@ -1127,12 +1194,17 @@ if(Photo_Gallery_WP()->settings->popup_rating_count=='no'){
     /**
     * Image Hover
     * - Always force opacity: 1, as the CSS Opacity setting for images may be less e.g. 0.5
-    */ }
+    */
+}
+
 .envira-gallery-wrap .envira-gallery-public.envira-gallery-css-animations .envira-gallery-item img {
     opacity: 0;
-    transition: all .2s ease-in-out; }
+    transition: all .2s ease-in-out;
+}
+
 .envira-gallery-wrap .envira-gallery-public.envira-gallery-css-animations .envira-gallery-item a:hover img {
-    opacity: 1 !important; }
+    opacity: 1 !important;
+}
 
 /**
 * Main Wrapper
@@ -1145,9 +1217,12 @@ if(Photo_Gallery_WP()->settings->popup_rating_count=='no'){
             &.envira-gallery-description-above {
                 display: table;
             }
-        }*/ }
+        }*/
+}
+
 .envira-gallery-public.envira-justified-gallery .envira-gallery-item-inner {
-    position: absolute; }
+    position: absolute;
+}
 
 .envira-gallery-public.envira-gallery-1-columns .envira-title,
 .envira-gallery-public.envira-gallery-1-columns .envira-caption,
@@ -1165,7 +1240,9 @@ if(Photo_Gallery_WP()->settings->popup_rating_count=='no'){
     width: 100%;
     font-size: 14px;
     line-height: 24px;
-    display: inline-block; }
+    display: inline-block;
+}
+
 .envira-gallery-public.envira-gallery-1-columns .envira-title,
 .envira-gallery-public.envira-gallery-2-columns .envira-title,
 .envira-gallery-public.envira-gallery-3-columns .envira-title,
@@ -1174,14 +1251,17 @@ if(Photo_Gallery_WP()->settings->popup_rating_count=='no'){
 .envira-gallery-public.envira-gallery-6-columns .envira-title {
     font-size: 18px;
     line-height: 26px;
-    font-weight: 600; }
+    font-weight: 600;
+}
+
 .envira-gallery-public.envira-gallery-1-columns .envira-caption,
 .envira-gallery-public.envira-gallery-2-columns .envira-caption,
 .envira-gallery-public.envira-gallery-3-columns .envira-caption,
 .envira-gallery-public.envira-gallery-4-columns .envira-caption,
 .envira-gallery-public.envira-gallery-5-columns .envira-caption,
 .envira-gallery-public.envira-gallery-6-columns .envira-caption {
-    font-weight: 200; }
+    font-weight: 200;
+}
 
 /**
 * RTL Support
@@ -1189,13 +1269,18 @@ if(Photo_Gallery_WP()->settings->popup_rating_count=='no'){
 .envira-gallery-wrap.envira-gallery-rtl {
     /**
     * Inner Wrapper
-    */ }
+    */
+}
+
 .envira-gallery-wrap.envira-gallery-rtl .envira-gallery-public {
     /**
     * Gallery Item
-    */ }
+    */
+}
+
 .envira-gallery-wrap.envira-gallery-rtl .envira-gallery-public .envira-gallery-item {
-    float: right; }
+    float: right;
+}
 
 /**
 * Mobile Landscape Size to Tablet Portrait (devices and browsers)
@@ -1208,7 +1293,9 @@ if(Photo_Gallery_WP()->settings->popup_rating_count=='no'){
     .envira-gallery-wrap {
         /**
         * Inner Wrapper
-        */ }
+        */
+    }
+
     .envira-gallery-wrap .envira-gallery-public {
         /**
         * Column Widths and Clearing
@@ -1217,27 +1304,50 @@ if(Photo_Gallery_WP()->settings->popup_rating_count=='no'){
         * Optional: Isotope
         * - if enabled, .enviratope is added to .envira-gallery-public
         * - no clearing on gallery items
-        */ }
+        */
+    }
+
     .envira-gallery-wrap .envira-gallery-public.envira-gallery-4-columns .envira-gallery-item {
-        width: 33%; }
+        width: 33%;
+    }
+
     .envira-gallery-wrap .envira-gallery-public.envira-gallery-4-columns .envira-gallery-item:nth-child(4n+1) {
-        clear: none; }
+        clear: none;
+    }
+
     .envira-gallery-wrap .envira-gallery-public.envira-gallery-4-columns .envira-gallery-item:nth-child(3n+1) {
-        clear: both; }
+        clear: both;
+    }
+
     .envira-gallery-wrap .envira-gallery-public.envira-gallery-5-columns .envira-gallery-item {
-        width: 33%; }
+        width: 33%;
+    }
+
     .envira-gallery-wrap .envira-gallery-public.envira-gallery-5-columns .envira-gallery-item:nth-child(5n+1) {
-        clear: none; }
+        clear: none;
+    }
+
     .envira-gallery-wrap .envira-gallery-public.envira-gallery-5-columns .envira-gallery-item:nth-child(3n+1) {
-        clear: both; }
+        clear: both;
+    }
+
     .envira-gallery-wrap .envira-gallery-public.envira-gallery-6-columns .envira-gallery-item {
-        width: 33%; }
+        width: 33%;
+    }
+
     .envira-gallery-wrap .envira-gallery-public.envira-gallery-6-columns .envira-gallery-item:nth-child(6n+1) {
-        clear: none; }
+        clear: none;
+    }
+
     .envira-gallery-wrap .envira-gallery-public.envira-gallery-6-columns .envira-gallery-item:nth-child(3n+1) {
-        clear: both; }
+        clear: both;
+    }
+
     .envira-gallery-wrap .envira-gallery-public.enviratope .envira-gallery-item {
-        clear: none !important; } }
+        clear: none !important;
+    }
+}
+
 /**
 * Mobile Landscape (devices and browsers)
 * - Envira Gallery Columns: Reduce to 2 column. Isotope will detect change + resize automatically.
@@ -1249,7 +1359,9 @@ if(Photo_Gallery_WP()->settings->popup_rating_count=='no'){
     .envira-gallery-wrap {
         /**
         * Inner Wrapper
-        */ }
+        */
+    }
+
     .envira-gallery-wrap .envira-gallery-public {
         /**
         * Column Widths and Clearing
@@ -1258,15 +1370,26 @@ if(Photo_Gallery_WP()->settings->popup_rating_count=='no'){
         * Optional: Isotope
         * - if enabled, .enviratope is added to .envira-gallery-public
         * - no clearing on gallery items
-        */ }
+        */
+    }
+
     .envira-gallery-wrap .envira-gallery-public.envira-gallery-2-columns .envira-gallery-item, .envira-gallery-wrap .envira-gallery-public.envira-gallery-3-columns .envira-gallery-item, .envira-gallery-wrap .envira-gallery-public.envira-gallery-4-columns .envira-gallery-item, .envira-gallery-wrap .envira-gallery-public.envira-gallery-5-columns .envira-gallery-item, .envira-gallery-wrap .envira-gallery-public.envira-gallery-6-columns .envira-gallery-item {
-        width: 50%; }
+        width: 50%;
+    }
+
     .envira-gallery-wrap .envira-gallery-public.envira-gallery-2-columns .envira-gallery-item:nth-child(3n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-2-columns .envira-gallery-item:nth-child(4n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-2-columns .envira-gallery-item:nth-child(5n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-2-columns .envira-gallery-item:nth-child(6n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-3-columns .envira-gallery-item:nth-child(3n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-3-columns .envira-gallery-item:nth-child(4n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-3-columns .envira-gallery-item:nth-child(5n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-3-columns .envira-gallery-item:nth-child(6n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-4-columns .envira-gallery-item:nth-child(3n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-4-columns .envira-gallery-item:nth-child(4n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-4-columns .envira-gallery-item:nth-child(5n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-4-columns .envira-gallery-item:nth-child(6n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-5-columns .envira-gallery-item:nth-child(3n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-5-columns .envira-gallery-item:nth-child(4n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-5-columns .envira-gallery-item:nth-child(5n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-5-columns .envira-gallery-item:nth-child(6n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-6-columns .envira-gallery-item:nth-child(3n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-6-columns .envira-gallery-item:nth-child(4n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-6-columns .envira-gallery-item:nth-child(5n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-6-columns .envira-gallery-item:nth-child(6n+1) {
-        clear: none; }
+        clear: none;
+    }
+
     .envira-gallery-wrap .envira-gallery-public.envira-gallery-2-columns .envira-gallery-item:nth-child(2n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-3-columns .envira-gallery-item:nth-child(2n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-4-columns .envira-gallery-item:nth-child(2n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-5-columns .envira-gallery-item:nth-child(2n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-6-columns .envira-gallery-item:nth-child(2n+1) {
-        clear: both; }
+        clear: both;
+    }
+
     .envira-gallery-wrap .envira-gallery-public.enviratope .envira-gallery-item {
-        clear: none !important; } }
+        clear: none !important;
+    }
+}
+
 /**
 * Mobile Portrait (devices and browsers)
 * - Envira Gallery Columns: Reduce to 1 column. Isotope will detect change + resize automatically.
@@ -1278,7 +1401,9 @@ if(Photo_Gallery_WP()->settings->popup_rating_count=='no'){
     .envira-gallery-wrap {
         /**
         * Inner Wrapper
-        */ }
+        */
+    }
+
     .envira-gallery-wrap .envira-gallery-public {
         /**
         * Column Widths and Clearing
@@ -1287,13 +1412,22 @@ if(Photo_Gallery_WP()->settings->popup_rating_count=='no'){
         * Optional: Isotope
         * - if enabled, .enviratope is added to .envira-gallery-public
         * - no clearing on gallery items
-        */ }
+        */
+    }
+
     .envira-gallery-wrap .envira-gallery-public.envira-gallery-1-columns .envira-gallery-item, .envira-gallery-wrap .envira-gallery-public.envira-gallery-2-columns .envira-gallery-item, .envira-gallery-wrap .envira-gallery-public.envira-gallery-3-columns .envira-gallery-item, .envira-gallery-wrap .envira-gallery-public.envira-gallery-4-columns .envira-gallery-item, .envira-gallery-wrap .envira-gallery-public.envira-gallery-5-columns .envira-gallery-item, .envira-gallery-wrap .envira-gallery-public.envira-gallery-6-columns .envira-gallery-item {
-        width: 100%; }
+        width: 100%;
+    }
+
     .envira-gallery-wrap .envira-gallery-public.envira-gallery-1-columns .envira-gallery-item:nth-child(2n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-1-columns .envira-gallery-item:nth-child(3n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-1-columns .envira-gallery-item:nth-child(4n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-1-columns .envira-gallery-item:nth-child(5n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-1-columns .envira-gallery-item:nth-child(6n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-2-columns .envira-gallery-item:nth-child(2n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-2-columns .envira-gallery-item:nth-child(3n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-2-columns .envira-gallery-item:nth-child(4n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-2-columns .envira-gallery-item:nth-child(5n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-2-columns .envira-gallery-item:nth-child(6n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-3-columns .envira-gallery-item:nth-child(2n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-3-columns .envira-gallery-item:nth-child(3n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-3-columns .envira-gallery-item:nth-child(4n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-3-columns .envira-gallery-item:nth-child(5n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-3-columns .envira-gallery-item:nth-child(6n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-4-columns .envira-gallery-item:nth-child(2n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-4-columns .envira-gallery-item:nth-child(3n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-4-columns .envira-gallery-item:nth-child(4n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-4-columns .envira-gallery-item:nth-child(5n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-4-columns .envira-gallery-item:nth-child(6n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-5-columns .envira-gallery-item:nth-child(2n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-5-columns .envira-gallery-item:nth-child(3n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-5-columns .envira-gallery-item:nth-child(4n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-5-columns .envira-gallery-item:nth-child(5n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-5-columns .envira-gallery-item:nth-child(6n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-6-columns .envira-gallery-item:nth-child(2n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-6-columns .envira-gallery-item:nth-child(3n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-6-columns .envira-gallery-item:nth-child(4n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-6-columns .envira-gallery-item:nth-child(5n+1), .envira-gallery-wrap .envira-gallery-public.envira-gallery-6-columns .envira-gallery-item:nth-child(6n+1) {
-        clear: both; }
+        clear: both;
+    }
+
     .envira-gallery-wrap .envira-gallery-public.enviratope .envira-gallery-item {
-        clear: none !important; } }
+        clear: none !important;
+    }
+}
+
 /* ==========================================================================
    Envira Lightbox Gallery Styles
    ========================================================================== */
@@ -1348,13 +1482,15 @@ if(Photo_Gallery_WP()->settings->popup_rating_count=='no'){
     -webkit-transition: none;
     -moz-transition: none;
     -o-transition: none;
-    -ms-transition: none; }
+    -ms-transition: none;
+}
 
 .envirabox-wrap {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 988020; }
+    z-index: 988020;
+}
 
 .envirabox-skin {
     position: relative;
@@ -1363,18 +1499,22 @@ if(Photo_Gallery_WP()->settings->popup_rating_count=='no'){
     text-shadow: none;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
-    border-radius: 4px; }
+    border-radius: 4px;
+}
 
 .envirabox-opened {
-    z-index: 988030; }
+    z-index: 988030;
+}
 
 .envirabox-opened .envirabox-skin {
     -webkit-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
     -moz-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); }
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
 
 .envirabox-outer, .envirabox-inner {
-    position: relative; }
+    position: relative;
+}
 
 .envirabox-inner {
     overflow: hidden;
@@ -1383,10 +1523,14 @@ if(Photo_Gallery_WP()->settings->popup_rating_count=='no'){
      */
     /**
     * Dynamic Positioning
-    */ }
+    */
+}
+
 .envirabox-inner .envirabox-actions {
     position: absolute;
-    z-index: 988050; }
+    z-index: 988050;
+}
+
 .envirabox-inner .envirabox-position-overlay {
     box-sizing: border-box;
     position: absolute;
@@ -1405,49 +1549,65 @@ if(Photo_Gallery_WP()->settings->popup_rating_count=='no'){
     */
     /**
     * Bottom Right
-    */ }
+    */
+}
+
 .envirabox-inner .envirabox-position-overlay.envira-gallery-top-left {
     top: 0;
     left: 0;
-    text-align: left; }
+    text-align: left;
+}
+
 .envirabox-inner .envirabox-position-overlay.envira-gallery-top-right {
     top: 0;
     right: 0;
-    text-align: right; }
+    text-align: right;
+}
+
 .envirabox-inner .envirabox-position-overlay.envira-gallery-bottom-left {
     bottom: 0;
     left: 0;
-    text-align: left; }
+    text-align: left;
+}
+
 .envirabox-inner .envirabox-position-overlay.envira-gallery-bottom-right {
     bottom: 0;
     right: 0;
-    text-align: right; }
+    text-align: right;
+}
 
 .envirabox-type-iframe .envirabox-inner {
     -webkit-overflow-scrolling: touch;
-    height: 100%; }
+    height: 100%;
+}
+
 .envirabox-type-iframe .envirabox-inner .envirabox-iframe {
     width: 100%;
-    height: 100%; }
+    height: 100%;
+}
 
 .envirabox-error {
     color: #444;
-    font: 13px/20px "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font: 13px/20px "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin: 0;
     padding: 15px;
-    white-space: nowrap; }
+    white-space: nowrap;
+}
 
 .envirabox-image, .envirabox-iframe {
     display: block;
     width: 100%;
-    height: 100%; }
+    height: 100%;
+}
 
 .envirabox-image {
     max-width: 100%;
-    max-height: 100%; }
+    max-height: 100%;
+}
 
 #envirabox-loading, .envirabox-close, .envirabox-prev span, .envirabox-next span {
-    background-image: url("images/envirabox_sprite.png"); }
+    background-image: url("images/envirabox_sprite.png");
+}
 
 #envirabox-loading {
     position: absolute;
@@ -1458,12 +1618,14 @@ if(Photo_Gallery_WP()->settings->popup_rating_count=='no'){
     background-position: 0 -108px;
     opacity: 0.8;
     cursor: pointer;
-    z-index: 988060; }
+    z-index: 988060;
+}
 
 #envirabox-loading div {
     width: 44px;
     height: 44px;
-    background: url("images/envirabox_loading.gif") center center no-repeat; }
+    background: url("images/envirabox_loading.gif") center center no-repeat;
+}
 
 .envirabox-close {
     position: absolute;
@@ -1472,7 +1634,8 @@ if(Photo_Gallery_WP()->settings->popup_rating_count=='no'){
     width: 36px;
     height: 36px;
     cursor: pointer;
-    z-index: 988040; }
+    z-index: 988040;
+}
 
 .envirabox-nav {
     position: absolute;
@@ -1484,22 +1647,28 @@ if(Photo_Gallery_WP()->settings->popup_rating_count=='no'){
     background: transparent url("images/blank.gif");
     /* helps IE */
     -webkit-tap-highlight-color: transparent;
-    z-index: 988040; }
+    z-index: 988040;
+}
 
 .envirabox-nav:focus {
-    outline: none; }
+    outline: none;
+}
 
 .envirabox-prev {
-    left: 0; }
+    left: 0;
+}
 
 .envirabox-next {
-    right: 0; }
+    right: 0;
+}
 
 .envirabox-prev.envirabox-arrows-outside {
-    left: -100px; }
+    left: -100px;
+}
 
 .envirabox-next.envirabox-arrows-outside {
-    right: -100px; }
+    right: -100px;
+}
 
 .envirabox-nav span {
     position: absolute;
@@ -1509,21 +1678,26 @@ if(Photo_Gallery_WP()->settings->popup_rating_count=='no'){
     margin-top: -18px;
     cursor: pointer;
     z-index: 988040;
-    visibility: hidden; }
+    visibility: hidden;
+}
 
 body.envira-touch .envirabox-nav span {
-    visibility: visible; }
+    visibility: visible;
+}
 
 .envirabox-prev span {
     left: 10px;
-    background-position: 0 -36px; }
+    background-position: 0 -36px;
+}
 
 .envirabox-next span {
     right: 10px;
-    background-position: 0 -72px; }
+    background-position: 0 -72px;
+}
 
 .envirabox-nav:hover span {
-    visibility: visible; }
+    visibility: visible;
+}
 
 .envirabox-tmp {
     position: absolute;
@@ -1531,24 +1705,29 @@ body.envira-touch .envirabox-nav span {
     left: -99999px;
     max-width: 99999px;
     max-height: 99999px;
-    overflow: visible !important; }
+    overflow: visible !important;
+}
 
 a.envirabox-close,
 a.envirabox-nav,
 a.fancy-close:hover,
 a.envirabox-nav:hover {
-    border: 0; }
+    border: 0;
+}
 
 /* Overlay helper */
 .envirabox-lock {
     overflow: visible !important;
-    width: auto; }
+    width: auto;
+}
 
 .envirabox-lock body {
-    overflow: hidden !important; }
+    overflow: hidden !important;
+}
 
 .envirabox-lock-test {
-    overflow-y: hidden !important; }
+    overflow-y: hidden !important;
+}
 
 .envirabox-overlay {
     position: absolute;
@@ -1558,25 +1737,29 @@ a.envirabox-nav:hover {
     display: none;
     z-index: 988010;
     /*background: url("images/envirabox_overlay.png");*/
-    background-color: rgba(0,0,0,0.7);}
+    background-color: rgba(0, 0, 0, 0.7);
+}
 
 .envirabox-overlay-fixed {
     position: fixed;
     bottom: 0;
-    right: 0; }
+    right: 0;
+}
 
 /* Title helper */
 .envirabox-title {
     visibility: hidden;
     font-size: 13px;
     line-height: 20px;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     position: relative;
     text-shadow: none;
-    z-index: 988090; }
+    z-index: 988090;
+}
 
 .envirabox-opened .envirabox-title {
-    visibility: visible; }
+    visibility: visible;
+}
 
 .envirabox-title-float-wrap {
     position: absolute;
@@ -1584,7 +1767,8 @@ a.envirabox-nav:hover {
     right: 50%;
     margin-top: 20px;
     z-index: 988050;
-    text-align: center; }
+    text-align: center;
+}
 
 .envirabox-title-float-wrap .child {
     display: inline-block;
@@ -1599,18 +1783,22 @@ a.envirabox-nav:hover {
     text-shadow: 0 1px 2px #222;
     color: #FFF;
     line-height: 24px;
-    white-space: normal; }
+    white-space: normal;
+}
 
 .envirabox-title-float-wrap.envirabox-title-text-wrap .child {
-    white-space: normal; }
+    white-space: normal;
+}
 
 .envirabox-title-outside-wrap {
     position: relative;
     margin-top: 10px;
-    color: #fff; }
+    color: #fff;
+}
 
 .envirabox-title-inside-wrap {
-    padding-top: 10px; }
+    padding-top: 10px;
+}
 
 .envirabox-title-over-wrap {
     position: absolute;
@@ -1619,26 +1807,32 @@ a.envirabox-nav:hover {
     color: #fff;
     padding: 10px;
     background: #000;
-    background: rgba(0, 0, 0, 0.8); }
+    background: rgba(0, 0, 0, 0.8);
+}
 
 #envirabox-buttons {
     position: fixed;
     left: 0;
     width: 100%;
-    z-index: 988050; }
+    z-index: 988050;
+}
 
 #envirabox-buttons.top {
-    top: 10px; }
+    top: 10px;
+}
 
 #envirabox-buttons.bottom {
-    bottom: 10px; }
+    bottom: 10px;
+}
 
 /* Allows for thumbnails to be displayed */
 #envirabox-buttons.bottom.has-padding {
-    bottom: 80px; }
+    bottom: 80px;
+}
 
 #envirabox-buttons.top.has-padding {
-    top: 80px; }
+    top: 80px;
+}
 
 #envirabox-buttons ul {
     display: block;
@@ -1659,20 +1853,23 @@ a.envirabox-nav:hover {
     background: -o-linear-gradient(top, #444444 0%, #343434 50%, #292929 50%, #333333 100%);
     background: -ms-linear-gradient(top, #444444 0%, #343434 50%, #292929 50%, #333333 100%);
     background: linear-gradient(top, #444444 0%, #343434 50%, #292929 50%, #333333 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#444444', endColorstr='#222222',GradientType=0 ); }
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#444444', endColorstr='#222222', GradientType=0);
+}
 
 #envirabox-buttons ul li {
     float: left;
     margin: 0;
-    padding: 0; }
+    padding: 0;
+}
 
 #envirabox-buttons ul li#envirabox-buttons-title span {
     display: block;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 13px;
     line-height: 30px;
     padding: 0 10px;
-    color: #fff; }
+    color: #fff;
+}
 
 #envirabox-buttons a {
     display: block;
@@ -1683,43 +1880,53 @@ a.envirabox-nav:hover {
     background-image: url("images/envirabox_buttons.png");
     background-repeat: no-repeat;
     outline: none;
-    opacity: 0.8; }
+    opacity: 0.8;
+}
 
 #envirabox-buttons a:hover {
-    opacity: 1; }
+    opacity: 1;
+}
 
 #envirabox-buttons a.btnPrev {
-    background-position: 5px 0; }
+    background-position: 5px 0;
+}
 
 #envirabox-buttons a.btnNext {
     background-position: -33px 0;
-    border-right: 1px solid #3e3e3e; }
+    border-right: 1px solid #3e3e3e;
+}
 
 #envirabox-buttons a.btnPlay {
-    background-position: 0 -30px; }
+    background-position: 0 -30px;
+}
 
 #envirabox-buttons a.btnPlayOn {
-    background-position: -30px -30px; }
+    background-position: -30px -30px;
+}
 
 #envirabox-buttons a.btnToggle,
 #envirabox-buttons a.btnFullscreen {
     background-position: 3px -60px;
     border-left: 1px solid #111;
     border-right: 1px solid #3e3e3e;
-    width: 35px; }
+    width: 35px;
+}
 
 #envirabox-buttons a.btnToggleOn,
 #envirabox-buttons a.btnFullscreenOn {
-    background-position: -27px -60px; }
+    background-position: -27px -60px;
+}
 
 #envirabox-buttons a.btnClose {
     border-left: 1px solid #111;
     width: 35px;
-    background-position: -56px 0px; }
+    background-position: -56px 0px;
+}
 
 #envirabox-buttons a.btnDisabled {
     opacity: 0.4;
-    cursor: default; }
+    cursor: default;
+}
 
 /**
  * Lightbox: Thumbnails Helper
@@ -1730,38 +1937,55 @@ a.envirabox-nav:hover {
     width: 100%;
     overflow: hidden;
     z-index: 988050;
-    box-sizing: border-box; }
+    box-sizing: border-box;
+}
+
 #envirabox-thumbs.top {
-    top: 2px; }
+    top: 2px;
+}
+
 #envirabox-thumbs.top.has-other-content {
-    top: 50px; }
+    top: 50px;
+}
+
 #envirabox-thumbs.bottom {
-    bottom: 2px; }
+    bottom: 2px;
+}
+
 #envirabox-thumbs.bottom.has-other-content {
-    bottom: 50px; }
+    bottom: 50px;
+}
+
 #envirabox-thumbs.inline {
-    position: absolute; }
+    position: absolute;
+}
+
 #envirabox-thumbs * {
-    box-sizing: border-box; }
+    box-sizing: border-box;
+}
 
 #envirabox-thumbs ul {
     position: relative;
     list-style: none;
     margin: 0;
-    padding: 0; }
+    padding: 0;
+}
 
 #envirabox-thumbs ul li {
     border: 3px solid #fff;
     float: left;
     margin: 5px;
-    opacity: 1; }
+    opacity: 1;
+}
 
 #envirabox-thumbs ul li.active {
     opacity: 0.75;
-    border: 3px solid #888; }
+    border: 3px solid #888;
+}
 
 #envirabox-thumbs ul li:hover {
-    opacity: 0.75; }
+    opacity: 0.75;
+}
 
 #envirabox-thumbs ul li a {
     display: block;
@@ -1769,7 +1993,8 @@ a.envirabox-nav:hover {
     overflow: hidden;
     border: 1px solid #222;
     background: #111;
-    outline: none; }
+    outline: none;
+}
 
 #envirabox-thumbs ul li img {
     display: block;
@@ -1778,190 +2003,252 @@ a.envirabox-nav:hover {
     padding: 0;
     max-width: none;
     width: 100%;
-    height: auto; }
+    height: auto;
+}
 
 /* Retina stuff */
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
     #envirabox-loading, .envirabox-close, .envirabox-prev span, .envirabox-next span {
         background-image: url("images/envirabox_sprite%402x.png");
-        background-size: 44px 152px; }
+        background-size: 44px 152px;
+    }
 
     #envirabox-loading div {
         background-image: url("images/envirabox_loading%402x.gif");
-        background-size: 24px 24px; } }
+        background-size: 24px 24px;
+    }
+}
+
 @media only screen and (max-width: 600px) {
     .envirabox-prev.envirabox-arrows-outside {
         left: -75px;
-        width: 12%; }
+        width: 12%;
+    }
 
     .envirabox-next.envirabox-arrows-outside {
         right: -75px;
-        width: 12%; } }
-/*
-#content img{
-    height: 0;
-    width: 0;
-    padding: 35px 120px; // adjust that depend on your image size
-    background-image: url('YOUR_IMAGE_PATH');
-    background-repeat: no-repeat;
-}*/
-/*.envira-gallery-public a.envira-gallery-link {
-  background-image: url("../images/placeholders/spinner.gif");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 25%;
-  display: inline-block;
-  background-color: #f1f1f1;
-  color: transparent; }*/
-/*.envira-gallery-public img.envira-gallery-image {
-  opacity: 0.0; }*/
-/*
+        width: 12%;
+    }
+}
 
 
-
-        .meter {
-            box-sizing: unset;
-            height: 20px;
-            position: relative;
-            margin: 10px 0 10px 0;
-            background: #555;
-            -moz-border-radius: 25px;
-            -webkit-border-radius: 25px;
-            border-radius: 25px;
-            padding: 10px;
-            -webkit-box-shadow: inset 0 -1px 1px rgba(255,255,255,0.3);
-            -moz-box-shadow   : inset 0 -1px 1px rgba(255,255,255,0.3);
-            box-shadow        : inset 0 -1px 1px rgba(255,255,255,0.3);
-        }
-        .meter > span {
-            display: block;
-            height: 100%;
-               -webkit-border-top-right-radius: 8px;
-            -webkit-border-bottom-right-radius: 8px;
-                   -moz-border-radius-topright: 8px;
-                -moz-border-radius-bottomright: 8px;
-                       border-top-right-radius: 8px;
-                    border-bottom-right-radius: 8px;
-                -webkit-border-top-left-radius: 20px;
-             -webkit-border-bottom-left-radius: 20px;
-                    -moz-border-radius-topleft: 20px;
-                 -moz-border-radius-bottomleft: 20px;
-                        border-top-left-radius: 20px;
-                     border-bottom-left-radius: 20px;
-            background-color: rgb(43,194,83);
-            background-image: -webkit-gradient(
-              linear,
-              left bottom,
-              left top,
-              color-stop(0, rgb(43,194,83)),
-              color-stop(1, rgb(84,240,84))
-             );
-            background-image: -moz-linear-gradient(
-              center bottom,
-              rgb(43,194,83) 37%,
-              rgb(84,240,84) 69%
-             );
-            -webkit-box-shadow:
-              inset 0 2px 9px  rgba(255,255,255,0.3),
-              inset 0 -2px 6px rgba(0,0,0,0.4);
-            -moz-box-shadow:
-              inset 0 2px 9px  rgba(255,255,255,0.3),
-              inset 0 -2px 6px rgba(0,0,0,0.4);
-            box-shadow:
-              inset 0 2px 9px  rgba(255,255,255,0.3),
-              inset 0 -2px 6px rgba(0,0,0,0.4);
-            position: relative;
-            overflow: hidden;
-        }
-        .meter > span:after, .animate > span > span {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background-image:
-               -webkit-gradient(linear, 0 0, 100% 100%,
-                  color-stop(.25, rgba(255, 255, 255, .2)),
-                  color-stop(.25, transparent), color-stop(.5, transparent),
-                  color-stop(.5, rgba(255, 255, 255, .2)),
-                  color-stop(.75, rgba(255, 255, 255, .2)),
-                  color-stop(.75, transparent), to(transparent)
-               );
-            background-image:
-                -moz-linear-gradient(
-                  -45deg,
-                  rgba(255, 255, 255, .2) 25%,
-                  transparent 25%,
-                  transparent 50%,
-                  rgba(255, 255, 255, .2) 50%,
-                  rgba(255, 255, 255, .2) 75%,
-                  transparent 75%,
-                  transparent
-               );
-            z-index: 1;
-            -webkit-background-size: 50px 50px;
-            -moz-background-size: 50px 50px;
-            background-size: 50px 50px;
-            -webkit-animation: move 2s linear infinite;
-            -moz-animation: move 2s linear infinite;
-               -webkit-border-top-right-radius: 8px;
-            -webkit-border-bottom-right-radius: 8px;
-                   -moz-border-radius-topright: 8px;
-                -moz-border-radius-bottomright: 8px;
-                       border-top-right-radius: 8px;
-                    border-bottom-right-radius: 8px;
-                -webkit-border-top-left-radius: 20px;
-             -webkit-border-bottom-left-radius: 20px;
-                    -moz-border-radius-topleft: 20px;
-                 -moz-border-radius-bottomleft: 20px;
-                        border-top-left-radius: 20px;
-                     border-bottom-left-radius: 20px;
-            overflow: hidden;
-        }
-
-        .animate > span:after {
-            display: none;
-        }
-
-        @-webkit-keyframes move {
-            0% {
-               background-position: 0 0;
-            }
-            100% {
-               background-position: 50px 50px;
-            }
-        }
-
-        @-moz-keyframes move {
-            0% {
-               background-position: 0 0;
-            }
-            100% {
-               background-position: 50px 50px;
-            }
-        }
+.album_images_count {
+    float: right;
+    position: absolute;
+    top: 3px;
+    right: 3px;
+}
 
 
-        .orange > span {
-            background-color: #f1a165;
-            background-image: -moz-linear-gradient(top, #f1a165, #f36d0a);
-            background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #f1a165),color-stop(1, #f36d0a));
-            background-image: -webkit-linear-gradient(#f1a165, #f36d0a);
-        }
+#hover {
+    color: rgba(188, 175, 204, 0.9);
+}
 
-        .red > span {
-            background-color: #f0a3a3;
-            background-image: -moz-linear-gradient(top, #f0a3a3, #f42323);
-            background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #f0a3a3),color-stop(1, #f42323));
-            background-image: -webkit-linear-gradient(#f0a3a3, #f42323);
-        }
+h2#testimonials {
+    color: #fffae3;
+}
 
-        .nostripes > span > span, .nostripes > span:after {
-            -webkit-animation: none;
-            -moz-animation: none;
-            background-image: none;
-        }
+div#all {
+    width: 100%;
+    height: 100%;
+}
 
 
-        */
+/* generic css */
+
+.view {
+    margin: 10px;
+    float: left;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    box-shadow: 1px 1px 2px #e6e6e6;
+    cursor: default;
+}
+
+.view .mask,
+.view .content {
+    width: 300px;
+    height: 200px;
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0
+}
+
+.view img {
+    display: block;
+    position: relative
+}
+
+.view h2 {
+    text-transform: uppercase;
+    color: #fff;
+    text-align: center;
+    position: relative;
+    font-size: 17px;
+    font-family: Raleway, serif;
+    padding: 10px;
+    /*background: rgba(0, 0, 0, 0.8);*/
+    margin: 20px 0 0 0
+}
+
+.view p {
+    font-family: Merriweather, serif;
+    font-style: italic;
+    font-size: 14px;
+    position: relative;
+    color: #fff;
+    padding: 0px 20px 0px;
+    text-align: center
+}
+
+.view a.info {
+    display: inline-block;
+    text-decoration: none;
+    padding: 7px 14px;
+    background: #000;
+    color: #fff;
+    font-family: Raleway, serif;
+    text-transform: uppercase;
+    box-shadow: 0 0 1px #000
+}
+
+.view a.info:hover {
+    box-shadow: 0 0 5px #000
+}
+
+.view .album_social{
+    color: #fff;
+    position: absolute;
+    bottom: 3px;
+    left: 3px;
+    border:1px solid #ffffff;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+    padding: 3px 5px;
+
+}
+
+.view .album_social:active,.view .album_social:focus,.view .album_social:hover {
+    color:#ffffff;
+    outline: none;
+}
+
+
+/*1*/
+
+.view img {
+    /*1*/
+    transition: all 0.2s linear;
+    width: 300px;
+    height: 200px;
+}
+
+.view-first .mask {
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: all 0.4s ease-in-out;
+}
+
+.view-first h2 {
+    transform: translateY(-100px);
+    opacity: 0;
+    font-family: Raleway, serif;
+    transition: all 0.2s ease-in-out;
+}
+
+.view-first p {
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.2s linear;
+}
+
+.view-first a.info {
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+}
+
+
+/* */
+
+.view-first:hover img {
+    transform: scale(1.1);
+}
+
+.view-first:hover .mask {
+    opacity: 1;
+}
+
+.view-first:hover h2,
+.view-first:hover p,
+.view-first:hover a.info {
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+.view-first:hover p {
+    transition-delay: 0.1s;
+}
+
+.view-first:hover a.info {
+    transition-delay: 0.2s;
+}
+
+
+/*3*/
+
+.view-third img {
+    transform: scaleY(1);
+    transition: all .7s ease-in-out;
+}
+
+.view-third .mask {
+    background-color: rgba(66, 60, 46, 0.53);
+    transition: all 0.5s linear;
+    opacity: 0;
+}
+
+.view-third h2 {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    background: transparent;
+    margin: 20px 40px 0px 40px;
+    transform: scale(0);
+    color: #333;
+    transition: all 0.5s linear;
+    opacity: 0;
+}
+
+.view-third p {
+    color: #333;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.5s linear;
+}
+
+.view-third a.info {
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.5s linear;
+}
+
+.view-third:hover img {
+    -webkit-transform: scale(10);
+    transform: scale(10);
+    opacity: 0;
+}
+
+.view-third:hover .mask {
+    opacity: 1;
+}
+
+.view-third:hover h2,
+.view-third:hover p,
+.view-third:hover a.info {
+    transform: scale(1);
+    opacity: 1;
+}
 
 
 
