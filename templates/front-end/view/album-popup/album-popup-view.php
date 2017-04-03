@@ -5,11 +5,6 @@
  * Date: 3/30/2017
  * Time: 9:24 AM
  */
-?>
-
-
-<?php
-
 switch (Photo_Gallery_WP()->settings->album_onhover_effects) {
     case 0:
         $hover_class = "view-first";
@@ -44,7 +39,9 @@ foreach ($albums as $key => $val) {
                 <p><?= $gallery->description ?></p>
                 <a href="#"
                    class="envira-album-gallery-<?= $gallery->id ?> envira-gallery-link info"><?= __("More", "gallery-images") ?></a>
-                <a href="#" class="album_social"><?= __("Social", "gallery-images") ?></a>
+                <?php if (Photo_Gallery_WP()->settings->album_show_sharing_buttons !== "false") { ?>
+                    <a href="#" class="album_social"><?= __("Social", "gallery-images") ?></a>
+                <?php } ?>
             </div>
         </div>
         <?php
@@ -93,20 +90,14 @@ foreach ($albums as $key => $val) {
                             <?php }
                         } ?>
 
-                        <?php foreach ($albums as $key => $album) { ?>
 
-                            <div class="hugeit_albums_list">
-                                <a href="#" title="" class="hugeit_album_item">
-                                    <img
-                                            src="<?= $album->image_url ?>"
-                                            width="<?= Photo_Gallery_WP()->settings->album_thumbnail_width_size ?>"
-                                            height="<?= Photo_Gallery_WP()->settings->album_thumbnail_height_size ?>"
-                                            data-envira-src="<?= $album->image_url ?>"
-                                            alt="" data-envira-caption="" alt="" title=""/>
-                                </a>
-                            </div>
 
-                            <div id="envira-gallery-item-56190"
+                        <?php
+
+
+                        foreach ($albums as $key => $album) { ?>
+
+                            <div id="envira-gallery-item-<?= $album->id ?>"
                                  class="envira-gallery-item enviratope-item envira-gallery-item-1"
                                  style="padding-left: 5px; padding-bottom: 10px; padding-right: 5px;">
                                 <div class="envira-gallery-item-inner">
@@ -116,8 +107,8 @@ foreach ($albums as $key => $val) {
                                     <div class="envira-gallery-position-overlay  envira-gallery-bottom-left"></div>
                                     <div class="envira-gallery-position-overlay  envira-gallery-bottom-right"></div>
                                     <a href="#"
-                                       class="envira-album-gallery-56190 envira-gallery-link" title="">
-                                        <img id="envira-gallery-image-56190"
+                                       class="envira-album-gallery-<?= $album->id ?> envira-gallery-link" title="">
+                                        <img id="envira-gallery-image-<?= $album->id ?>"
                                              class="envira-gallery-image envira-gallery-image-<?= $key ?>"
                                              src="<?= $album->image_url ?>"
                                              width="<?= Photo_Gallery_WP()->settings->album_thumbnail_width_size ?>"
@@ -136,9 +127,6 @@ foreach ($albums as $key => $val) {
         </section>
     </div>
 </div>
-
-
-<!-- envira script  -->
 
 <style>
     .album_images_count {
@@ -200,79 +188,34 @@ foreach ($albums as $key => $val) {
             $('.envira-gallery-item img').show();
         });
 
+        <?php
+        foreach ($albums as $key => $album){
 
-        envira_albums_galleries_images['56190'] = [];
+        echo "envira_albums_galleries_images[$album->id] = [];";
 
-        envira_albums_galleries_images['56190'].push({
-            href: 'http://7818-presscdn-0-76.pagely.netdna-cdn.com/wp-content/uploads/2015/10/Icelandic_Roads_16.jpg',
-            id: 115181,
-            gallery_id: '56190',
+        foreach($album->galleries as $k => $gallery){
+        foreach($gallery->images as $k_img => $image){
+        ?>
+
+        envira_albums_galleries_images[<?= $album->id ?>].push({
+            href: '<?= $image->image_url ?>',
+            id: <?= $gallery->id ?> + <?= $image->id ?>,
+            gallery_id: <?= $album->id ?>,
             alt: '',
             caption: '',
-            title: 'Icelandic_Roads_16',
-            index: 0,
-            thumbnail: 'http://7818-presscdn-0-76.pagely.netdna-cdn.com/wp-content/uploads/2015/10/Icelandic_Roads_16-150x100_c.jpg',
-            mobile_thumbnail: 'http://7818-presscdn-0-76.pagely.netdna-cdn.com/wp-content/uploads/2015/10/Icelandic_Roads_16-150x100_c.jpg'
+            title: '<?= $image->name ?>',
+            index: <?= $k_img ?>,
+            thumbnail: '<?= $image->image_url ?>',
+            mobile_thumbnail: '<?= $image->image_url ?>'
         });
-        envira_albums_galleries_images['56190'].push({
-            href: 'http://7818-presscdn-0-76.pagely.netdna-cdn.com/wp-content/uploads/2015/10/Icelandic_Roads_4.jpg',
-            id: 115182,
-            gallery_id: '56190',
-            alt: '',
-            caption: '',
-            title: 'Icelandic_Roads_4',
-            index: 1,
-            thumbnail: 'http://7818-presscdn-0-76.pagely.netdna-cdn.com/wp-content/uploads/2015/10/Icelandic_Roads_4-150x100_c.jpg',
-            mobile_thumbnail: 'http://7818-presscdn-0-76.pagely.netdna-cdn.com/wp-content/uploads/2015/10/Icelandic_Roads_4-150x100_c.jpg'
-        });
-        envira_albums_galleries_images['56190'].push({
-            href: 'http://7818-presscdn-0-76.pagely.netdna-cdn.com/wp-content/uploads/2015/10/Icelandic_Roads_5.jpg',
-            id: 115183,
-            gallery_id: '56190',
-            alt: '',
-            caption: '',
-            title: 'Icelandic_Roads_5',
-            index: 2,
-            thumbnail: 'http://7818-presscdn-0-76.pagely.netdna-cdn.com/wp-content/uploads/2015/10/Icelandic_Roads_5-150x100_c.jpg',
-            mobile_thumbnail: 'http://7818-presscdn-0-76.pagely.netdna-cdn.com/wp-content/uploads/2015/10/Icelandic_Roads_5-150x100_c.jpg'
-        });
-        envira_albums_galleries_images['56190'].push({
-            href: 'http://7818-presscdn-0-76.pagely.netdna-cdn.com/wp-content/uploads/2015/10/Icelandic_Roads_11.jpg',
-            id: 115184,
-            gallery_id: '56190',
-            alt: '',
-            caption: '',
-            title: 'Icelandic_Roads_11',
-            index: 3,
-            thumbnail: 'http://7818-presscdn-0-76.pagely.netdna-cdn.com/wp-content/uploads/2015/10/Icelandic_Roads_11-150x100_c.jpg',
-            mobile_thumbnail: 'http://7818-presscdn-0-76.pagely.netdna-cdn.com/wp-content/uploads/2015/10/Icelandic_Roads_11-150x100_c.jpg'
-        });
-        envira_albums_galleries_images['56190'].push({
-            href: 'http://7818-presscdn-0-76.pagely.netdna-cdn.com/wp-content/uploads/2015/10/Icelandic_Roads_10.jpg',
-            id: 115185,
-            gallery_id: '56190',
-            alt: '',
-            caption: '',
-            title: 'Icelandic_Roads_10',
-            index: 4,
-            thumbnail: 'http://7818-presscdn-0-76.pagely.netdna-cdn.com/wp-content/uploads/2015/10/Icelandic_Roads_10-150x100_c.jpg',
-            mobile_thumbnail: 'http://7818-presscdn-0-76.pagely.netdna-cdn.com/wp-content/uploads/2015/10/Icelandic_Roads_10-150x100_c.jpg'
-        });
-        envira_albums_galleries_images['56190'].push({
-            href: 'http://7818-presscdn-0-76.pagely.netdna-cdn.com/wp-content/uploads/2015/10/Icelandic_Roads_1-1.jpg',
-            id: 115186,
-            gallery_id: '56190',
-            alt: '',
-            caption: '',
-            title: 'Icelandic_Roads_1',
-            index: 5,
-            thumbnail: 'http://7818-presscdn-0-76.pagely.netdna-cdn.com/wp-content/uploads/2015/10/Icelandic_Roads_1-1-150x100_c.jpg',
-            mobile_thumbnail: 'http://7818-presscdn-0-76.pagely.netdna-cdn.com/wp-content/uploads/2015/10/Icelandic_Roads_1-1-150x100_c.jpg'
-        });
-        $(document).on('click', '.envira-album-gallery-56190', function (e) {
+
+        <?php }} ?>
+
+
+        $(document).on('click', '.envira-album-gallery-<?= $album->id ?>', function (e) {
             e.preventDefault();
 
-            envira_albums_galleries['56190'] = $.envirabox.open(envira_albums_galleries_images['56190'], {
+            envira_albums_galleries['<?= $album->id ?>'] = $.envirabox.open(envira_albums_galleries_images['<?= $album->id ?>'], {
                 lightboxTheme: 'base',
                 margin: 40,
                 padding: 15,
@@ -334,10 +277,10 @@ foreach ($albums as $key => $val) {
                     actionDivRoot: false,
                 },
                 beforeLoad: function () {
-                    if (typeof envira_albums_galleries_images['56190'][this.index].caption !== 'undefined') {
-                        this.title = envira_albums_galleries_images['56190'][this.index].caption;
+                    if (typeof envira_albums_galleries_images['<?= $album->id ?>'][this.index].caption !== 'undefined') {
+                        this.title = envira_albums_galleries_images['<?= $album->id ?>'][this.index].caption;
                     } else {
-                        this.title = envira_albums_galleries_images['56190'][this.index].title;
+                        this.title = envira_albums_galleries_images['<?= $album->id ?>'][this.index].title;
                     }
                 },
                 afterLoad: function (current, previous) {
@@ -351,11 +294,11 @@ foreach ($albums as $key => $val) {
                     });
 
                     /* Set alt, data-envira-title, data-envira-caption and data-envira-index attributes on Lightbox image */
-                    $('img.envirabox-image').attr('alt', envira_albums_galleries_images['56190'][this.index].alt)
-                        .attr('data-envira-gallery-id', '56190')
-                        .attr('data-envira-item-id', envira_albums_galleries_images['56190'][this.index].id)
-                        .attr('data-envira-title', envira_albums_galleries_images['56190'][this.index].title)
-                        .attr('data-envira-caption', envira_albums_galleries_images['56190'][this.index].caption)
+                    $('img.envirabox-image').attr('alt', envira_albums_galleries_images['<?= $album->id ?>'][this.index].alt)
+                        .attr('data-envira-gallery-id', '<?= $album->id ?>')
+                        .attr('data-envira-item-id', envira_albums_galleries_images['<?= $album->id ?>'][this.index].id)
+                        .attr('data-envira-title', envira_albums_galleries_images['<?= $album->id ?>'][this.index].title)
+                        .attr('data-envira-caption', envira_albums_galleries_images['<?= $album->id ?>'][this.index].caption)
                         .attr('data-envira-index', this.index);
 
                     $('.envirabox-overlay').addClass('envirabox-thumbs');
@@ -433,6 +376,7 @@ foreach ($albums as $key => $val) {
         });
 
         <?php
+        }
         foreach ($albums as $key => $album){
         foreach($album->galleries as $k => $gallery){
         ?>

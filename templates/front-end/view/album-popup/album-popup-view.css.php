@@ -2031,14 +2031,12 @@ a.envirabox-nav:hover {
     }
 }
 
-
 .album_images_count {
     float: right;
     position: absolute;
     top: 3px;
     right: 3px;
 }
-
 
 #hover {
     color: rgba(188, 175, 204, 0.9);
@@ -2052,7 +2050,6 @@ div#all {
     width: 100%;
     height: 100%;
 }
-
 
 /* generic css */
 
@@ -2118,24 +2115,23 @@ div#all {
     box-shadow: 0 0 5px #000
 }
 
-.view .album_social{
+.view .album_social {
     color: #fff;
     position: absolute;
     bottom: 3px;
     left: 3px;
-    border:1px solid #ffffff;
-    -webkit-border-radius:3px;
-    -moz-border-radius:3px;
-    border-radius:3px;
+    border: 1px solid #ffffff;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
     padding: 3px 5px;
 
 }
 
-.view .album_social:active,.view .album_social:focus,.view .album_social:hover {
-    color:#ffffff;
+.view .album_social:active, .view .album_social:focus, .view .album_social:hover {
+    color: #ffffff;
     outline: none;
 }
-
 
 /*1*/
 
@@ -2170,7 +2166,6 @@ div#all {
     transition: all 0.2s ease-in-out;
 }
 
-
 /* */
 
 .view-first:hover img {
@@ -2194,6 +2189,59 @@ div#all {
 
 .view-first:hover a.info {
     transition-delay: 0.2s;
+}
+
+/*2*/
+.view-second img {
+    -webkit-filter: grayscale(0) blur(0);
+    filter: grayscale(0) blur(0);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+
+.view-second .mask {
+    background-color: rgba(226, 200, 127, 0.2);
+    transition: all 0.5s linear;
+    opacity: 0;
+}
+
+.view-second h2 {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    background: transparent;
+    margin: 20px 40px 0px 40px;
+    transform: scale(0);
+    color: #333;
+    transition: all 0.5s linear;
+    opacity: 0;
+}
+
+.view-second p {
+    color: #333;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.5s linear;
+}
+
+.view-second a.info {
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.5s linear;
+}
+
+.view-second:hover img {
+    -webkit-filter: grayscale(100%) blur(3px);
+    filter: grayscale(100%) blur(3px);
+}
+
+.view-second:hover .mask {
+    opacity: 1;
+}
+
+.view-second:hover h2,
+.view-second:hover p,
+.view-second:hover a.info {
+    transform: scale(1);
+    opacity: 1;
 }
 
 
@@ -2250,7 +2298,17 @@ div#all {
     opacity: 1;
 }
 
+.view-second img {
+    -webkit-filter: grayscale(0) blur(0);
+    filter: grayscale(0) blur(0);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
 
+.view-second:hover img {
+    -webkit-filter: grayscale(100%) blur(3px);
+    filter: grayscale(100%) blur(3px);
+}
 
 </style>
 

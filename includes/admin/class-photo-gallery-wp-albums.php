@@ -156,13 +156,21 @@ class Photo_Gallery_WP_Albums
             }
         }
 
+        //get categories
+        $query = esc_sql("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_album_categories");
+        $categories = $wpdb->get_results($query);
+
+
         $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys WHERE id= %d", $id);
         $query2 = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_albums WHERE id= %d", $id);
         $row = $wpdb->get_row($query);
         $album_row = $wpdb->get_row($query2);
-        /* if (!isset($row->gallery_list_effects_s)) {
-             return 'id not found';
-         }*/
+
+        $album_row->category_arr = explode(",", $album_row->category);
+
+
+        debug::trace($album_row);
+
         $images = explode(";;;", $row->gallery_list_effects_s);
         $par = explode('	', $row->param);
         $count_ord = count($images);
@@ -196,6 +204,7 @@ INSERT INTO
                 $wpdb->query($sql_2);
             }
         }
+
         $query = "SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_albums order by id ASC";
         $rowsld = $wpdb->get_results($query);
 
@@ -227,6 +236,33 @@ INSERT INTO
 
             return false;
         }
+
+        $new_cat_arr = array();
+        $selected_cat = array();
+        $album_cats = "";
+
+        if (isset($_POST["categories"])) {
+            foreach ($_POST["categories"] as $category) {
+                $selected_cat[] = sanitize_text_field($category);
+            }
+            $album_cats = (!empty($selected_cat)) ? implode(",", $selected_cat) : "";
+        }
+
+        if (isset($_POST["cat_names"])) {
+            foreach ($_POST["cat_names"] as $val) {
+                $new_cat_arr[] = sanitize_text_field($val);
+            }
+        }
+
+
+        if (!empty($new_cat_arr)) {
+            $wpdb->query("DELETE FROM " . $wpdb->prefix . "photo_gallery_wp_album_categories");
+            foreach ($new_cat_arr as $key => $val) {
+                $wpdb->query("INSERT INTO " . $wpdb->prefix . "photo_gallery_wp_album_categories (`id`,`name`) VALUES ('" . ++$key . "','$val')");
+            }
+        }
+
+
         if (!(isset($_POST['sl_width']) && isset($_POST["album_name"]))) {
             echo '';
         }
@@ -238,29 +274,13 @@ INSERT INTO
         if (isset($_POST["album_name"]) && $_POST["album_name"]) {
             $data = array(
                 "name" => sanitize_text_field($_POST["album_name"]),
-//                "sl_width" => sanitize_text_field($_POST["sl_width"]),
-//                "sl_height" => sanitize_text_field($_POST["sl_height"]),
-//                "gallery_list_effects_s" => sanitize_text_field($_POST["gallery_list_effects_s"]),
                 "description" => sanitize_text_field($_POST["album_description"]),
-//                "sl_position" => sanitize_text_field($_POST["sl_position"]),
-//                "photo_gallery_wp_sl_effects" => sanitize_text_field($_POST["photo_gallery_wp_sl_effects"]),
-//                "ordering" => '1'
+                "category" => $album_cats
             );
-            $format = array("%s", "%s");
+            $format = array("%s", "%s", "%s");
             $where = array('id' => $id);
             $where_format = array('%d');
-            /*if (isset($_POST["display_type"]) && isset($_POST["content_per_page"])) {
-                $data['content_per_page'] = sanitize_text_field($_POST["content_per_page"]);
-                $data['display_type'] = sanitize_text_field($_POST["display_type"]);
-                array_push($format, '%s', '%s');
-            }
-            $data['gallery_loader_type'] = 0;
-            array_push($format, '%s');
-            if (isset($_POST['show-hide-loading']) && $_POST['show-hide-loading'] == 1) {
-                if (isset($_POST['gallery_loader_type']) && in_array($_POST['gallery_loader_type'], array(1, 2, 3, 4))) {
-                    $data['gallery_loader_type'] = $_POST["gallery_loader_type"];
-                }
-            }*/
+
 
             $wpdb->update($wpdb->prefix . "photo_gallery_wp_albums", $data, $where, $format, $where_format);
         }
@@ -279,7 +299,6 @@ INSERT INTO
         <div class="updated"><p><strong><?php _e('Item Saved'); ?></strong></p></div>
         <?php
         return true;
-
     }
 
 

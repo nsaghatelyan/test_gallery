@@ -87,6 +87,23 @@ CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "photo_gallery_wp_albums` (
   PRIMARY KEY (`id`)
 )   DEFAULT CHARSET=utf8";
 
+
+        $sql_photo_gallery_wp_album_categories = "
+CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "photo_gallery_wp_album_categories` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) NOT NULL,
+  `ordering` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+)   DEFAULT CHARSET=utf8";
+
+        /* $sql_photo_gallery_wp_album_has_category = "
+             CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "photo_gallery_wp_album_has_category` (
+   `id_cat` int(11) unsigned NOT NULL,
+   `id_album` int(11) unsigned NOT NULL,
+   PRIMARY KEY (`id_cat`,`id_album`)
+ )   DEFAULT CHARSET=utf8
+         ";*/
+
         $table_name = $wpdb->prefix . "photo_gallery_wp_images";
         $sql_2 = "
 INSERT INTO 
@@ -110,6 +127,8 @@ INSERT INTO `$album_table_name` (`id`, `name`, `sl_height`, `sl_width`, `gallery
         $sql_3_2 = "
         INSERT INTO `$table_name` (`id`, `id_album`, `name`, `sl_height`, `sl_width`, `pause_on_hover`, `gallery_list_effects_s`, `description`, `param`, `sl_position`, `ordering`, `published`, `photo_gallery_wp_sl_effects`) VALUES
 (1, 1, 'My First Gallery', 375, 600, 'on', 'random', '4000', '1000', 'center', 1, '300', '5')";
+        $wpdb->query($sql_photo_gallery_wp_album_categories);
+        // $wpdb->query($sql_photo_gallery_wp_album_has_category);
         $wpdb->query($sql_photo_gallery_wp_images);
         $wpdb->query($sql_photo_gallery_wp_gallerys);
         $wpdb->query($sql_photo_gallery_wp_like_dislike);

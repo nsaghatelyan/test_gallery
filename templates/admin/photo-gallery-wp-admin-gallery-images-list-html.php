@@ -322,25 +322,6 @@ if (isset($_GET["addslide"])) {
                                                value="<?php echo esc_html(stripslashes($row->name)); ?>"
                                                onkeyup="name_changeRight(this)">
                                     </li>
-                                    <?php //ns code start ?>
-                                    <li>
-                                        <label
-                                                for="huge_it_gallery_album_name"><?php echo __('Album name', 'photo-gallery-wp'); ?></label>
-                                        <input type="text" name="album_name" id="huge_it_gallery_album_name"
-                                               value="<?php echo esc_html(stripslashes($album_row->name)); ?>"
-                                               onkeyup="name_changeRight(this)">
-                                    </li>
-                                    <li>
-                                        <label
-                                                for="huge_it_gallery_album_description"><?php echo __('Album description', 'photo-gallery-wp'); ?></label>
-                                        <textarea type="text" name="album_description"
-                                                  id="huge_it_gallery_album_description"
-                                                  onkeyup="name_changeRight(this)">
-                                        <?php echo esc_html(stripslashes($album_row->description)); ?>
-                                        </textarea>
-                                    </li>
-                                    <?php //ns code end ?>
-
 
                                     <li>
                                         <label

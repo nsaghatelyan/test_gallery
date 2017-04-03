@@ -25,6 +25,7 @@ class Photo_Gallery_WP_Template_Loader
 
 
         $album_view = null;
+        $album_categories = array();
 
         if (!is_null($albums)) {
             foreach ($albums as $key => $val) {
@@ -39,6 +40,8 @@ class Photo_Gallery_WP_Template_Loader
             $albumID = $albums[0]->id;
 //            $album_view = $albums[0]->gallery_list_effects_s;
             $album_view = Photo_Gallery_WP()->settings->album_style;
+            $query = esc_sql("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_album_categories");
+            $album_categories = $wpdb->get_results($query);
         }
 
 
@@ -50,7 +53,8 @@ class Photo_Gallery_WP_Template_Loader
         $num = $gallery[0]->content_per_page;
         $loading_type = $gallery[0]->gallery_loader_type;
         $like_dislike = $gallery[0]->rating;
-        $total = intval(((count($images) - 1) / $num) + 1);
+//        $total = intval(((count($images) - 1) / $num) + 1);
+        $total = 100;
         $pattern = '/-/';
         $huge_it_ip = photo_gallery_wp_get_ip();
         $pID = $post->ID;
