@@ -1912,7 +1912,9 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
 
     private function init_controls_albums()
     {
-        $this->album_images_count_style = $this->get_option("album_count_style", "3");
+        $this->album_style = $this->get_option("album_style", '2');
+        $this->album_count_style = $this->get_option("album_count_style", '3');
+        $this->album_onhover_effects = $this->get_option("album_onhover_effects", '1');
     }
 
     private function controls_mosaic()

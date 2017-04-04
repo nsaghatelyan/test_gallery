@@ -25,6 +25,25 @@ class Photo_Gallery_WP_Ajax
 
         add_action('wp_ajax_photo_gallery_wp_load_images_mosaic', array($this, 'load_images_mosaic'));
         add_action('wp_ajax_nopriv_photo_gallery_wp_load_images_mosaic', array($this, 'load_images_mosaic'));
+
+        add_action('wp_ajax_get_album_images', array($this, 'get_album_images'));
+        add_action('wp_ajax_nopriv_get_album_images', array($this, 'get_album_images'));
+    }
+
+    public function get_album_images($id)
+    {
+        check_ajax_referer('get_album_images', 'nonce');
+
+        if (isset($_GET['day'])) {
+            $day = $_GET['day'];
+        }
+        $response = array(
+            'success' => 1,
+            'day' => $day
+        );
+
+        echo json_encode($response);
+        wp_die();
     }
 
     /**

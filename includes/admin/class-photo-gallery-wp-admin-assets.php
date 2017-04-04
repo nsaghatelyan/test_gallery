@@ -12,6 +12,8 @@ class Photo_Gallery_WP_Admin_Assets {
 	public function __construct() {
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_styles' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
+
+
 	}
 
 	/**

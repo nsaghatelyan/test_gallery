@@ -51,7 +51,7 @@ class Photo_Gallery_WP__Shortcode
         do_action('Photo_Gallery_WP_Shortcode_scripts', $attrs['id'], $gallery_view, $has_youtube, $has_vimeo);
         do_action('Photo_gallery_wp_localize_scripts', $attrs['id']);
 
-        return $this->init_frontend($attrs['id']);
+        return $this->init_frontend($attrs['id'], "gallery");
     }
 
     public function run_shortcode_album($attrs)
@@ -86,7 +86,7 @@ class Photo_Gallery_WP__Shortcode
         do_action('Photo_Gallery_WP_Shortcode_scripts', $attrs['id'], $gallery_view, $has_youtube, $has_vimeo);
         do_action('Photo_gallery_wp_localize_scripts', $attrs['id']);
 
-        return $this->init_frontend($id_array);
+        return $this->init_frontend($id_array, "album");
     }
 
     /**
@@ -96,7 +96,7 @@ class Photo_Gallery_WP__Shortcode
      *
      * @return string
      */
-    protected function init_frontend($id_array)
+    protected function init_frontend($id_array, $flag)
     {
         global $wpdb;
         $format = '';
@@ -125,27 +125,34 @@ class Photo_Gallery_WP__Shortcode
         $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys where id_album IN (" . $id . ") order by id ASC", "");
         $album_galleries = $wpdb->get_results($query);
 
-        $album_image_count = 0;
-        foreach ($album_galleries as $val) {
+
+        foreach ($album_galleries as $key => $val) {
             $query = $wpdb->prepare("SELECT id,gallery_id, name, description, image_url FROM " . $wpdb->prefix . "photo_gallery_wp_images where gallery_id = '%d' order by ordering ASC", $val->id);
             $val->image_url = $wpdb->get_results($query)[0]->image_url;
             $val->image_count = count($wpdb->get_results($query));
             $val->images = $wpdb->get_results($query);
-            $album_image_count = $album_image_count + $val->image_count;
         }
 
-        foreach ($albums as $val) {
-            $val->image_url = $album_galleries[0]->image_url;
-            $val->image_count = $album_image_count;
-            $val->galleries = $album_galleries;
+        foreach ($albums as $key => $val) {
+            $album_image_count[$key] = 0;
+            foreach ($album_galleries as $k => $v) {
+                if ($v->id_album == $val->id) {
+                    $album_image_count[$key] = $album_image_count[$key] + count($v->images);
+                    $val->image_url = $v->image_url;
+                    $val->image_count = $album_image_count[$key];
+                    $val->galleries[] = $v;
+                }
+            }
         }
-        /*foreach ($gallery as $val) {
-            $val->album = $albums;
-        }*/
 
         ob_start();
 
-        Photo_Gallery_WP()->template_loader->load_front_end($images, $gallery, $albums);
+        if ($flag == "album") {
+            Photo_Gallery_WP()->template_loader->load_album_front_end($albums);
+        } else {
+            Photo_Gallery_WP()->template_loader->load_front_end($images, $gallery);
+        }
+
 
         return ob_get_clean();
     }

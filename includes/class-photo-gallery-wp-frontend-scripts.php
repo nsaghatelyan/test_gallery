@@ -107,6 +107,8 @@ class Photo_Gallery_WP_Frontend_Scripts
         if ($gallery_view == '3') {
             wp_enqueue_script('jssor.slider-21.1.6.min', plugins_url('../assets/js/jssor.slider-21.1.6.min.js', __FILE__), array('jquery'));
         }
+
+        wp_enqueue_script("hg_album_page_view", Photo_Gallery_WP()->plugin_url() . "/assets/js/album_page_view.js", array('jquery'));
     }
 
     public function localize_scripts($id)
@@ -200,6 +202,7 @@ class Photo_Gallery_WP_Frontend_Scripts
             $justified_params[$name] = $value;
         }
 
+
         wp_localize_script('ph-front-end-js-' . $view_slug, 're_slider_obj', $ph_re_slider_options);
         wp_localize_script('ph-front-end-js-' . $view_slug, 'param_obj', $gallery_params);
         wp_localize_script('ph-front-end-js-' . $view_slug, 'gallery_obj', $gallery);
@@ -211,6 +214,12 @@ class Photo_Gallery_WP_Frontend_Scripts
         wp_localize_script('ph-lightbox-js', 'lightbox_obj', $ph_lightbox_options);
         wp_localize_script('custom-js', 'galleryId', $id);
         wp_localize_script('jusiifed-js', 'justified_obj', $justified);
+
+        wp_localize_script('hg_album_page_view', 'hg_album_page_view_obj',
+            array(
+                'ajax_url' => Photo_Gallery_WP()->ajax_url(),
+                'front_nonce' => wp_create_nonce('get_album_images')
+            ));
     }
 }
 

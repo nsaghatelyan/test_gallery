@@ -9,6 +9,13 @@ class Photo_Gallery_WP_Template_Loader
     public function __contstruct()
     {
         add_action('media_buttons_context', array($this, 'add_editor_media_button'));
+
+//        add_action('wp_ajax_album_page', array($this, 'test_ajax_exec'));
+//        add_action('wp_ajax_nopriv_album_page', array($this, 'test_ajax_exec'));
+
+        add_action('wp_ajax_calendar_front', array($this, 'calendar_frontend_day_view'));
+        add_action('wp_ajax_nopriv_calendar_front', array($this, 'calendar_frontend_day_view'));
+
     }
 
     /**
@@ -18,13 +25,66 @@ class Photo_Gallery_WP_Template_Loader
      * @param $gallery
      * @param $title
      */
-    public function load_front_end($images, $gallery, $albums = null)
+
+    public function test_ajax_exec()
+    {
+        check_ajax_referer('album_page', 'nonce');
+
+        if (isset($_POST["test_val"])) {
+            $test = $_POST["test_val"];
+
+//            $response = array("result" => $_POST["test_val"]);
+        }
+//        else {
+//            $response = 78;
+//        }
+
+        $response = array(
+            'success' => 1,
+            'test' => $test
+        );
+
+        echo json_encode($response);
+        wp_die();
+    }
+
+    public function calendar_frontend_day_view()
+    {
+        //check_ajax_referer('calendar_front', 'nonce');
+
+        if (isset($_GET['day'])) {
+            $day = $_GET['day'];
+        }
+        $response = array(
+            'success' => 1,
+            'day' => $day
+        );
+
+        echo json_encode($response);
+        wp_die();
+
+    }
+
+
+    public function load_album_front_end($albums)
     {
         global $post;
         global $wpdb;
 
+        //  test ajax execution
 
-        $album_view = null;
+//        wp_enqueue_script("hg_calendar_calendar_front", Photo_Gallery_WP()->plugin_url() . "/assets/js/album_page_view.js", array('jquery'));
+
+        /*$calendar_front = wp_create_nonce('calendar_front');
+        wp_localize_script('hg_calendar_calendar_front', 'hg_calendar_calendar_front_obj',
+            array(
+                'ajax_url' => Photo_Gallery_WP()->ajax_url(),
+                'front_nonce' => $calendar_front
+            ));*/
+
+        //end test
+
+        $album_view = 1;
         $album_categories = array();
 
         if (!is_null($albums)) {
@@ -43,7 +103,28 @@ class Photo_Gallery_WP_Template_Loader
             $query = esc_sql("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_album_categories");
             $album_categories = $wpdb->get_results($query);
         }
+        $albumID = $albums[0]->id;
 
+
+        wp_enqueue_script("album_filter.js", Photo_Gallery_WP()->plugin_url() . "/assets/js/jquery.filterizr.js", false);
+        switch ($album_view) {
+            case 1:
+                $view_slug = photo_gallery_wp_get_view_slag_by_id($albumID);
+                require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'album-popup' . DIRECTORY_SEPARATOR . 'album-popup-view.php';
+                require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'album-popup' . DIRECTORY_SEPARATOR . 'album-popup-view.css.php';
+                break;
+            case 2:
+                $view_slug = photo_gallery_wp_get_view_slag_by_id($albumID);
+                require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'album-page' . DIRECTORY_SEPARATOR . 'album-page-view.php';
+                require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'album-page' . DIRECTORY_SEPARATOR . 'album-page-view.css.php';
+                break;
+        }
+    }
+
+    public function load_front_end($images, $gallery)
+    {
+        global $post;
+        global $wpdb;
 
         $galleryID = $gallery[0]->id;
         $view = $gallery[0]->photo_gallery_wp_sl_effects;
@@ -53,8 +134,8 @@ class Photo_Gallery_WP_Template_Loader
         $num = $gallery[0]->content_per_page;
         $loading_type = $gallery[0]->gallery_loader_type;
         $like_dislike = $gallery[0]->rating;
-//        $total = intval(((count($images) - 1) / $num) + 1);
-        $total = 100;
+        $total = intval(((count($images) - 1) / $num) + 1);
+//        $total = 100;
         $pattern = '/-/';
         $huge_it_ip = photo_gallery_wp_get_ip();
         $pID = $post->ID;
@@ -100,21 +181,6 @@ class Photo_Gallery_WP_Template_Loader
         if ($disp_type == 2) {
             $page_images = $images;
             $count_page = 9999;
-        }
-
-        if (isset($album_params) && !empty($album_params)) {
-            switch ($album_view) {
-                case 1:
-                    $view_slug = photo_gallery_wp_get_view_slag_by_id($galleryID);
-                    require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'album-popup' . DIRECTORY_SEPARATOR . 'album-popup-view.php';
-                    require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'album-popup' . DIRECTORY_SEPARATOR . 'album-popup-view.css.php';
-                    break;
-                case 2:
-                    $view_slug = photo_gallery_wp_get_view_slag_by_id($galleryID);
-                    require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'album-page' . DIRECTORY_SEPARATOR . 'album-page-view.php';
-                    require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'album-page' . DIRECTORY_SEPARATOR . 'album-page-view.css.php';
-                    break;
-            }
         }
 
         switch ($view) {

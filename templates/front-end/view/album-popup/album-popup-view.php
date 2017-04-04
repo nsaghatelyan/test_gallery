@@ -1,10 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: User
- * Date: 3/30/2017
- * Time: 9:24 AM
- */
+
+wp_enqueue_script("album_filter.js", Photo_Gallery_WP()->plugin_url() . "/assets/js/jquery.filterizr.js", false);
+
 switch (Photo_Gallery_WP()->settings->album_onhover_effects) {
     case 0:
         $hover_class = "view-first";
@@ -26,105 +23,45 @@ switch (Photo_Gallery_WP()->settings->album_onhover_effects) {
         break;
 }
 
-foreach ($albums as $key => $val) {
-    foreach ($val->galleries as $k => $gallery) {
-        ?>
-        <div class="view <?= $hover_class; ?>">
-            <?php if (Photo_Gallery_WP()->settings->album_show_image_count !== "false") { ?>
-                <span class="album_images_count"><?= count($gallery->images) ?></span>
-            <?php } ?>
-            <img src="<?= $gallery->image_url ?>"/>
-            <div class="mask">
-                <h2><?= $gallery->name ?></h2>
-                <p><?= $gallery->description ?></p>
-                <a href="#"
-                   class="envira-album-gallery-<?= $gallery->id ?> envira-gallery-link info"><?= __("More", "gallery-images") ?></a>
-                <?php if (Photo_Gallery_WP()->settings->album_show_sharing_buttons !== "false") { ?>
-                    <a href="#" class="album_social"><?= __("Social", "gallery-images") ?></a>
-                <?php } ?>
-            </div>
-        </div>
-        <?php
-    }
-}
 ?>
+<div class="row album_categories">
+    <ul class="simplefilter album_categories">
+        <li class="active" data-filter="all"><?= __("All", "gallery-images") ?></li>
+        <?php foreach ($album_categories as $key => $cat) { ?>
+            <li data-filter="<?= $cat->id ?>"><?= $cat->name ?></li>
+        <?php } ?>
+    </ul>
+</div>
 
 <div id="main">
     <div class="container">
-        <section class="has-sidebar">
-            <article>
-                <div id="envira-gallery-wrap-56458"
-                     class="envira-album-wrap envira-gallery-wrap envira-gallery-theme-base envira-lightbox-theme-base">
-                    <div id="envira-gallery-56458"
-                         class="envira-gallery-public  envira-gallery-2-columns envira-clear envira-gallery-css-animations"
-                         data-envira-columns="2">
-                        <?php
-                        foreach ($albums as $key => $album) {
-                            foreach ($album->galleries as $gallery) {
-                                ?>
-                                <div id="envira-gallery-item-<?= $gallery->id ?> "
-                                     class="envira-gallery-item enviratope-item envira-gallery-item-<?= $gallery->id ?>"
-                                     style="padding-left: 5px; padding-bottom: 10px; padding-right: 5px;">
-                                    <div class="envira-gallery-item-inner">
-                                        <?php if (Photo_Gallery_WP()->settings->album_show_image_count !== "false") { ?>
-                                            <span class="album_images_count"><?= count($gallery->images) ?></span>
-                                        <?php } ?>
-                                        <div class="envira-gallery-position-overlay  envira-gallery-top-left"></div>
-                                        <div class="envira-gallery-position-overlay  envira-gallery-top-right"></div>
-                                        <div class="envira-gallery-position-overlay  envira-gallery-bottom-left"></div>
-                                        <div class="envira-gallery-position-overlay  envira-gallery-bottom-right"></div>
-                                        <a href="#"
-                                           class="envira-album-gallery-<?= $gallery->id ?> envira-gallery-link"
-                                           title="">
-                                            <img id="envira-gallery-image-<?= $gallery->id ?>"
-                                                 class="envira-gallery-image envira-gallery-image-<?= $gallery->id ?>"
-                                                 src="<?= $gallery->image_url ?>"
-                                                 width="<?= Photo_Gallery_WP()->settings->album_thumbnail_width_size ?>"
-                                                 height="<?= Photo_Gallery_WP()->settings->album_thumbnail_height_size ?>"
-                                                 data-envira-src="<?= $gallery->image_url ?>"
-                                                 alt="" data-envira-caption="" alt="" title=""/>
-                                        </a>
-
-                                    </div>
-                                </div>
-                            <?php }
-                        } ?>
-
-
-
-                        <?php
-
-
-                        foreach ($albums as $key => $album) { ?>
-
-                            <div id="envira-gallery-item-<?= $album->id ?>"
-                                 class="envira-gallery-item enviratope-item envira-gallery-item-1"
-                                 style="padding-left: 5px; padding-bottom: 10px; padding-right: 5px;">
-                                <div class="envira-gallery-item-inner">
-                                    <span class="album_images_count"><?= $album->image_count ?></span>
-                                    <div class="envira-gallery-position-overlay  envira-gallery-top-left"></div>
-                                    <div class="envira-gallery-position-overlay  envira-gallery-top-right"></div>
-                                    <div class="envira-gallery-position-overlay  envira-gallery-bottom-left"></div>
-                                    <div class="envira-gallery-position-overlay  envira-gallery-bottom-right"></div>
-                                    <a href="#"
-                                       class="envira-album-gallery-<?= $album->id ?> envira-gallery-link" title="">
-                                        <img id="envira-gallery-image-<?= $album->id ?>"
-                                             class="envira-gallery-image envira-gallery-image-<?= $key ?>"
-                                             src="<?= $album->image_url ?>"
-                                             width="<?= Photo_Gallery_WP()->settings->album_thumbnail_width_size ?>"
-                                             height="<?= Photo_Gallery_WP()->settings->album_thumbnail_height_size ?>"
-                                             data-envira-src="<?= $album->image_url ?>"
-                                             alt="" data-envira-caption="" alt="" title=""/>
-                                    </a>
-                                </div>
-                            </div>
+        <div class="row filtr-container">
+            <?php
+            /// gallery list with hover effects
+            foreach ($albums as $key => $album) { ?>
+                <div class="view <?= $hover_class; ?> filtr-item" data-category="<?= $album->category ?>">
+                    <?php if (Photo_Gallery_WP()->settings->album_show_image_count !== "false") { ?>
+                        <span class="album_images_count"><?= $album->image_count ?></span>
+                    <?php } ?>
+                    <img src="<?= $album->image_url ?>"/>
+                    <div class="mask">
+                        <?php if (Photo_Gallery_WP()->settings->album_show_title !== 'false') { ?>
+                            <h2><?= $album->name ?></h2>
+                        <?php }
+                        if (Photo_Gallery_WP()->settings->album_show_description !== 'false') { ?>
+                            <p><?= $album->description ?></p>
+                        <?php } ?>
+                        <a href="#"
+                           class="envira-album-gallery-<?= $album->id ?> envira-gallery-link info"><?= __("More", "gallery-images") ?></a>
+                        <?php if (Photo_Gallery_WP()->settings->album_show_sharing_buttons !== "false") { ?>
+                            <a href="#" class="album_social"><?= __("Social", "gallery-images") ?></a>
                         <?php } ?>
                     </div>
                 </div>
-                <noscript></noscript>
-                <p><a id="album-with-standalone-galleries"></a></p>
-            </article>
-        </section>
+                <?php
+            }
+            ?>
+        </div>
     </div>
 </div>
 
@@ -199,7 +136,7 @@ foreach ($albums as $key => $val) {
 
         envira_albums_galleries_images[<?= $album->id ?>].push({
             href: '<?= $image->image_url ?>',
-            id: <?= $gallery->id ?> + <?= $image->id ?>,
+            id: <?= $album->id ?>+<?= $gallery->id ?> + <?= $image->id ?>,
             gallery_id: <?= $album->id ?>,
             alt: '',
             caption: '',
@@ -209,7 +146,8 @@ foreach ($albums as $key => $val) {
             mobile_thumbnail: '<?= $image->image_url ?>'
         });
 
-        <?php }} ?>
+        <?php }
+        } ?>
 
 
         $(document).on('click', '.envira-album-gallery-<?= $album->id ?>', function (e) {
@@ -584,7 +522,28 @@ foreach ($albums as $key => $val) {
             $('.envira-gallery-item img').fadeTo('slow', 1);
         });
 
+        $('.simplefilter li').click(function () {
+            $('.simplefilter li').removeClass('active');
+            $(this).addClass('active');
+        });
+        //Multifilter controls
+        $('.multifilter li').click(function () {
+            $(this).toggleClass('active');
+        });
+        //Shuffle control
+        $('.shuffle-btn').click(function () {
+            $('.sort-btn').removeClass('active');
+        });
+        //Sort controls
+        $('.sort-btn').click(function () {
+            $('.sort-btn').removeClass('active');
+            $(this).addClass('active');
+        });
+
+        $('.filtr-container').filterizr();
+
 
     });
+
 
 </script>

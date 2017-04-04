@@ -75,6 +75,7 @@ CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "photo_gallery_wp_gallerys` (
 CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "photo_gallery_wp_albums` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(200) NOT NULL,
+  `category` text,
   `sl_height` int(11) unsigned DEFAULT NULL,
   `sl_width` int(11) unsigned DEFAULT NULL,
   `gallery_list_effects_s` text,
