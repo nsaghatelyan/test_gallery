@@ -34,13 +34,32 @@ class Photo_Gallery_WP_Ajax
     {
         check_ajax_referer('get_album_images', 'nonce');
 
-        if (isset($_GET['day'])) {
-            $day = $_GET['day'];
+        global $wpdb;
+
+        $response = array();
+        $gallerys = array();
+
+        if (isset($_POST["album_id"])) {
+            $id = esc_html($_POST["album_id"]);
+            $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys where id_album = '%d' order by ordering ASC", $id);
+            $gallerys = $wpdb->get_results($query);
+
+            $required_data = array();
+
+            foreach ($gallerys as $key => $val) {
+                $query = $wpdb->prepare("SELECT `image_url` FROM " . $wpdb->prefix . "photo_gallery_wp_images where gallery_id = '%d' LIMIT 1", $val->id);
+                $required_data[$key]["id"] = $val->id;
+                $required_data[$key]["name"] = $val->name;
+                $required_data[$key]["image_url"] = $wpdb->get_row($query);
+            }
+
+
+            $response = array(
+                "success" => 1,
+                "gallerys" => $required_data
+            );
         }
-        $response = array(
-            'success' => 1,
-            'day' => $day
-        );
+
 
         echo json_encode($response);
         wp_die();

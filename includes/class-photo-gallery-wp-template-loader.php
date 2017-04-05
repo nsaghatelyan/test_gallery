@@ -71,19 +71,6 @@ class Photo_Gallery_WP_Template_Loader
         global $post;
         global $wpdb;
 
-        //  test ajax execution
-
-//        wp_enqueue_script("hg_calendar_calendar_front", Photo_Gallery_WP()->plugin_url() . "/assets/js/album_page_view.js", array('jquery'));
-
-        /*$calendar_front = wp_create_nonce('calendar_front');
-        wp_localize_script('hg_calendar_calendar_front', 'hg_calendar_calendar_front_obj',
-            array(
-                'ajax_url' => Photo_Gallery_WP()->ajax_url(),
-                'front_nonce' => $calendar_front
-            ));*/
-
-        //end test
-
         $album_view = 1;
         $album_categories = array();
 
@@ -118,7 +105,9 @@ class Photo_Gallery_WP_Template_Loader
                 require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'album-page' . DIRECTORY_SEPARATOR . 'album-page-view.php';
                 require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'album-page' . DIRECTORY_SEPARATOR . 'album-page-view.css.php';
                 break;
+
         }
+        require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'album-page' . DIRECTORY_SEPARATOR . 'album-general.css.php';
     }
 
     public function load_front_end($images, $gallery)
