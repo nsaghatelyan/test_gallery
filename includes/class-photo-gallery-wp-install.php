@@ -85,6 +85,7 @@ CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "photo_gallery_wp_albums` (
   `published` text,
   `photo_gallery_wp_sl_effects` text NOT NULL,
   `gallery_loader_type` tinyint DEFAULT 1,
+  `date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 )   DEFAULT CHARSET=utf8";
 

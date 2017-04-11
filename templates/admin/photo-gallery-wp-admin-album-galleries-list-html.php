@@ -175,10 +175,9 @@ if (isset($_GET["addslide"])) {
                                     <textarea type="text" name="album_description"
                                               id="huge_it_gallery_album_description"
                                               onkeyup="name_changeRight(this)">
-                                        <?php echo esc_html(stripslashes($album_row->description)); ?>
-                                        </textarea>
+                                        <?php echo esc_html(stripslashes($album_row->description)); ?></textarea>
                                 </li>
-
+                                <?php /* ?>
                                 <li>
                                     <label
                                             for="photo_gallery_wp_sl_effects"><?php echo __('Select style', 'photo-gallery-wp'); ?></label>
@@ -574,39 +573,40 @@ if (isset($_GET["addslide"])) {
                                                    value="<?php echo esc_attr($row->content_per_page); ?>"
                                                    class="text_area"/>
                                         </li>
-                                    </ul>
-                                </div>
-                                <li class="for_slider">
-                                    <label
-                                            for="pause_on_hover"><?php echo __('Pause on hover', 'photo-gallery-wp'); ?></label>
-                                    <input type="hidden" value="off" name="pause_on_hover"/>
-                                    <input type="checkbox" name="pause_on_hover" value="on"
-                                           id="pause_on_hover" <?php if ($row->pause_on_hover == 'on') {
-                                        echo 'checked="checked"';
-                                    } ?> />
-                                </li>
-                                <li class="for_slider">
-                                    <label
-                                            for="sl_pausetime"><?php echo __('Pause time', 'photo-gallery-wp'); ?></label>
-                                    <input type="text" name="sl_pausetime" id="sl_pausetime"
-                                           value="<?php echo esc_html($row->description); ?>" class="text_area"/>
-                                </li>
-                                <li class="for_slider">
-                                    <label
-                                            for="sl_changespeed"><?php echo __('Change speed', 'photo-gallery-wp'); ?></label>
-                                    <input type="text" name="sl_changespeed" id="sl_changespeed"
-                                           value="<?php echo esc_html(stripslashes($row->param)); ?>"
-                                           class="text_area"/>
-                                </li>
                             </ul>
-                            <div id="major-publishing-actions">
-                                <div id="publishing-action">
-                                    <input type="button" onclick="galleryImgSubmitButton('apply')"
-                                           value="Save Album"
-                                           id="save-buttom" class="button button-primary button-large">
+                        </div>
+                        <li class="for_slider">
+                            <label
+                                    for="pause_on_hover"><?php echo __('Pause on hover', 'photo-gallery-wp'); ?></label>
+                            <input type="hidden" value="off" name="pause_on_hover"/>
+                            <input type="checkbox" name="pause_on_hover" value="on"
+                                   id="pause_on_hover" <?php if ($row->pause_on_hover == 'on') {
+                                echo 'checked="checked"';
+                            } ?> />
+                        </li>
+                        <li class="for_slider">
+                            <label
+                                    for="sl_pausetime"><?php echo __('Pause time', 'photo-gallery-wp'); ?></label>
+                            <input type="text" name="sl_pausetime" id="sl_pausetime"
+                                   value="<?php echo esc_html($row->description); ?>" class="text_area"/>
+                        </li>
+                        <li class="for_slider">
+                            <label
+                                    for="sl_changespeed"><?php echo __('Change speed', 'photo-gallery-wp'); ?></label>
+                            <input type="text" name="sl_changespeed" id="sl_changespeed"
+                                   value="<?php echo esc_html(stripslashes($row->param)); ?>"
+                                   class="text_area"/>
+                        </li>
+                        </ul>
+                        <?php */ ?>
+                                <div id="major-publishing-actions">
+                                    <div id="publishing-action">
+                                        <input type="button" onclick="galleryImgSubmitButton('apply')"
+                                               value="Save Album"
+                                               id="save-buttom" class="button button-primary button-large">
+                                    </div>
+                                    <div class="clear"></div>
                                 </div>
-                                <div class="clear"></div>
-                            </div>
                         </div>
 
 
@@ -631,7 +631,7 @@ if (isset($_GET["addslide"])) {
                                                        value="<?php echo esc_attr(str_replace("_", " ", $value->name)); ?>"
                                                 >
                                                 <span class="delete_cat"><img
-                                                            src="<?php echo PORTFOLIO_GALLERY_IMAGES_URL . "/admin_images/delete1.png"; ?>"
+                                                            src="<?php echo PORTFOLIO_GALLERY_IMAGES_URL . "/admin_images/remove.jpg"; ?>"
                                                             width="9" height="9" value="a"></span>
                                             </li>
                                             <?php

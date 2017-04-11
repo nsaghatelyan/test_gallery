@@ -1,13 +1,21 @@
 <?= "<style>" ?>
 
+/*===== general options =========*/
+a {
+    box-shadow: none !important;
+}
+
 /* ====================== album onhover styles ==========================*/
 
 .album_images_count {
-    padding: 7px 15px 15px 15px !important;
+
     font-size: 21px !important;
     background-repeat: no-repeat !important;
-    background-size: contain !important;
+    background-size: cover !important;
     z-index: 2;
+    width: 50px;
+    height: 50px;
+    padding-top: 10px !important;
 <?php switch(Photo_Gallery_WP()->settings->album_count_style)
 {
 case 0:
@@ -17,6 +25,8 @@ case 0:
 case 1:
    $count = 1;
    $color = "#565656";
+   echo "width: 65px;";
+   echo "background-size: contain !important;";
    break;
 case 2:
    $count = 2;
@@ -29,41 +39,114 @@ case 3:
 case 4:
    $count = 4;
    $color = "#ffffff";
+   echo "background-size: contain !important; width: 87px; height: 30px; text-align: right;padding:0px !important; padding-right: 12px !important;";
    break;
 default:
    $count = 3;
    $color = "#ffffff";
    break;
 }
-?> background-image: url('<?= PHOTO_GALLERY_WP_IMAGES_URL."/albums/count/".$count.".png" ?>' !important);
-    color: <?= $color; ?>
+?> background-image: url('<?= PHOTO_GALLERY_WP_IMAGES_URL."/albums/count/".$count.".png" ?>') !important;
+    color: <?= $color; ?>;
 }
 
 /* ====================== album onhover styles ==========================*/
 
+#album_list .view {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    display: none;
+
+}
+
+<?php
+$grid = Photo_Gallery_WP()->settings->album_grid_style;
+switch($grid) {
+    case '0':
+        $view_width = "width:100%;";
+        $img_height = "height:auto;";
+        $visibility = "display:block;";
+        break;
+    case '1':
+        $view_width = "width:47%;";
+        $img_height = "height:165px;";
+        //$img_height = "height:auto;";
+        $visibility = "display:block;";
+        break;
+    case '2':
+        $view_width = "width:30%;";
+        $img_height = "height:115px;";
+        $visibility = "display:none;";
+        break;
+    case '3':
+        $view_width = "width:23%;";
+        $img_height = "height:95px;";
+        $visibility = "display:none;";
+        break;
+    case '4':
+        $view_width = "width:".Photo_Gallery_WP()->settings->album_thumbnail_width_size."px;";
+        $img_height = "height:".Photo_Gallery_WP()->settings->album_thumbnail_height_size."px;";
+        echo "#album_list, .gallery_images, .album_image_place{background-color:#".Photo_Gallery_WP()->settings->thumb_box_background."; 
+        text-align:center;
+        border:".Photo_Gallery_WP()->settings->thumb_image_border_width."px solid;
+        border-color:#".Photo_Gallery_WP()->settings->thumb_image_border_color.";}";
+        echo ".view {display: inline-block;}";
+        break;
+    case '5':
+        $view_width = "width:100%;";
+        $img_height = "height:auto;";
+        echo ".mosaicflow__column {float:left;}";
+        break;
+     case '6':
+        $view_width = "width:100%;";
+        $img_height = "height:auto;";
+        echo ".mosaicflow__column {float:left;}";
+        break;
+    default:
+        $view_width = "width:49%;";
+        $img_height = "height:165px;";
+        break;
+}?>
+
 .view {
-    margin: 10px;
-    float: left;
+    color: #fff;
+    margin: 0px;
     overflow: hidden;
     position: relative;
     text-align: center;
-    box-shadow: 1px 1px 2px #e6e6e6;
-    cursor: default;
+    /*box-shadow: 1px 1px 2px #e6e6e6;*/
+<?php if($grid != 4) {?> float: left;
+<?php } ?><?php if($grid != 5){ ?> border: 1px solid #ececec;
+    border-radius: 5px;
+    margin: 1%;
+<?php } ?> cursor: default;
+<?php if($grid == 6){ ?> padding: 3px;
+<?php } ?><?= $view_width ?><?= $img_height ?>
 }
 
 .view .mask,
 .view .content {
-    width: 300px;
-    height: 200px;
+    width: 100%;
+    height: 100%;
     position: absolute;
     overflow: hidden;
     top: 0;
-    left: 0
+    left: 0;
 }
 
 .view img {
     display: block;
     position: relative
+    transition: all 0.2s linear;
+    max-width: 100%;
+    width: <?php echo ($grid == 4 || $grid == 5) ? "100%" : "auto" ?>;
+    margin: 0 auto;
+<?php
+    echo ($grid == 4) ? "height: 100%" : "height: auto";
+if($grid == 6){
+    echo "padding:4px;";
+} ?>
 }
 
 .view h2 {
@@ -75,7 +158,12 @@ default:
     font-family: Raleway, serif;
     padding: 10px;
     /*background: rgba(0, 0, 0, 0.8);*/
-    margin: 20px 0 0 0
+    margin: 0px;
+<?= $visibility ?>
+}
+
+.view .text-category, .view .album_socials {
+<?= $visibility ?>
 }
 
 .view p {
@@ -85,13 +173,16 @@ default:
     position: relative;
     color: #fff;
     padding: 0px 20px 0px;
-    text-align: center
+    text-align: center;
+<?= $visibility ?>
 }
 
 .view a.info {
     display: inline-block;
     text-decoration: none;
-    padding: 7px 14px;
+    font-size: 13px;
+    padding: 2px 14px;
+    margin-bottom: 3px;
     background: #000;
     color: #fff;
     font-family: Raleway, serif;
@@ -123,15 +214,8 @@ default:
 
 /*1*/
 
-.view img {
-    /*1*/
-    transition: all 0.2s linear;
-    width: 300px;
-    height: 200px;
-}
-
 .view .info {
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .view-first .mask {
@@ -161,7 +245,7 @@ default:
 /* */
 
 .view-first:hover img {
-    transform: scale(1.1);
+    /*transform: scale(1.1);*/
 }
 
 .view-first:hover .mask {
@@ -181,6 +265,10 @@ default:
 
 .view-first:hover a.info {
     transition-delay: 0.2s;
+}
+
+.view-first .text-category, .view-first .mask-text h2 {
+    color: #ffffff;
 }
 
 /*2*/
@@ -248,6 +336,10 @@ default:
     filter: grayscale(100%) blur(3px);
 }
 
+.view-second .text-category, .view-second .mask-text h2 {
+    color: #000;
+}
+
 /*3*/
 
 .view-third img {
@@ -264,7 +356,7 @@ default:
 .view-third h2 {
     border-bottom: 1px solid rgba(0, 0, 0, 0.3);
     background: transparent;
-    margin: 20px 40px 0px 40px;
+    margin: 5px 40px 0px 40px;
     transform: scale(0);
     color: #333;
     transition: all 0.5s linear;
@@ -284,6 +376,10 @@ default:
     transition: all 0.5s linear;
 }
 
+.view-third .text-category {
+    color: #333;
+}
+
 .view-third:hover img {
     -webkit-transform: scale(10);
     transform: scale(10);
@@ -301,7 +397,116 @@ default:
     opacity: 1;
 }
 
+/* ==== view 4 ===*/
+
+.view-forth-wrapper {
+    overflow: hidden;
+    position: relative !important;
+    height: 100%;
+    /* cursor: pointer;*/
+}
+
+.view-forth img {
+    max-width: 100%;
+    position: relative;
+    top: 0;
+    -webkit-transition: all 600ms cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: all 600ms cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.view-forth .mask {
+    position: absolute;
+    width: 100%;
+    height: 70px;
+    bottom: -70px;
+    -webkit-transition: all 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: all 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
+    top: inherit;
+}
+
+.view-forth .mask-bg {
+    background: #e95a44;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.view-forth .mask-text {
+    color: #fff;
+    position: relative;
+    z-index: 500;
+    padding: 5px 8px;
+}
+
+.view-forth .mask-text h2 {
+    margin: 0px;
+    font-size: 13px;
+    padding: 2px;
+}
+
+.view-forth .mask-text h2:hover {
+    cursor: pointer;
+}
+
+.view-forth .text-category {
+    display: block;
+    font-size: 9px;
+    color: #fff;
+}
+
+.view-forth:hover .mask {
+    bottom: 0;
+}
+
+.view-forth:hover img {
+    top: -30px;
+}
+
+/*==  view 5 ==*/
+
+.album_list .view-fifth .view-fifth-wrapper,
+.album_list .view-fifth .view-fifth-wrapper img {
+    display: block;
+    position: relative;
+}
+
+.album_list .view-fifth .view-fifth-wrapper {
+    overflow: hidden;
+    height: 100%;
+}
+
+.album_list .view-fifth .view-fifth-wrapper .mask {
+    display: none;
+    position: absolute;
+    background: #333;
+    background: rgba(75, 75, 75, 0.7);
+    width: 100%;
+    height: 100%;
+}
+
+.view-fifth .text-category, .view-fifth .text-category *, .view-fifth .mask-text h2 {
+    color: #ffffff;
+}
+
 /* ====================== album category styles ==========================*/
+
+#filters {
+    margin: 1%;
+    padding: 0;
+    list-style: none;
+}
+
+#filters li {
+    float: left;
+}
+
+#filters li span {
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+}
 
 .album_categories {
     list-style-type: none;
@@ -311,7 +516,7 @@ default:
     padding-top: 5px;
 }
 
-.album_categories li {
+.album_categories li span {
     float: left;
     margin: 0 5px 5px 5px;
     display: block;
@@ -357,7 +562,7 @@ default:
 <?php } ?>
 }
 
-.album_categories li.active, .album_categories li:hover {
+.album_categories li span.active, .album_categories li span:hover {
     cursor: pointer;
 
 <?php if(Photo_Gallery_WP()->settings->album_category_style == 0){ ?> background-color: #2e303c;
@@ -369,6 +574,45 @@ default:
 <?php }elseif(Photo_Gallery_WP()->settings->album_category_style == 5){ ?> background-color: #ab1b41;
 <?php }elseif(Photo_Gallery_WP()->settings->album_category_style == 6){ ?> background-color: #3ab75c;
 <?php } ?>
+}
+
+/*=========  sharing buttons  ============*/
+
+.album_socials {
+    position: relative;
+    top: 3px;
+}
+
+.album_socials .rwd-share-buttons {
+    top: 0px !important;
+}
+
+.album_socials a {
+    text-decoration: underline !important;
+}
+
+.gallery_images, .album_image_place {
+    margin-top: 15px;
+}
+
+#rwd-share-facebook:hover {
+    background-position: 0 -31px !important;
+}
+
+#rwd-share-twitter:hover {
+    background-position: -31px 32px !important;
+}
+
+#rwd-share-googleplus:hover {
+    background-position: -66px -31px !important;
+}
+
+.rwd-share-buttons li, .rwd-share-buttons li a {
+    width: 26px !important;
+}
+
+#envirabox-thumbs ul {
+    width: 100% !important;
 }
 
 <?= "</style>" ?>

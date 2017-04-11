@@ -92,8 +92,31 @@ class Photo_Gallery_WP_Template_Loader
         }
         $albumID = $albums[0]->id;
 
+        foreach ($albums as $val) {
+            $val->cat_class = explode(",", $val->category);
+            foreach ($val->cat_class as $k => $cat) {
+                $val->cat_class[$k] = "hg_cat_" . $cat;
+            }
+        }
 
-        wp_enqueue_script("album_filter.js", Photo_Gallery_WP()->plugin_url() . "/assets/js/jquery.filterizr.js", false);
+        //wp_enqueue_script("album_filter.js", Photo_Gallery_WP()->plugin_url() . "/assets/js/jquery.filterizr.js", false);
+        wp_enqueue_script("album_filter.js", Photo_Gallery_WP()->plugin_url() . "/assets/js/jquery.mixitup.min.js", false);
+        wp_enqueue_style("album_filter.css", Photo_Gallery_WP()->plugin_url() . "/assets/style/filterize.css", false);
+
+
+        if (Photo_Gallery_WP()->settings->album_onhover_effects == 4) {
+            wp_register_script('hoverdir.js', Photo_Gallery_WP()->plugin_url() . '/assets/js/jquery.hoverdir.js', array('jquery'), '1.0.0', true);
+            wp_enqueue_script('hoverdir.js');
+
+            wp_register_script('hover_custom.js', Photo_Gallery_WP()->plugin_url() . '/assets/js/modernizr.custom.97074.js', array('jquery'), '1.0.0', true);
+            wp_enqueue_script('hover_custom.js');
+        }
+
+        if (in_array(Photo_Gallery_WP()->settings->album_grid_style, array(5, 6))) {
+            wp_register_script('mosaicflow.js', Photo_Gallery_WP()->plugin_url() . '/assets/js/jquery.mosaicflow.js', array('jquery'), '1.0.0', true);
+            wp_enqueue_script('mosaicflow.js');
+        }
+
         switch ($album_view) {
             case 1:
                 $view_slug = photo_gallery_wp_get_view_slag_by_id($albumID);
@@ -105,7 +128,6 @@ class Photo_Gallery_WP_Template_Loader
                 require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'album-page' . DIRECTORY_SEPARATOR . 'album-page-view.php';
                 require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'album-page' . DIRECTORY_SEPARATOR . 'album-page-view.css.php';
                 break;
-
         }
         require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'album-page' . DIRECTORY_SEPARATOR . 'album-general.css.php';
     }
@@ -118,7 +140,6 @@ class Photo_Gallery_WP_Template_Loader
         $galleryID = $gallery[0]->id;
         $view = $gallery[0]->photo_gallery_wp_sl_effects;
         $disp_type = $gallery[0]->display_type;
-
 
         $num = $gallery[0]->content_per_page;
         $loading_type = $gallery[0]->gallery_loader_type;

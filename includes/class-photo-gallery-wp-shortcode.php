@@ -56,21 +56,17 @@ class Photo_Gallery_WP__Shortcode
 
     public function run_shortcode_album($attrs)
     {
-
         $id_array = explode(",", $attrs["id"]);
         $attrs = shortcode_atts(array(
             'id' => 'photo gallery wp',
         ), $attrs);
 
-
         global $wpdb;
-
 
         $query = $wpdb->prepare("SELECT photo_gallery_wp_sl_effects FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys WHERE id=%d", $attrs['id']);
         $gallery_view = $wpdb->get_var($query);
         $query = $wpdb->prepare("SELECT image_url FROM " . $wpdb->prefix . "photo_gallery_wp_images WHERE gallery_id=%d ORDER BY `id` DESC LIMIT 1", $attrs['id']);
         $images = $wpdb->get_col($query);
-
 
         $has_youtube = false;
         $has_vimeo = false;
@@ -112,6 +108,18 @@ class Photo_Gallery_WP__Shortcode
             $id = $id_array;
         }
 
+        switch (Photo_Gallery_WP()->settings->album_sorting) {
+            case 0:
+                $album_sorting = "`date`";
+                break;
+            case 1:
+                $album_sorting = "`name`";
+                break;
+            default:
+                $album_sorting = "`date`";
+                break;
+        }
+
 
         $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_images where gallery_id IN (" . $id . ") order by ordering ASC", "");
         $images = $wpdb->get_results($query);
@@ -119,7 +127,7 @@ class Photo_Gallery_WP__Shortcode
         $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys where id IN (" . $id . ") order by id ASC", "");
         $gallery = $wpdb->get_results($query);
 
-        $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_albums where id IN (" . $id . ") order by id ASC", "");
+        $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_albums where id IN (" . $id . ") order by " . $album_sorting . " ASC", "");
         $albums = $wpdb->get_results($query);
 
         $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys where id_album IN (" . $id . ") order by id ASC", "");

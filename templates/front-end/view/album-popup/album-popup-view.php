@@ -1,5 +1,4 @@
 <?php
-debug::trace("popup view");
 wp_register_style('album-popup-css', Photo_Gallery_WP()->plugin_url() . "/assets/style/album-popup.css");
 wp_enqueue_style('album-popup-css');
 
@@ -24,90 +23,114 @@ switch (Photo_Gallery_WP()->settings->album_onhover_effects) {
         break;
 }
 
+if (Photo_Gallery_WP()->settings->album_grid_style == 5) {
+    $mosaic = 1;
+} elseif (Photo_Gallery_WP()->settings->album_grid_style == 6) {
+    $mosaic = 2;
+} else {
+    $mosaic = 0;
+}
+
+$cat_class = array();
+foreach ($album_categories as $val) {
+    $cat_class_all[] = ".hg_cat_" . $val->id;
+}
 ?>
 
-<div class="row album_categories">
-    <ul class="simplefilter album_categories">
-        <li class="active" data-filter="all"><?= __("All", "gallery-images") ?></li>
-        <?php foreach ($album_categories as $key => $cat) { ?>
-            <li data-filter="<?= $cat->id ?>"><?= $cat->name ?></li>
-        <?php } ?>
-    </ul>
-</div>
-
-<div id="main">
-    <div class="container">
-        <div class="row filtr-container">
+<input type="hidden" name="album_view" value="<?= Photo_Gallery_WP()->settings->album_style ?>">
+<input type="hidden" name="mosaic" value="<?= $mosaic ?>">
+<div id="main" style="display: inline-block; width:100%;">
+    <div id="album_list_container">
+        <div class="row album_categories">
+            <ul id="filters" class="clearfix">
+                <li><span class="filter active" id="album_all_categories"
+                          data-filter="<?php echo implode(', ', $cat_class_all); ?>"><?= __("All", "gallery-images") ?></span>
+                </li>
+                <?php foreach ($album_categories as $key => $cat) { ?>
+                    <li><span class="filter" data-filter=".hg_cat_<?= $cat->id ?>"><?= $cat->name ?></span></li>
+                <?php } ?>
+            </ul>
+        </div>
+        <div class="row filtr-container album_list" id="album_list">
             <?php
-            /// gallery list with hover effects
             foreach ($albums as $key => $album) { ?>
-                <div class="view <?= $hover_class; ?> filtr-item" data-category="<?= $album->category ?>">
-                    <?php if (Photo_Gallery_WP()->settings->album_show_image_count !== "false") { ?>
-                        <span class="album_images_count"><?= $album->image_count ?></span>
-                    <?php } ?>
-                    <img src="<?= $album->image_url ?>"/>
-                    <div class="mask">
-                        <?php if (Photo_Gallery_WP()->settings->album_show_title !== 'false') { ?>
-                            <h2><?= $album->name ?></h2>
-                        <?php }
-                        if (Photo_Gallery_WP()->settings->album_show_description !== 'false') { ?>
-                            <p><?= $album->description ?></p>
+                <div class="view <?= $hover_class; ?>  <?php echo implode(" ", $album->cat_class); ?>">
+                    <div class="<?= $hover_class; ?>-wrapper">
+                        <?php if (Photo_Gallery_WP()->settings->album_show_image_count !== "false") { ?>
+                            <span class="album_images_count"><?= $album->image_count ?></span>
                         <?php } ?>
-                        <a href="#"
-                           class="envira-album-gallery-<?= $album->id ?> envira-gallery-link info"><?= __("More", "gallery-images") ?></a>
-                        <?php if (Photo_Gallery_WP()->settings->album_show_sharing_buttons !== "false") { ?>
-                            <a href="#" class="album_social"><?= __("Social", "gallery-images") ?></a>
-                        <?php } ?>
+                        <img src="<?= $album->image_url ?>" alt="<?= $album->name ?>"/>
+                        <div class="mask">
+                            <div class="mask-text">
+                                <?php if (Photo_Gallery_WP()->settings->album_show_title !== 'false') { ?>
+                                    <a class="text-title get_galleries envira-album-gallery-<?= $album->id ?>"
+                                       data-id="<?= $album->id ?>"><h2><?= $album->name ?></h2>
+                                    </a>
+                                <?php }
+                                if (Photo_Gallery_WP()->settings->album_show_description !== 'false') { ?>
+                                    <span class="text-category"><?= $album->description ?></span>
+                                <?php } ?>
+                            </div>
+                            <?php if ($hover_class != "view-forth") { ?>
+                                <a href="#"
+                                   class="envira-album-gallery-<?= $album->id ?> envira-gallery-link info"><?= __("More", "gallery-images") ?></a>
+                                <?php if (Photo_Gallery_WP()->settings->album_show_sharing_buttons !== "false") { ?>
+                                    <div class="album_socials"></div>
+                                <?php }
+                            } ?>
+                            <div class="mask-bg"></div>
+                        </div>
                     </div>
                 </div>
-                <?php
-            }
-            ?>
+            <?php } ?>
         </div>
     </div>
 </div>
 
-<style>
-    .album_images_count {
-        padding: 7px 15px 15px 15px !important;
-        font-size: 21px !important;
-        background-repeat: no-repeat !important;
-        background-size: contain !important;
-        z-index: 2;
+<?php if ($hover_class == "view-fifth") { ?>
 
-    <?php switch(Photo_Gallery_WP()->settings->album_count_style)
-{
-   case 0:
-       $count = 0;
-       $color = "#565656";
-       break;
-   case 1:
-       $count = 1;
-       $color = "#565656";
-       break;
-   case 2:
-       $count = 2;
-       $color = "#ffffff";
-       break;
-   case 3:
-       $count = 3;
-       $color = "#ffffff";
-       break;
-   case 4:
-       $count = 4;
-       $color = "#ffffff";
-       break;
-   default:
-       $count = 3;
-       $color = "#ffffff";
-       break;
-}
-     echo "background-image: url('".PHOTO_GALLERY_WP_IMAGES_URL."/albums/count/".$count.".png') !important;";
-    echo "color:".$color;
-?>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            jQuery(' #album_list > .view-fifth ').each(function () {
+                jQuery(this).hoverdir();
+            });
+        });
+    </script>
+<?php } ?>
 
-    }
-</style>
+<script type="text/javascript">
+    jQuery(function () {
+        var filterList = {
+            init: function () {
+                jQuery('#album_list').mixItUp({
+                    selectors: {
+                        target: '.view',
+                        filter: '.filter'
+                    }
+                });
+            }
+        };
+        filterList.init();
+    });
+
+    jQuery(document).ready(function () {
+        jQuery(document).ready(function () {
+            jQuery("#album_all_categories").addClass("active");
+        })
+
+        var shareButtons = '<ul class="rwd-share-buttons" style="display: block;">';
+        shareButtons += '<li><a title="Facebook" class="album_social_fb" id="rwd-share-facebook" target="_blank"></a></li>';
+        shareButtons += '<li><a title="Twitter" class="album_social_twitter" id="rwd-share-twitter" target="_blank"></a></li>';
+        shareButtons += '<li><a title="Google Plus" class="album_social_google" id="rwd-share-googleplus" target="_blank"></a></li>';
+        shareButtons += '</ul>';
+
+        jQuery(".album_socials").append(shareButtons);
+
+        jQuery('.album_social_fb').attr('href', 'https://www.facebook.com/sharer/sharer.php?u=' + (encodeURIComponent(document.URL)));
+        jQuery('.album_social_twitter').attr('href', 'https://twitter.com/intent/tweet?text=&url=' + (encodeURIComponent(document.URL)));
+        jQuery('.album_social_google').attr('href', 'https://plus.google.com/share?url=' + (encodeURIComponent(document.URL)));
+    });
+</script>
 
 <script type="text/javascript">
     var envira_albums_galleries = [],
@@ -354,10 +377,6 @@ switch (Photo_Gallery_WP()->settings->album_onhover_effects) {
             $('.sort-btn').removeClass('active');
             $(this).addClass('active');
         });
-
-        $('.filtr-container').filterizr();
-
-
     });
 
 

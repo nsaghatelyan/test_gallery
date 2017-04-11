@@ -30,6 +30,7 @@ class Photo_Gallery_WP_Ajax
         add_action('wp_ajax_nopriv_get_album_images', array($this, 'get_album_images'));
     }
 
+    
     public function get_album_images($id)
     {
         check_ajax_referer('get_album_images', 'nonce');
@@ -37,27 +38,51 @@ class Photo_Gallery_WP_Ajax
         global $wpdb;
 
         $response = array();
-        $gallerys = array();
+        $required_data = array();
+        if ($_POST["type"] == "get_galleries") {
+            $gallerys = array();
 
-        if (isset($_POST["album_id"])) {
-            $id = esc_html($_POST["album_id"]);
-            $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys where id_album = '%d' order by ordering ASC", $id);
-            $gallerys = $wpdb->get_results($query);
+            if (isset($_POST["album_id"])) {
 
-            $required_data = array();
+                $id = esc_html($_POST["album_id"]);
+                $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys where id_album = '%d' order by ordering ASC", $id);
+                $gallerys = $wpdb->get_results($query);
 
-            foreach ($gallerys as $key => $val) {
-                $query = $wpdb->prepare("SELECT `image_url` FROM " . $wpdb->prefix . "photo_gallery_wp_images where gallery_id = '%d' LIMIT 1", $val->id);
-                $required_data[$key]["id"] = $val->id;
-                $required_data[$key]["name"] = $val->name;
-                $required_data[$key]["image_url"] = $wpdb->get_row($query);
+
+                foreach ($gallerys as $key => $val) {
+                    $query = $wpdb->prepare("SELECT `image_url` FROM " . $wpdb->prefix . "photo_gallery_wp_images where gallery_id = '%d' LIMIT 1", $val->id);
+                    $required_data[$key] = array(
+                        "id" => $val->id,
+                        "name" => $val->name,
+                        "description" => $val->description,
+                        "image_url" => $wpdb->get_row($query)
+                    );
+                }
+
+                $response = array(
+                    "success" => 1,
+                    "gallerys" => $required_data
+                );
             }
-
-
-            $response = array(
-                "success" => 1,
-                "gallerys" => $required_data
-            );
+        } elseif ($_POST["type"] == "get_images") {
+            $images = array();
+            if (isset($_POST["gallery_id"])) {
+                $id = esc_html($_POST["gallery_id"]);
+                $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_images where gallery_id= '%d' order by ordering ASC", $id);
+                $images = $wpdb->get_results($query);
+                foreach ($images as $key => $val) {
+                    $required_data[$key] = array(
+                        "id" => $val->id,
+                        "name" => $val->name,
+                        "description" => $val->description,
+                        "image_url" => $val->image_url
+                    );
+                }
+                $response = array(
+                    "success" => 1,
+                    'images' => $required_data
+                );
+            }
         }
 
 

@@ -168,9 +168,6 @@ class Photo_Gallery_WP_Albums
 
         $album_row->category_arr = explode(",", $album_row->category);
 
-
-        debug::trace($album_row);
-
         $images = explode(";;;", $row->gallery_list_effects_s);
         $par = explode('	', $row->param);
         $count_ord = count($images);

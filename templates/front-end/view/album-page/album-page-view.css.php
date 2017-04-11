@@ -2051,5 +2051,32 @@ div#all {
     height: 100%;
 }
 
+.album_back_button .album_socials {
+    float: right;
+    top: -8px
+}
+
+.album_back_button {
+    margin-bottom: 15px;
+}
+
+.album_back_button .rwd-share-buttons {
+    margin: 0px;
+    padding: 6px 1px 0px 5px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 3px;
+}
+
+#back_to_albums, #back_to_galleries {
+    background: #616161;
+    padding: 10px;
+    color: #fff;
+    border-radius: 3px;
+}
+
+#back_to_albums:hover, #back_to_galleries:hover {
+    background-color: #000;
+}
+
 <?= "</style>" ?>
 
