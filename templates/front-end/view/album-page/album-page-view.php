@@ -65,35 +65,35 @@ foreach ($album_categories as $val) {
             <?php
             /// gallery list with hover effects
             foreach ($albums as $key => $album) { ?>
-                <div class="view <?= $hover_class; ?>  <?php echo implode(" ", $album->cat_class); ?> ">
+                <div class="view  <?= $hover_class; ?> <?php echo implode(" ", $album->cat_class); ?> ">
+
                     <div class="<?= $hover_class; ?>-wrapper">
                         <?php if (Photo_Gallery_WP()->settings->album_show_image_count !== "false") { ?>
                             <span class="album_images_count"><?= $album->image_count ?></span>
                         <?php } ?>
                         <img src="<?= $album->image_url ?>" alt="<?= $album->name ?>"/>
                         <div class="mask">
-                            <div class="mask-text">
-                                <?php if (Photo_Gallery_WP()->settings->album_show_title !== 'false') { ?>
-                                    <a class="text-title get_galleries"
-                                       data-id="<?= $album->id ?>" data-hover="<?= $hover_class ?>">
+                            <a href="#" class="get_galleries" data-id="<?= $album->id ?>"
+                               data-hover="<?= $hover_class ?>">
+                                <div class="mask-text">
+                                    <?php if (Photo_Gallery_WP()->settings->album_show_title !== 'false') { ?>
                                         <h2><?= $album->name ?></h2>
-                                    </a>
-                                <?php }
-                                if (Photo_Gallery_WP()->settings->album_show_description !== 'false') { ?>
-                                    <span class="text-category"><?= $album->description ?></span>
-                                <?php } ?>
-                            </div>
-                            <?php if ($hover_class != "view-forth") { ?>
-                                <a href="#"
-                                   class="info get_galleries"
-                                   data-id="<?= $album->id ?>"><?= __("More", "gallery-images") ?></a>
-                                <?php if (Photo_Gallery_WP()->settings->album_show_sharing_buttons !== "false") { ?>
-                                    <div class="album_socials"></div>
-                                <?php }
-                            } ?>
-                            <div class="mask-bg"></div>
+                                    <?php }
+                                    if (Photo_Gallery_WP()->settings->album_show_description !== 'false') { ?>
+                                        <span class="text-category"><?= $album->description ?></span>
+                                    <?php } ?>
+                                </div>
+                            </a>
+                            <?php if (Photo_Gallery_WP()->settings->album_show_sharing_buttons !== "false" && $hover_class != "view-forth") { ?>
+                                <div class="album_socials"></div>
+                            <?php } ?>
+                            <a href="#" class="get_galleries" data-id="<?= $album->id ?>"
+                               data-hover="<?= $hover_class ?>">
+                                <div class="mask-bg"></div>
+                            </a>
                         </div>
                     </div>
+                    </a>
                 </div>
             <?php } ?>
         </div>

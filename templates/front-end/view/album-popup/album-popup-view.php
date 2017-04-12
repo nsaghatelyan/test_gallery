@@ -61,24 +61,24 @@ foreach ($album_categories as $val) {
                         <?php } ?>
                         <img src="<?= $album->image_url ?>" alt="<?= $album->name ?>"/>
                         <div class="mask">
-                            <div class="mask-text">
-                                <?php if (Photo_Gallery_WP()->settings->album_show_title !== 'false') { ?>
-                                    <a class="text-title get_galleries envira-album-gallery-<?= $album->id ?>"
-                                       data-id="<?= $album->id ?>"><h2><?= $album->name ?></h2>
-                                    </a>
-                                <?php }
-                                if (Photo_Gallery_WP()->settings->album_show_description !== 'false') { ?>
-                                    <span class="text-category"><?= $album->description ?></span>
-                                <?php } ?>
-                            </div>
+                            <a href="#" class="envira-album-gallery-<?= $album->id ?> envira-gallery-link">
+                                <div class="mask-text">
+                                    <?php if (Photo_Gallery_WP()->settings->album_show_title !== 'false') { ?>
+                                        <h2><?= $album->name ?></h2>
+                                    <?php }
+                                    if (Photo_Gallery_WP()->settings->album_show_description !== 'false') { ?>
+                                        <span class="text-category"><?= $album->description ?></span>
+                                    <?php } ?>
+                                </div>
+                            </a>
                             <?php if ($hover_class != "view-forth") { ?>
-                                <a href="#"
-                                   class="envira-album-gallery-<?= $album->id ?> envira-gallery-link info"><?= __("More", "gallery-images") ?></a>
                                 <?php if (Photo_Gallery_WP()->settings->album_show_sharing_buttons !== "false") { ?>
                                     <div class="album_socials"></div>
                                 <?php }
                             } ?>
-                            <div class="mask-bg"></div>
+                            <a href="#" class="envira-album-gallery-<?= $album->id ?> envira-gallery-link">
+                                <div class="mask-bg"></div>
+                            </a>
                         </div>
                     </div>
                 </div>

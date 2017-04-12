@@ -317,8 +317,6 @@ INSERT INTO
     {
         if (isset($_GET["task"]) && $_GET["task"] == 'remove_photo_gallery_album_wp') {
 
-            debug::trace($_GET["task"]);
-
             $id = absint($_GET["id"]);
             if (isset($_REQUEST['photo_gallery_wp_nonce_remove_album'])) {
                 $photo_gallery_wp_nonce_remove_album = $_REQUEST['photo_gallery_wp_nonce_remove_album'];

@@ -54,7 +54,6 @@ CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "photo_gallery_wp_like_dislike` 
         $sql_photo_gallery_wp_gallerys = "
 CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "photo_gallery_wp_gallerys` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `id_album` int(11) unsigned,
   `name` varchar(200) NOT NULL,
   `sl_height` int(11) unsigned DEFAULT NULL,
   `sl_width` int(11) unsigned DEFAULT NULL,
@@ -70,6 +69,10 @@ CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "photo_gallery_wp_gallerys` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
 )   DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ";
+
+        $sql_photo_gallery_wp_gallery_alter = "
+            ALTER TABLE `" . $wpdb->prefix . "photo_gallery_wp_gallerys` ADD `id_album` int(11) unsigned DEFAULT 0 after `id`
+        ";
 
         $sql_photo_gallery_wp_albums = "
 CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "photo_gallery_wp_albums` (
@@ -132,9 +135,10 @@ INSERT INTO `$album_table_name` (`id`, `name`, `sl_height`, `sl_width`, `gallery
         $wpdb->query($sql_photo_gallery_wp_album_categories);
         // $wpdb->query($sql_photo_gallery_wp_album_has_category);
         $wpdb->query($sql_photo_gallery_wp_images);
-        $wpdb->query($sql_photo_gallery_wp_gallerys);
-        $wpdb->query($sql_photo_gallery_wp_like_dislike);
         $wpdb->query($sql_photo_gallery_wp_albums);
+        $wpdb->query($sql_photo_gallery_wp_gallerys);
+        $wpdb->query($sql_photo_gallery_wp_gallery_alter);
+        $wpdb->query($sql_photo_gallery_wp_like_dislike);
 
         if (!$wpdb->get_var("select count(*) from " . $wpdb->prefix . "photo_gallery_wp_images")) {
             $wpdb->query($sql_2);

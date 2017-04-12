@@ -11,9 +11,9 @@ class debug
 
     public static function trace($arr)
     {
-        echo "<pre style='background-color: #ffff82;padding: 10px;'>";
+        echo "<div><pre style='background-color: #ffff82;padding: 10px;'>";
         print_r($arr);
-        echo "</pre>";
+        echo "</pre></div>";
     }
 
 }

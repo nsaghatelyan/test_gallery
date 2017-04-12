@@ -168,16 +168,6 @@ class Photo_Gallery_WP_Albums
 
         $album_row->category_arr = explode(",", $album_row->category);
 
-        $images = explode(";;;", $row->gallery_list_effects_s);
-        $par = explode('	', $row->param);
-        $count_ord = count($images);
-        $query = $wpdb->prepare("SELECT name,ordering FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys WHERE sl_width=%d  ORDER BY `ordering` ", $row->sl_width);
-        $ord_elem = $wpdb->get_results($query);
-
-        $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_images where gallery_id = %d order by ordering ASC  ", $row->id);
-        $rowim = $wpdb->get_results($query);
-
-
         // get Album's galleries list
         $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys where id_album = %d order by ordering ASC  ", $album_row->id);
         $row_galleries = $wpdb->get_results($query);

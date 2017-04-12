@@ -116,8 +116,10 @@ class Photo_Gallery_WP_Frontend_Scripts
         global $wpdb;
         global $post;
         $pID = (string)$post->ID;
+
         $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys WHERE id=%d", $id);
         $gallery = $wpdb->get_results($query);
+
         $admin_url = admin_url("admin-ajax.php");
         $gallery_default_params = photo_gallery_wp_get_general_options();
         $gallery_params = array();
@@ -138,7 +140,30 @@ class Photo_Gallery_WP_Frontend_Scripts
             }
         }
 
-        $gallery_view = $gallery[0]->photo_gallery_wp_sl_effects;
+        $gallery_view = null;
+        $ph_re_slider_options = array();
+
+        if (!empty($gallery)) {
+            $gallery_view = $gallery[0]->photo_gallery_wp_sl_effects;
+
+            $ph_re_slider_options = array(
+                'ph_re_slider_widht' => $gallery[0]->sl_width,
+                'ph_re_slider_height' => $gallery[0]->sl_height,
+                'ph_re_slider_effects' => $gallery[0]->gallery_list_effects_s,
+                'ph_re_slider_pause_time' => $gallery[0]->description,
+                'ph_re_slider_change_speed' => $gallery[0]->param,
+                'pause_on_hover' => $gallery[0]->pause_on_hover,
+                'ph_re_slider_position' => $gallery[0]->sl_position,
+                'ph_re_slider_show_thumbnails' => Photo_Gallery_WP()->settings->slider_show_thumbnails,
+                'ph_re_slider_show_thumbnails_show_all' => Photo_Gallery_WP()->settings->slider_thumbnails_position,
+                'ph_re_slider_show_bullets' => Photo_Gallery_WP()->settings->slider_show_bullets,
+                'ph_re_slider_show_bullets_orientation' => Photo_Gallery_WP()->settings->slider_bullets_orientation,
+                'ph_re_slider_show_bullets_Spacing_x' => Photo_Gallery_WP()->settings->slider_inline_space_horizontal,
+                'ph_re_slider_show_bullets_Spacing_y' => Photo_Gallery_WP()->settings->slider_inline_space_vertical,
+                'ph_re_slider_show_arrows' => Photo_Gallery_WP()->settings->slider_show_arrows,
+            );
+        }
+
 
         $ph_lightbox_options = array(
             'ph_lightbox_speed' => Photo_Gallery_WP()->lightbox_settings->ph_lightbox_speed,
@@ -170,24 +195,6 @@ class Photo_Gallery_WP_Frontend_Scripts
             'ph_lightbox_social_yummly' => Photo_Gallery_WP()->lightbox_settings->ph_lightbox_social_yummly
         );
 
-        $ph_re_slider_options = array(
-            'ph_re_slider_widht' => $gallery[0]->sl_width,
-            'ph_re_slider_height' => $gallery[0]->sl_height,
-            'ph_re_slider_effects' => $gallery[0]->gallery_list_effects_s,
-            'ph_re_slider_pause_time' => $gallery[0]->description,
-            'ph_re_slider_change_speed' => $gallery[0]->param,
-            'pause_on_hover' => $gallery[0]->pause_on_hover,
-            'ph_re_slider_position' => $gallery[0]->sl_position,
-            'ph_re_slider_show_thumbnails' => Photo_Gallery_WP()->settings->slider_show_thumbnails,
-            'ph_re_slider_show_thumbnails_show_all' => Photo_Gallery_WP()->settings->slider_thumbnails_position,
-            'ph_re_slider_show_bullets' => Photo_Gallery_WP()->settings->slider_show_bullets,
-            'ph_re_slider_show_bullets_orientation' => Photo_Gallery_WP()->settings->slider_bullets_orientation,
-            'ph_re_slider_show_bullets_Spacing_x' => Photo_Gallery_WP()->settings->slider_inline_space_horizontal,
-            'ph_re_slider_show_bullets_Spacing_y' => Photo_Gallery_WP()->settings->slider_inline_space_vertical,
-            'ph_re_slider_show_arrows' => Photo_Gallery_WP()->settings->slider_show_arrows,
-        );
-
-
         $justified = array(
             'imagemargin' => Photo_Gallery_WP()->settings->view8_element_padding,
             'imagerandomize' => Photo_Gallery_WP()->settings->view8_element_randomize,
@@ -214,7 +221,6 @@ class Photo_Gallery_WP_Frontend_Scripts
         wp_localize_script('ph-lightbox-js', 'lightbox_obj', $ph_lightbox_options);
         wp_localize_script('custom-js', 'galleryId', $id);
         wp_localize_script('jusiifed-js', 'justified_obj', $justified);
-
         wp_localize_script('hg_album_page_view', 'hg_album_page_view_obj',
             array(
                 'ajax_url' => Photo_Gallery_WP()->ajax_url(),

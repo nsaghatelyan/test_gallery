@@ -9,6 +9,26 @@ jQuery(document).ready(function ($) {
         }
     });
 
+    if (jQuery("#album_grid_style").val() != 4) {
+        jQuery("#album_thumbnail_width_size").attr("disabled", "disabled").css("background-color", "#ccc").attr("title", 'This option available for "Thumbnail" grid view');
+        jQuery("#album_thumbnail_height_size").attr("disabled", "disabled").css("background-color", "#ccc").attr("title", 'This option available for "Thumbnail" grid view');
+    }
+
+    jQuery("#album_grid_style").on("change", function () {
+        if (jQuery(this).val() == 4) {
+            jQuery("#album_thumbnail_width_size").removeAttr("disabled").css("background-color", "#fff").attr("title", "");
+            jQuery("#album_thumbnail_height_size").removeAttr("disabled").css("background-color", "#fff").attr("title", "");
+        }
+        else {
+            jQuery("#album_thumbnail_width_size").attr("disabled", "disabled").css("background-color", "#ccc").attr("title", 'This option available for "Thumbnail" grid view');
+            jQuery("#album_thumbnail_height_size").attr("disabled", "disabled").css("background-color", "#ccc").attr("title", 'This option available for "Thumbnail" grid view');
+        }
+    });
+
+    jQuery("#album_count_style-4").parent().find("img").height("40px");
+    jQuery("#album_popup_count_style-4").parent().find("img").height("40px");
+
+
     for (var i = 8; i < 14; i++) {
         jQuery(".wpdev-settings-section:nth-child(" + i + ")").hide();
     }
@@ -29,9 +49,15 @@ jQuery(document).ready(function ($) {
         if (view == 1) {
             for (var i = 2; i < 14; i++) {
                 if (i < 8) {
+                    var top = jQuery(".wpdev-settings-section:nth-child(" + i + ")").css("top");
+                    // console.log(top);
+                    var new_top = Math.abs(parseInt(top) + 445) + "px";
                     jQuery(".wpdev-settings-section:nth-child(" + i + ")").hide();
                 }
                 else {
+                    var top = jQuery(".wpdev-settings-section:nth-child(" + i + ")").css("top");
+                    console.log(top);
+                    var new_top = Math.abs(parseInt(top) - 445) + "px";
                     jQuery(".wpdev-settings-section:nth-child(" + i + ")").show();
                 }
             }
@@ -58,47 +84,34 @@ jQuery(document).ready(function ($) {
             'slow');
     }
 
-
-    if (jQuery("#album_grid_style").val() != 4) {
-        jQuery("#album_thumbnail_width_size").attr("disabled", "disabled").css("background-color", "#ccc").attr("title", 'This option available for "Thumbnail" grid view');
-        jQuery("#album_thumbnail_height_size").attr("disabled", "disabled").css("background-color", "#ccc").attr("title", 'This option available for "Thumbnail" grid view');
-    }
-
-    jQuery("#album_grid_style").on("change", function () {
-        if (jQuery(this).val() == 4) {
-            jQuery("#album_thumbnail_width_size").removeAttr("disabled").css("background-color", "#fff").attr("title", "");
-            jQuery("#album_thumbnail_height_size").removeAttr("disabled").css("background-color", "#fff").attr("title", "");
-        }
-        else {
-            jQuery("#album_thumbnail_width_size").attr("disabled", "disabled").css("background-color", "#ccc").attr("title", 'This option available for "Thumbnail" grid view');
-            jQuery("#album_thumbnail_height_size").attr("disabled", "disabled").css("background-color", "#ccc").attr("title", 'This option available for "Thumbnail" grid view');
-        }
-    })
-
-
-    /* $("#album_style").on("change", function (e) {
-     var data = $(this).val();
-     e.preventDefault();
-
-
-     $.ajax({
-     "action": "post_word_count",
-     dataType: "JSON",
-     type: 'POST',
-     url: MyAjax.ajaxurl,
-     data: {
-     data: data,
-     nonce: MyAjax.nonce
-     },
-     success: function (response) {
-     if (response.result) {
-     console.log("success");
-     }
-     },
-     error: function (error) {
-     console.log("error");
-     }
-     });
-
-     });*/
 });
+
+/* */
+
+
+/* $("#album_style").on("change", function (e) {
+ var data = $(this).val();
+ e.preventDefault();
+
+
+ $.ajax({
+ "action": "post_word_count",
+ dataType: "JSON",
+ type: 'POST',
+ url: MyAjax.ajaxurl,
+ data: {
+ data: data,
+ nonce: MyAjax.nonce
+ },
+ success: function (response) {
+ if (response.result) {
+ console.log("success");
+ }
+ },
+ error: function (error) {
+ console.log("error");
+ }
+ });
+
+ });
+ });*/

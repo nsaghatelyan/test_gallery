@@ -9,14 +9,14 @@ Author: Huge-IT
 Author URI: https://huge-it.com/
 License: GNU/GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
 */
-
+error_reporting(E_ALL);
 require_once("debug.php");
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
-if ( ! class_exists( 'Photo_Gallery_WP' ) ) :
+if (!class_exists('Photo_Gallery_WP')) :
 
     final class Photo_Gallery_WP
     {
@@ -151,11 +151,11 @@ if ( ! class_exists( 'Photo_Gallery_WP' ) ) :
                 case 'admin' :
                     return is_admin();
                 case 'ajax' :
-                    return defined( 'DOING_AJAX' );
+                    return defined('DOING_AJAX');
                 case 'cron' :
-                    return defined( 'DOING_CRON' );
+                    return defined('DOING_CRON');
                 case 'frontend' :
-                    return  ! is_admin() && ! defined( 'DOING_CRON' );
+                    return !is_admin() && !defined('DOING_CRON');
             }
         }
 
@@ -169,20 +169,20 @@ if ( ! class_exists( 'Photo_Gallery_WP' ) ) :
             include_once('includes/class-photo-gallery-wp-settings.php');
             include_once('includes/class-photo-gallery-wp-lightbox-settings.php');
             include_once('includes/photo-gallery-wp-video-function.php');
-            include_once( 'includes/class-photo-gallery-wp-install.php' );
-            include_once( 'includes/class-photo-gallery-wp-template-loader.php' );
-            include_once( 'includes/class-photo-gallery-wp-ajax.php' );
-            include_once( 'includes/class-photo-gallery-wp-widgets.php' );
-            include_once( 'includes/class-photo-gallery-wp-gallery-widget.php' );
-            include_once( 'includes/class-photo-gallery-wp-shortcode.php' );
-            include_once( 'includes/class-photo-gallery-wp-frontend-scripts.php' );
-            if ( $this->is_request( 'admin' ) ) {
+            include_once('includes/class-photo-gallery-wp-install.php');
+            include_once('includes/class-photo-gallery-wp-template-loader.php');
+            include_once('includes/class-photo-gallery-wp-ajax.php');
+            include_once('includes/class-photo-gallery-wp-widgets.php');
+            include_once('includes/class-photo-gallery-wp-gallery-widget.php');
+            include_once('includes/class-photo-gallery-wp-shortcode.php');
+            include_once('includes/class-photo-gallery-wp-frontend-scripts.php');
+            if ($this->is_request('admin')) {
                 include_once('includes/admin/class-photo-gallery-wp-admin-functions.php');
-                include_once( 'includes/admin/class-photo-gallery-wp-admin.php' );
-                include_once( 'includes/admin/class-photo-gallery-wp-admin-assets.php' );
-                include_once( 'includes/admin/class-photo-gallery-wp-galleries.php' );
-                include_once( 'includes/admin/class-photo-gallery-wp-featured-plugins.php' );
-                include_once( 'includes/admin/class-photo-gallery-wp-albums.php' );
+                include_once('includes/admin/class-photo-gallery-wp-admin.php');
+                include_once('includes/admin/class-photo-gallery-wp-admin-assets.php');
+                include_once('includes/admin/class-photo-gallery-wp-galleries.php');
+                include_once('includes/admin/class-photo-gallery-wp-featured-plugins.php');
+                include_once('includes/admin/class-photo-gallery-wp-albums.php');
             }
         }
 

@@ -194,6 +194,10 @@ if($grid == 6){
     box-shadow: 0 0 5px #000
 }
 
+.view .mask-bg {
+    height: 100%;
+}
+
 .view .album_social {
     color: #fff;
     position: absolute;
@@ -581,6 +585,9 @@ if($grid == 6){
 .album_socials {
     position: relative;
     top: 3px;
+    width: 100px;
+    height: 28px;
+    margin: 0 auto;
 }
 
 .album_socials .rwd-share-buttons {

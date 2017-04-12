@@ -101,8 +101,10 @@ class Photo_Gallery_WP__Shortcode
         if (is_array($id_array)) {
             if (count($id_array) == 1) {
                 $id = $id_array[0];
+                $format = "%d";
             } else {
                 $id = implode(",", $id_array);
+                $format = rtrim(str_repeat("%d, ", count($id_array)), ", ");
             }
         } else {
             $id = $id_array;
@@ -124,8 +126,10 @@ class Photo_Gallery_WP__Shortcode
         $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_images where gallery_id IN (" . $id . ") order by ordering ASC", "");
         $images = $wpdb->get_results($query);
 
+
         $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys where id IN (" . $id . ") order by id ASC", "");
         $gallery = $wpdb->get_results($query);
+
 
         $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_albums where id IN (" . $id . ") order by " . $album_sorting . " ASC", "");
         $albums = $wpdb->get_results($query);
@@ -140,7 +144,6 @@ class Photo_Gallery_WP__Shortcode
             $val->image_count = count($wpdb->get_results($query));
             $val->images = $wpdb->get_results($query);
         }
-
         foreach ($albums as $key => $val) {
             $album_image_count[$key] = 0;
             foreach ($album_galleries as $k => $v) {
@@ -150,6 +153,9 @@ class Photo_Gallery_WP__Shortcode
                     $val->image_count = $album_image_count[$key];
                     $val->galleries[] = $v;
                 }
+            }
+            if (!isset($val->galleries)) {
+                unset($albums[$key]);
             }
         }
 
@@ -165,23 +171,6 @@ class Photo_Gallery_WP__Shortcode
         return ob_get_clean();
     }
 
-    protected function album_init_frontend($id)
-    {
-        global $wpdb;
-
-        $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_images where gallery_id = '%d' order by ordering ASC", $id);
-        $images = $wpdb->get_results($query);
-
-        $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys where id = '%d' order by id ASC", $id);
-        $gallery = $wpdb->get_results($query);
-
-        ob_start();
-
-        Photo_Gallery_WP()->template_loader->load_front_end($images, $gallery);
-
-        return ob_get_clean();
-
-    }
 
     /**
      * Add editor media button
