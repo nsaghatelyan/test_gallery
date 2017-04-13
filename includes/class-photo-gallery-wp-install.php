@@ -127,7 +127,7 @@ INSERT INTO
         $table_name = $wpdb->prefix . "photo_gallery_wp_gallerys";
         $sql_3 = "
 INSERT INTO `$album_table_name` (`id`, `name`, `sl_height`, `sl_width`, `gallery_list_effects_s`, `description`, `sl_position`, `ordering`, `published`, `photo_gallery_wp_sl_effects`) VALUES
-(1, 'My First Album', 375, 600, 'random', '4000', 'center', 1, '300', '5')";
+(1, 'My First Album', 375, 600, 'random', 'My first Album description', 'center', 1, '300', '5')";
 
         $sql_3_2 = "
         INSERT INTO `$table_name` (`id`, `id_album`, `name`, `sl_height`, `sl_width`, `pause_on_hover`, `gallery_list_effects_s`, `description`, `param`, `sl_position`, `ordering`, `published`, `photo_gallery_wp_sl_effects`) VALUES

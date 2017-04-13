@@ -129,7 +129,7 @@ class Photo_Gallery_WP_Albums
 //        $query = "SELECT galleries.*, COUNT(images.id) as images_count FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys AS galleries LEFT JOIN " . $wpdb->prefix . "photo_gallery_wp_images AS images ON galleries.id = images.gallery_id " . $where . " GROUP BY galleries.id LIMIT %d OFFSET %d";
         $query = "SELECT albums.*, COUNT(galleries.id) as galleries_count FROM " . $wpdb->prefix . "photo_gallery_wp_albums AS albums LEFT JOIN " . $wpdb->prefix . "photo_gallery_wp_gallerys AS galleries ON albums.id = galleries.id_album" . $where . " GROUP BY albums.id LIMIT %d OFFSET %d";
         $albums = $wpdb->get_results($wpdb->prepare($query, $params));
-
+        
         require_once(PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . 'photo-gallery-wp-admin-albums-list.php');
     }
 
@@ -253,6 +253,7 @@ INSERT INTO
         if (!(isset($_POST['sl_width']) && isset($_POST["album_name"]))) {
             echo '';
         }
+
         if (isset($_POST['photo_gallery_wp_admin_image_hover_preview'])) {
             $img_hover_preview = sanitize_text_field($_POST['photo_gallery_wp_admin_image_hover_preview']);
             update_option('photo_gallery_wp_admin_image_hover_preview', $img_hover_preview);

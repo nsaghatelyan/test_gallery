@@ -1,0 +1,1145 @@
+/* ==========================================================================
+   hg-photo-gallery-popup- Gallery Styles
+   ========================================================================== */
+/**
+* hg-photo-gallery-popup- Gallery - Reset
+*/
+.hg-photo-gallery-popup--gallery-wrap,
+.hg-photo-gallery-popup--gallery-wrap *,
+.hg-photo-gallery-popup--tags-filter-list,
+.hg-photo-gallery-popup--tags-filter-list * {
+    background: none;
+    border: 0 none;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    float: none;
+    font-size: 100%;
+    height: auto;
+    letter-spacing: normal;
+    /*list-style:none;*/
+    outline: none;
+    position: static;
+    text-decoration: none;
+    text-indent: 0;
+    text-shadow: none;
+    text-transform: none;
+    width: auto;
+    visibility: visible;
+    overflow: visible;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -ms-box-shadow: none;
+    -o-box-shadow: none;
+    box-shadow: none;
+    -webkit-appearance: none;
+    transition: none;
+    -webkit-transition: none;
+    -moz-transition: none;
+    -o-transition: none;
+    -ms-transition: none;
+}
+
+/**
+* Tags Addon
+*/
+.hg-photo-gallery-popup--tags-filter-list {
+    clear: both;
+    margin: 0 0 10px 0;
+}
+
+.hg-photo-gallery-popup--tags-filter-list li.hg-photo-gallery-popup--tags-filter,
+.hg-photo-gallery-popup--tags-filter-list li.hg-photo-gallery-popup--tag-filter {
+    float: left;
+    margin: 0 20px 10px 0;
+}
+
+.hg-photo-gallery-popup--tags-filter-list .hg-photo-gallery-popup--tag-filter-link {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/**
+* Breadcrumbs Addon
+*/
+.hg-photo-gallery-popup--breadcrumbs {
+    display: block;
+    margin: 0 0 20px 0;
+    padding: 10px;
+    background: #eee;
+    clear: both;
+}
+
+.hg-photo-gallery-popup--breadcrumbs a {
+    text-decoration: none;
+}
+
+/**
+* WooCommerce Addon
+*/
+.hg-photo-gallery-popup--hidden {
+    display: none;
+}
+
+/**
+* Main Wrapper
+*/
+.hg-photo-gallery-popup--gallery-wrap {
+    width: 100%;
+    margin: 0 auto 20px auto;
+    /**
+    * Pagination Addon
+    */
+    /**
+    * Description
+    */
+    /**
+    * Inner Wrapper
+    */
+}
+
+.hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--pagination {
+    margin: 0 0 20px 0;
+}
+
+.hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-description {
+    clear: both;
+}
+
+.hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public {
+    width: 100%;
+    margin: 0 auto 20px auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    /**
+    * Clearing
+    */
+    /**
+    * Inner
+    */
+    /**
+    * Gallery Item
+    */
+    /**
+    * Column Widths and Clearing
+    */
+    /**
+    * Optional: Isotope
+    * - if enabled, .hg-photo-gallery-popup-tope is added to .hg-photo-gallery-popup--gallery-public
+    * - no clearing on gallery items
+    */
+    /**
+    * Optional: CSS Animations
+    * - if enabled, .hg-photo-gallery-popup--gallery-css-animations is added to .hg-photo-gallery-popup--gallery-public
+    */
+}
+
+.hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--clear {
+    clear: both;
+}
+
+.hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--clear:after {
+    clear: both;
+    content: '.';
+    display: block;
+    height: 0;
+    line-height: 0;
+    overflow: auto;
+    visibility: hidden;
+    zoom: 1;
+}
+
+.hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public .hg-photo-gallery-popup--gallery-item-inner {
+    position: relative;
+    /**
+    * Dynamic Positioning
+    */
+}
+
+.hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public .hg-photo-gallery-popup--gallery-item-inner .hg-photo-gallery-popup--gallery-position-overlay {
+    box-sizing: border-box;
+    position: absolute;
+    overflow: visible;
+    z-index: 999;
+    /**
+    * Top Left
+    */
+    /**
+    * Top Right
+    */
+    /**
+    * Bottom Left
+    */
+    /**
+    * Bottom Right
+    */
+}
+
+.hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public .hg-photo-gallery-popup--gallery-item-inner .hg-photo-gallery-popup--gallery-position-overlay.hg-photo-gallery-popup--gallery-top-left {
+    top: 0;
+    left: 0;
+    padding: 5px 0 0 5px;
+}
+
+.hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public .hg-photo-gallery-popup--gallery-item-inner .hg-photo-gallery-popup--gallery-position-overlay.hg-photo-gallery-popup--gallery-top-right {
+    top: 0;
+    right: 0;
+    padding: 5px 5px 0 0;
+    text-align: right;
+}
+
+.hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public .hg-photo-gallery-popup--gallery-item-inner .hg-photo-gallery-popup--gallery-position-overlay.hg-photo-gallery-popup--gallery-bottom-left {
+    bottom: 0;
+    left: 0;
+    padding: 0 0 5px 5px;
+}
+
+.hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public .hg-photo-gallery-popup--gallery-item-inner .hg-photo-gallery-popup--gallery-position-overlay.hg-photo-gallery-popup--gallery-bottom-right {
+    bottom: 0;
+    right: 0;
+    padding: 0 5px 5px 0;
+    text-align: right;
+}
+
+.hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public .hg-photo-gallery-popup--gallery-item {
+    float: left;
+    /**
+    * Link
+    */
+    /**
+    * Image
+    */
+    /**
+    * Videos
+    */
+}
+
+.hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public .hg-photo-gallery-popup--gallery-item > .hg-photo-gallery-popup--gallery-link {
+    display: block;
+    outline: none;
+    border: 0 none;
+    position: relative;
+}
+
+.hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public .hg-photo-gallery-popup--gallery-item img {
+    float: none;
+    display: block;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 100%;
+}
+
+.hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public .hg-photo-gallery-popup--gallery-item iframe, .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public .hg-photo-gallery-popup--gallery-item video {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-1-columns .hg-photo-gallery-popup--gallery-item {
+    clear: both;
+    width: 100%;
+}
+
+.hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-2-columns .hg-photo-gallery-popup--gallery-item {
+    width: 50%;
+}
+
+.hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-2-columns .hg-photo-gallery-popup--gallery-item:nth-child(2n+1) {
+    clear: both;
+}
+
+.hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-3-columns .hg-photo-gallery-popup--gallery-item {
+    width: 33.33%;
+}
+
+.hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-3-columns .hg-photo-gallery-popup--gallery-item:nth-child(3n+1) {
+    clear: both;
+}
+
+.hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-4-columns .hg-photo-gallery-popup--gallery-item {
+    width: 25%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-4-columns .hg-photo-gallery-popup--gallery-item:nth-child(4n+1) {
+    clear: both;
+}
+
+.hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-5-columns .hg-photo-gallery-popup--gallery-item {
+    width: 20%;
+}
+
+.hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-5-columns .hg-photo-gallery-popup--gallery-item:nth-child(5n+1) {
+    clear: both;
+}
+
+.hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-6-columns .hg-photo-gallery-popup--gallery-item {
+    width: 16.66%;
+}
+
+.hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-6-columns .hg-photo-gallery-popup--gallery-item:nth-child(6n+1) {
+    clear: both;
+}
+
+.hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup-tope .hg-photo-gallery-popup--gallery-item {
+    clear: none !important;
+}
+
+.hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-css-animations {
+    /**
+    * Gallery Item
+    */
+}
+
+.hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-css-animations .hg-photo-gallery-popup--gallery-item {
+    /**
+    * Image
+    */
+    /**
+    * Image Hover
+    * - Always force opacity: 1, as the CSS Opacity setting for images may be less e.g. 0.5
+    */
+}
+
+.hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-css-animations .hg-photo-gallery-popup--gallery-item img {
+    opacity: 0;
+    transition: all .2s ease-in-out;
+}
+
+.hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-css-animations .hg-photo-gallery-popup--gallery-item a:hover img {
+    opacity: 1 !important;
+}
+
+/**
+* Main Wrapper
+*/
+.hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--justified-gallery {
+    /**
+    * Inner
+    */
+    /*    .hg-photo-gallery-popup--gallery-description {
+            &.hg-photo-gallery-popup--gallery-description-above {
+                display: table;
+            }
+        }*/
+}
+
+.hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--justified-gallery .hg-photo-gallery-popup--gallery-item-inner {
+    position: absolute;
+}
+
+.hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-1-columns .hg-photo-gallery-popup--title,
+.hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-1-columns .hg-photo-gallery-popup--caption,
+.hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-2-columns .hg-photo-gallery-popup--title,
+.hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-2-columns .hg-photo-gallery-popup--caption,
+.hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-3-columns .hg-photo-gallery-popup--title,
+.hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-3-columns .hg-photo-gallery-popup--caption,
+.hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-4-columns .hg-photo-gallery-popup--title,
+.hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-4-columns .hg-photo-gallery-popup--caption,
+.hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-5-columns .hg-photo-gallery-popup--title,
+.hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-5-columns .hg-photo-gallery-popup--caption,
+.hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-6-columns .hg-photo-gallery-popup--title,
+.hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-6-columns .hg-photo-gallery-popup--caption {
+    text-align: center;
+    width: 100%;
+    font-size: 14px;
+    line-height: 24px;
+    display: inline-block;
+}
+
+.hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-1-columns .hg-photo-gallery-popup--title,
+.hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-2-columns .hg-photo-gallery-popup--title,
+.hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-3-columns .hg-photo-gallery-popup--title,
+.hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-4-columns .hg-photo-gallery-popup--title,
+.hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-5-columns .hg-photo-gallery-popup--title,
+.hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-6-columns .hg-photo-gallery-popup--title {
+    font-size: 18px;
+    line-height: 26px;
+    font-weight: 600;
+}
+
+.hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-1-columns .hg-photo-gallery-popup--caption,
+.hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-2-columns .hg-photo-gallery-popup--caption,
+.hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-3-columns .hg-photo-gallery-popup--caption,
+.hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-4-columns .hg-photo-gallery-popup--caption,
+.hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-5-columns .hg-photo-gallery-popup--caption,
+.hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-6-columns .hg-photo-gallery-popup--caption {
+    font-weight: 200;
+}
+
+/**
+* RTL Support
+*/
+.hg-photo-gallery-popup--gallery-wrap.hg-photo-gallery-popup--gallery-rtl {
+    /**
+    * Inner Wrapper
+    */
+}
+
+.hg-photo-gallery-popup--gallery-wrap.hg-photo-gallery-popup--gallery-rtl .hg-photo-gallery-popup--gallery-public {
+    /**
+    * Gallery Item
+    */
+}
+
+.hg-photo-gallery-popup--gallery-wrap.hg-photo-gallery-popup--gallery-rtl .hg-photo-gallery-popup--gallery-public .hg-photo-gallery-popup--gallery-item {
+    float: right;
+}
+
+/**
+* Mobile Landscape Size to Tablet Portrait (devices and browsers)
+* - hg-photo-gallery-popup- Gallery Columns: If 4, 5 or 6, reduce to 3 columns. Isotope will detect change + resize automatically.
+*/
+@media only screen and (max-width: 767px) {
+    /**
+    * Main Wrapper
+    */
+    .hg-photo-gallery-popup--gallery-wrap {
+        /**
+        * Inner Wrapper
+        */
+    }
+
+    .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public {
+        /**
+        * Column Widths and Clearing
+        */
+        /**
+        * Optional: Isotope
+        * - if enabled, .hg-photo-gallery-popup-tope is added to .hg-photo-gallery-popup--gallery-public
+        * - no clearing on gallery items
+        */
+    }
+
+    .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-4-columns .hg-photo-gallery-popup--gallery-item {
+        width: 33%;
+    }
+
+    .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-4-columns .hg-photo-gallery-popup--gallery-item:nth-child(4n+1) {
+        clear: none;
+    }
+
+    .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-4-columns .hg-photo-gallery-popup--gallery-item:nth-child(3n+1) {
+        clear: both;
+    }
+
+    .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-5-columns .hg-photo-gallery-popup--gallery-item {
+        width: 33%;
+    }
+
+    .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-5-columns .hg-photo-gallery-popup--gallery-item:nth-child(5n+1) {
+        clear: none;
+    }
+
+    .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-5-columns .hg-photo-gallery-popup--gallery-item:nth-child(3n+1) {
+        clear: both;
+    }
+
+    .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-6-columns .hg-photo-gallery-popup--gallery-item {
+        width: 33%;
+    }
+
+    .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-6-columns .hg-photo-gallery-popup--gallery-item:nth-child(6n+1) {
+        clear: none;
+    }
+
+    .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-6-columns .hg-photo-gallery-popup--gallery-item:nth-child(3n+1) {
+        clear: both;
+    }
+
+    .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup-tope .hg-photo-gallery-popup--gallery-item {
+        clear: none !important;
+    }
+}
+
+/**
+* Mobile Landscape (devices and browsers)
+* - hg-photo-gallery-popup- Gallery Columns: Reduce to 2 column. Isotope will detect change + resize automatically.
+*/
+@media only screen and (max-width: 459px) {
+    /**
+    * Main Wrapper
+    */
+    .hg-photo-gallery-popup--gallery-wrap {
+        /**
+        * Inner Wrapper
+        */
+    }
+
+    .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public {
+        /**
+        * Column Widths and Clearing
+        */
+        /**
+        * Optional: Isotope
+        * - if enabled, .hg-photo-gallery-popup-tope is added to .hg-photo-gallery-popup--gallery-public
+        * - no clearing on gallery items
+        */
+    }
+
+    .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-2-columns .hg-photo-gallery-popup--gallery-item, .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-3-columns .hg-photo-gallery-popup--gallery-item, .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-4-columns .hg-photo-gallery-popup--gallery-item, .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-5-columns .hg-photo-gallery-popup--gallery-item, .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-6-columns .hg-photo-gallery-popup--gallery-item {
+        width: 50%;
+    }
+
+    .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-2-columns .hg-photo-gallery-popup--gallery-item:nth-child(3n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-2-columns .hg-photo-gallery-popup--gallery-item:nth-child(4n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-2-columns .hg-photo-gallery-popup--gallery-item:nth-child(5n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-2-columns .hg-photo-gallery-popup--gallery-item:nth-child(6n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-3-columns .hg-photo-gallery-popup--gallery-item:nth-child(3n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-3-columns .hg-photo-gallery-popup--gallery-item:nth-child(4n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-3-columns .hg-photo-gallery-popup--gallery-item:nth-child(5n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-3-columns .hg-photo-gallery-popup--gallery-item:nth-child(6n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-4-columns .hg-photo-gallery-popup--gallery-item:nth-child(3n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-4-columns .hg-photo-gallery-popup--gallery-item:nth-child(4n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-4-columns .hg-photo-gallery-popup--gallery-item:nth-child(5n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-4-columns .hg-photo-gallery-popup--gallery-item:nth-child(6n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-5-columns .hg-photo-gallery-popup--gallery-item:nth-child(3n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-5-columns .hg-photo-gallery-popup--gallery-item:nth-child(4n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-5-columns .hg-photo-gallery-popup--gallery-item:nth-child(5n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-5-columns .hg-photo-gallery-popup--gallery-item:nth-child(6n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-6-columns .hg-photo-gallery-popup--gallery-item:nth-child(3n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-6-columns .hg-photo-gallery-popup--gallery-item:nth-child(4n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-6-columns .hg-photo-gallery-popup--gallery-item:nth-child(5n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-6-columns .hg-photo-gallery-popup--gallery-item:nth-child(6n+1) {
+        clear: none;
+    }
+
+    .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-2-columns .hg-photo-gallery-popup--gallery-item:nth-child(2n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-3-columns .hg-photo-gallery-popup--gallery-item:nth-child(2n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-4-columns .hg-photo-gallery-popup--gallery-item:nth-child(2n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-5-columns .hg-photo-gallery-popup--gallery-item:nth-child(2n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-6-columns .hg-photo-gallery-popup--gallery-item:nth-child(2n+1) {
+        clear: both;
+    }
+
+    .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup-tope .hg-photo-gallery-popup--gallery-item {
+        clear: none !important;
+    }
+}
+
+/**
+* Mobile Portrait (devices and browsers)
+* - hg-photo-gallery-popup- Gallery Columns: Reduce to 1 column. Isotope will detect change + resize automatically.
+*/
+@media only screen and (max-width: 320px) {
+    /**
+    * Main Wrapper
+    */
+    .hg-photo-gallery-popup--gallery-wrap {
+        /**
+        * Inner Wrapper
+        */
+    }
+
+    .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public {
+        /**
+        * Column Widths and Clearing
+        */
+        /**
+        * Optional: Isotope
+        * - if enabled, .hg-photo-gallery-popup-tope is added to .hg-photo-gallery-popup--gallery-public
+        * - no clearing on gallery items
+        */
+    }
+
+    .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-1-columns .hg-photo-gallery-popup--gallery-item, .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-2-columns .hg-photo-gallery-popup--gallery-item, .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-3-columns .hg-photo-gallery-popup--gallery-item, .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-4-columns .hg-photo-gallery-popup--gallery-item, .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-5-columns .hg-photo-gallery-popup--gallery-item, .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-6-columns .hg-photo-gallery-popup--gallery-item {
+        width: 100%;
+    }
+
+    .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-1-columns .hg-photo-gallery-popup--gallery-item:nth-child(2n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-1-columns .hg-photo-gallery-popup--gallery-item:nth-child(3n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-1-columns .hg-photo-gallery-popup--gallery-item:nth-child(4n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-1-columns .hg-photo-gallery-popup--gallery-item:nth-child(5n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-1-columns .hg-photo-gallery-popup--gallery-item:nth-child(6n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-2-columns .hg-photo-gallery-popup--gallery-item:nth-child(2n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-2-columns .hg-photo-gallery-popup--gallery-item:nth-child(3n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-2-columns .hg-photo-gallery-popup--gallery-item:nth-child(4n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-2-columns .hg-photo-gallery-popup--gallery-item:nth-child(5n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-2-columns .hg-photo-gallery-popup--gallery-item:nth-child(6n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-3-columns .hg-photo-gallery-popup--gallery-item:nth-child(2n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-3-columns .hg-photo-gallery-popup--gallery-item:nth-child(3n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-3-columns .hg-photo-gallery-popup--gallery-item:nth-child(4n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-3-columns .hg-photo-gallery-popup--gallery-item:nth-child(5n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-3-columns .hg-photo-gallery-popup--gallery-item:nth-child(6n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-4-columns .hg-photo-gallery-popup--gallery-item:nth-child(2n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-4-columns .hg-photo-gallery-popup--gallery-item:nth-child(3n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-4-columns .hg-photo-gallery-popup--gallery-item:nth-child(4n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-4-columns .hg-photo-gallery-popup--gallery-item:nth-child(5n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-4-columns .hg-photo-gallery-popup--gallery-item:nth-child(6n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-5-columns .hg-photo-gallery-popup--gallery-item:nth-child(2n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-5-columns .hg-photo-gallery-popup--gallery-item:nth-child(3n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-5-columns .hg-photo-gallery-popup--gallery-item:nth-child(4n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-5-columns .hg-photo-gallery-popup--gallery-item:nth-child(5n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-5-columns .hg-photo-gallery-popup--gallery-item:nth-child(6n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-6-columns .hg-photo-gallery-popup--gallery-item:nth-child(2n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-6-columns .hg-photo-gallery-popup--gallery-item:nth-child(3n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-6-columns .hg-photo-gallery-popup--gallery-item:nth-child(4n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-6-columns .hg-photo-gallery-popup--gallery-item:nth-child(5n+1), .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup--gallery-6-columns .hg-photo-gallery-popup--gallery-item:nth-child(6n+1) {
+        clear: both;
+    }
+
+    .hg-photo-gallery-popup--gallery-wrap .hg-photo-gallery-popup--gallery-public.hg-photo-gallery-popup-tope .hg-photo-gallery-popup--gallery-item {
+        clear: none !important;
+    }
+}
+
+/* ==========================================================================
+   hg-photo-gallery-popup- Lightbox Gallery Styles
+   ========================================================================== */
+/*! hg-photo-gallery-popup-box v2.1.5 fancyapps.com | fancyapps.com/hg-photo-gallery-popup-box/#license */
+.hg-photo-gallery-popup-box-wrap,
+.hg-photo-gallery-popup-box-skin,
+.hg-photo-gallery-popup-box-outer,
+.hg-photo-gallery-popup-box-inner,
+.hg-photo-gallery-popup-box-image,
+.hg-photo-gallery-popup-box-wrap iframe,
+.hg-photo-gallery-popup-box-wrap object,
+.hg-photo-gallery-popup-box-nav,
+.hg-photo-gallery-popup-box-nav span,
+.hg-photo-gallery-popup-box-tmp,
+.hg-photo-gallery-popup-box-buttons,
+.hg-photo-gallery-popup-box-thumbs,
+.hg-photo-gallery-popup-box-wrap *,
+.hg-photo-gallery-popup-box-thumbs *,
+.hg-photo-gallery-popup-box-buttons * {
+    background: none;
+    border: 0 none;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    float: none;
+    font-size: 100%;
+    height: auto;
+    letter-spacing: normal;
+    list-style: none;
+    outline: none;
+    position: static;
+    text-decoration: none;
+    text-indent: 0;
+    text-shadow: none;
+    text-transform: none;
+    width: auto;
+    visibility: visible;
+    overflow: visible;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -ms-box-shadow: none;
+    -o-box-shadow: none;
+    box-shadow: none;
+    -webkit-appearance: none;
+    transition: none;
+    -webkit-transition: none;
+    -moz-transition: none;
+    -o-transition: none;
+    -ms-transition: none;
+}
+
+.hg-photo-gallery-popup-box-wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 988020;
+}
+
+.hg-photo-gallery-popup-box-skin {
+    position: relative;
+    background: #f9f9f9;
+    color: #444;
+    text-shadow: none;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.hg-photo-gallery-popup-box-opened {
+    z-index: 988030;
+}
+
+.hg-photo-gallery-popup-box-opened .hg-photo-gallery-popup-box-skin {
+    -webkit-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.hg-photo-gallery-popup-box-outer, .hg-photo-gallery-popup-box-inner {
+    position: relative;
+}
+
+.hg-photo-gallery-popup-box-inner {
+    overflow: hidden;
+    /**
+     * Actions
+     */
+    /**
+    * Dynamic Positioning
+    */
+}
+
+.hg-photo-gallery-popup-box-inner .hg-photo-gallery-popup-box-actions {
+    position: absolute;
+    z-index: 988050;
+}
+
+.hg-photo-gallery-popup-box-inner .hg-photo-gallery-popup-box-position-overlay {
+    box-sizing: border-box;
+    position: absolute;
+    overflow: visible;
+    z-index: 988041;
+    /* Beat the prev/next controls */
+    padding: 0;
+    /**
+    * Top Left
+    */
+    /**
+    * Top Right
+    */
+    /**
+    * Bottom Left
+    */
+    /**
+    * Bottom Right
+    */
+}
+
+.hg-photo-gallery-popup-box-inner .hg-photo-gallery-popup-box-position-overlay.hg-photo-gallery-popup--gallery-top-left {
+    top: 0;
+    left: 0;
+    text-align: left;
+}
+
+.hg-photo-gallery-popup-box-inner .hg-photo-gallery-popup-box-position-overlay.hg-photo-gallery-popup--gallery-top-right {
+    top: 0;
+    right: 0;
+    text-align: right;
+}
+
+.hg-photo-gallery-popup-box-inner .hg-photo-gallery-popup-box-position-overlay.hg-photo-gallery-popup--gallery-bottom-left {
+    bottom: 0;
+    left: 0;
+    text-align: left;
+}
+
+.hg-photo-gallery-popup-box-inner .hg-photo-gallery-popup-box-position-overlay.hg-photo-gallery-popup--gallery-bottom-right {
+    bottom: 0;
+    right: 0;
+    text-align: right;
+}
+
+.hg-photo-gallery-popup-box-type-iframe .hg-photo-gallery-popup-box-inner {
+    -webkit-overflow-scrolling: touch;
+    height: 100%;
+}
+
+.hg-photo-gallery-popup-box-type-iframe .hg-photo-gallery-popup-box-inner .hg-photo-gallery-popup-box-iframe {
+    width: 100%;
+    height: 100%;
+}
+
+.hg-photo-gallery-popup-box-error {
+    color: #444;
+    font: 13px/20px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 15px;
+    white-space: nowrap;
+}
+
+.hg-photo-gallery-popup-box-image, .hg-photo-gallery-popup-box-iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.hg-photo-gallery-popup-box-image {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#hg-photo-gallery-popup-box-loading, .hg-photo-gallery-popup-box-close, .hg-photo-gallery-popup-box-prev span, .hg-photo-gallery-popup-box-next span {
+    background-image: url("../images/albums/arrows/controls.png");
+}
+
+#hg-photo-gallery-popup-box-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -22px;
+    margin-left: -22px;
+    background-position: 0 -108px;
+    opacity: 0.8;
+    cursor: pointer;
+    z-index: 988060;
+}
+
+#hg-photo-gallery-popup-box-loading div {
+    width: 44px;
+    height: 44px;
+    background: url("../images/albums/popup_loader.gif") center center no-repeat;
+}
+
+.hg-photo-gallery-popup-box-close {
+    position: absolute;
+    top: -18px;
+    right: -18px;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    z-index: 988040;
+}
+
+.hg-photo-gallery-popup-box-nav {
+    position: absolute;
+    top: 0;
+    width: 40%;
+    height: 100%;
+    cursor: pointer;
+    text-decoration: none;
+    background: transparent url("images/blank.gif");
+    /* helps IE */
+    -webkit-tap-highlight-color: transparent;
+    z-index: 988040;
+}
+
+.hg-photo-gallery-popup-box-nav:focus {
+    outline: none;
+}
+
+.hg-photo-gallery-popup-box-prev {
+    left: 0;
+}
+
+.hg-photo-gallery-popup-box-next {
+    right: 0;
+}
+
+.hg-photo-gallery-popup-box-prev.hg-photo-gallery-popup-box-arrows-outside {
+    left: -100px;
+}
+
+.hg-photo-gallery-popup-box-next.hg-photo-gallery-popup-box-arrows-outside {
+    right: -100px;
+}
+
+.hg-photo-gallery-popup-box-nav span {
+    position: absolute;
+    top: 50%;
+    width: 36px;
+    height: 34px;
+    margin-top: -18px;
+    cursor: pointer;
+    z-index: 988040;
+    visibility: hidden;
+}
+
+body.hg-photo-gallery-popup--touch .hg-photo-gallery-popup-box-nav span {
+    visibility: visible;
+}
+
+.hg-photo-gallery-popup-box-prev span {
+    left: 10px;
+    background-position: 0 -36px;
+}
+
+.hg-photo-gallery-popup-box-next span {
+    right: 10px;
+    background-position: 0 -72px;
+}
+
+.hg-photo-gallery-popup-box-nav:hover span {
+    visibility: visible;
+}
+
+.hg-photo-gallery-popup-box-tmp {
+    position: absolute;
+    top: -99999px;
+    left: -99999px;
+    max-width: 99999px;
+    max-height: 99999px;
+    overflow: visible !important;
+}
+
+a.hg-photo-gallery-popup-box-close,
+a.hg-photo-gallery-popup-box-nav,
+a.fancy-close:hover,
+a.hg-photo-gallery-popup-box-nav:hover {
+    border: 0;
+}
+
+/* Overlay helper */
+.hg-photo-gallery-popup-box-lock {
+    overflow: visible !important;
+    width: auto;
+}
+
+.hg-photo-gallery-popup-box-lock body {
+    overflow: hidden !important;
+}
+
+.hg-photo-gallery-popup-box-lock-test {
+    overflow-y: hidden !important;
+}
+
+.hg-photo-gallery-popup-box-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    display: none;
+    z-index: 988010;
+    /*background: url("images/hg-photo-gallery-popup-box_overlay.png");*/
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.hg-photo-gallery-popup-box-overlay-fixed {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
+/* Title helper */
+.hg-photo-gallery-popup-box-title {
+    visibility: hidden;
+    font-size: 13px;
+    line-height: 20px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    position: relative;
+    text-shadow: none;
+    z-index: 988090;
+}
+
+.hg-photo-gallery-popup-box-opened .hg-photo-gallery-popup-box-title {
+    visibility: visible;
+}
+
+.hg-photo-gallery-popup-box-title-float-wrap {
+    position: absolute;
+    bottom: auto;
+    right: 50%;
+    margin-top: 20px;
+    z-index: 988050;
+    text-align: center;
+}
+
+.hg-photo-gallery-popup-box-title-float-wrap .child {
+    display: inline-block;
+    margin-right: -100%;
+    padding: 2px 20px;
+    background: transparent;
+    /* Fallback for web browsers that doesn't support RGBa */
+    background: rgba(0, 0, 0, 0.8);
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    text-shadow: 0 1px 2px #222;
+    color: #FFF;
+    line-height: 24px;
+    white-space: normal;
+}
+
+.hg-photo-gallery-popup-box-title-float-wrap.hg-photo-gallery-popup-box-title-text-wrap .child {
+    white-space: normal;
+}
+
+.hg-photo-gallery-popup-box-title-outside-wrap {
+    position: relative;
+    margin-top: 10px;
+    color: #fff;
+}
+
+.hg-photo-gallery-popup-box-title-inside-wrap {
+    padding-top: 10px;
+}
+
+.hg-photo-gallery-popup-box-title-over-wrap {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: #fff;
+    padding: 10px;
+    background: #000;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+#hg-photo-gallery-popup-box-buttons {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    z-index: 988050;
+}
+
+#hg-photo-gallery-popup-box-buttons.top {
+    top: 10px;
+}
+
+#hg-photo-gallery-popup-box-buttons.bottom {
+    bottom: 10px;
+}
+
+/* Allows for thumbnails to be displayed */
+#hg-photo-gallery-popup-box-buttons.bottom.has-padding {
+    bottom: 80px;
+}
+
+#hg-photo-gallery-popup-box-buttons.top.has-padding {
+    top: 80px;
+}
+
+#hg-photo-gallery-popup-box-buttons ul {
+    display: block;
+    width: auto;
+    height: 30px;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+    border: 1px solid #111;
+    border-radius: 3px;
+    -webkit-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    -moz-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    background: #323232;
+    background: -moz-linear-gradient(top, #444444 0%, #343434 50%, #292929 50%, #333333 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #444444), color-stop(50%, #343434), color-stop(50%, #292929), color-stop(100%, #333333));
+    background: -webkit-linear-gradient(top, #444444 0%, #343434 50%, #292929 50%, #333333 100%);
+    background: -o-linear-gradient(top, #444444 0%, #343434 50%, #292929 50%, #333333 100%);
+    background: -ms-linear-gradient(top, #444444 0%, #343434 50%, #292929 50%, #333333 100%);
+    background: linear-gradient(top, #444444 0%, #343434 50%, #292929 50%, #333333 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#444444', endColorstr='#222222', GradientType=0);
+}
+
+#hg-photo-gallery-popup-box-buttons ul li {
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+
+#hg-photo-gallery-popup-box-buttons ul li#hg-photo-gallery-popup-box-buttons-title span {
+    display: block;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    line-height: 30px;
+    padding: 0 10px;
+    color: #fff;
+}
+
+#hg-photo-gallery-popup-box-buttons a {
+    display: block;
+    width: 30px;
+    height: 30px;
+    text-indent: -9999px;
+    background-color: transparent;
+    background-image: url("../images/albums/arrows/arrows.png");
+    background-repeat: no-repeat;
+    outline: none;
+    opacity: 0.8;
+}
+
+#hg-photo-gallery-popup-box-buttons a:hover {
+    opacity: 1;
+}
+
+#hg-photo-gallery-popup-box-buttons a.btnPrev {
+    background-position: 5px 0;
+}
+
+#hg-photo-gallery-popup-box-buttons a.btnNext {
+    background-position: -33px 0;
+    border-right: 1px solid #3e3e3e;
+}
+
+#hg-photo-gallery-popup-box-buttons a.btnPlay {
+    background-position: 0 -30px;
+}
+
+#hg-photo-gallery-popup-box-buttons a.btnPlayOn {
+    background-position: -30px -30px;
+}
+
+#hg-photo-gallery-popup-box-buttons a.btnToggle,
+#hg-photo-gallery-popup-box-buttons a.btnFullscreen {
+    background-position: 3px -60px;
+    border-left: 1px solid #111;
+    border-right: 1px solid #3e3e3e;
+    width: 35px;
+}
+
+#hg-photo-gallery-popup-box-buttons a.btnToggleOn,
+#hg-photo-gallery-popup-box-buttons a.btnFullscreenOn {
+    background-position: -27px -60px;
+}
+
+#hg-photo-gallery-popup-box-buttons a.btnClose {
+    border-left: 1px solid #111;
+    width: 35px;
+    background-position: -56px 0px;
+}
+
+#hg-photo-gallery-popup-box-buttons a.btnDisabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+/**
+ * Lightbox: Thumbnails Helper
+ */
+#hg-photo-gallery-popup-box-thumbs {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    z-index: 988050;
+    box-sizing: border-box;
+}
+
+#hg-photo-gallery-popup-box-thumbs.top {
+    top: 2px;
+}
+
+#hg-photo-gallery-popup-box-thumbs.top.has-other-content {
+    top: 50px;
+}
+
+#hg-photo-gallery-popup-box-thumbs.bottom {
+    bottom: 2px;
+}
+
+#hg-photo-gallery-popup-box-thumbs.bottom.has-other-content {
+    bottom: 50px;
+}
+
+#hg-photo-gallery-popup-box-thumbs.inline {
+    position: absolute;
+}
+
+#hg-photo-gallery-popup-box-thumbs * {
+    box-sizing: border-box;
+}
+
+#hg-photo-gallery-popup-box-thumbs ul {
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#hg-photo-gallery-popup-box-thumbs ul li {
+    border: 3px solid #fff;
+    float: left;
+    margin: 5px;
+    opacity: 1;
+}
+
+#hg-photo-gallery-popup-box-thumbs ul li.active {
+    opacity: 0.75;
+    border: 3px solid #888;
+}
+
+#hg-photo-gallery-popup-box-thumbs ul li:hover {
+    opacity: 0.75;
+}
+
+#hg-photo-gallery-popup-box-thumbs ul li a {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #222;
+    background: #111;
+    outline: none;
+}
+
+#hg-photo-gallery-popup-box-thumbs ul li img {
+    display: block;
+    position: relative;
+    border: 0;
+    padding: 0;
+    max-width: none;
+    width: 100%;
+    height: auto;
+}
+
+/* Retina stuff */
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+    #hg-photo-gallery-popup-box-loading, .hg-photo-gallery-popup-box-close, .hg-photo-gallery-popup-box-prev span, .hg-photo-gallery-popup-box-next span {
+        background-image: url("images/hg-photo-gallery-popup-box_sprite%402x.png");
+        background-size: 44px 152px;
+    }
+
+    #hg-photo-gallery-popup-box-loading div {
+        background-image: url("images/hg-photo-gallery-popup-box_loading%402x.gif");
+        background-size: 24px 24px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .hg-photo-gallery-popup-box-prev.hg-photo-gallery-popup-box-arrows-outside {
+        left: -75px;
+        width: 12%;
+    }
+
+    .hg-photo-gallery-popup-box-next.hg-photo-gallery-popup-box-arrows-outside {
+        right: -75px;
+        width: 12%;
+    }
+}

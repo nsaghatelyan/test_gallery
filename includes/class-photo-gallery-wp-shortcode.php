@@ -123,18 +123,19 @@ class Photo_Gallery_WP__Shortcode
         }
 
 
-        $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_images where gallery_id IN (" . $id . ") order by ordering ASC", "");
+        $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_images where gallery_id IN (%d) order by ordering ASC", $id);
         $images = $wpdb->get_results($query);
 
 
-        $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys where id IN (" . $id . ") order by id ASC", "");
+        $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys where id IN (%d) order by id ASC", $id);
         $gallery = $wpdb->get_results($query);
 
 
-        $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_albums where id IN (" . $id . ") order by " . $album_sorting . " ASC", "");
+        $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_albums where id IN (" . $format . ") order by " . $album_sorting . " ASC", $id_array);
         $albums = $wpdb->get_results($query);
 
-        $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys where id_album IN (" . $id . ") order by id ASC", "");
+        $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys where id_album IN (" . $format . ") order by id ASC", $id_array);
+        $album_galleries = $wpdb->get_results($query);
         $album_galleries = $wpdb->get_results($query);
 
 

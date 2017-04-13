@@ -1,4 +1,21 @@
 <?= "<style>" ?>
+<?php
+    $album_view = Photo_Gallery_WP()->settings->album_style;
+    if($album_view == 1){
+        $grid = Photo_Gallery_WP()->settings->album_popup_grid_style;
+        $count_style = Photo_Gallery_WP()->settings->album_popup_count_style;
+        $thumb_width = Photo_Gallery_WP()->settings->album_popup_thumbnail_width_size;
+        $thumb_height = Photo_Gallery_WP()->settings->album_popup_thumbnail_height_size;
+        $cat_style = Photo_Gallery_WP()->settings->album_popup_category_style;
+    }
+    elseif($album_view == 2){
+        $grid = Photo_Gallery_WP()->settings->album_grid_style;
+        $count_style = Photo_Gallery_WP()->settings->album_count_style;
+        $thumb_width = Photo_Gallery_WP()->settings->album_thumbnail_width_size;
+        $thumb_height = Photo_Gallery_WP()->settings->album_thumbnail_height_size;
+        $cat_style = Photo_Gallery_WP()->settings->album_category_style;
+    }
+?>
 
 /*===== general options =========*/
 a {
@@ -10,42 +27,45 @@ a {
 .album_images_count {
 
     font-size: 21px !important;
+    font-family: sans-serif !important;
     background-repeat: no-repeat !important;
     background-size: cover !important;
     z-index: 2;
     width: 50px;
     height: 50px;
     padding-top: 10px !important;
-<?php switch(Photo_Gallery_WP()->settings->album_count_style)
-{
-case 0:
-   $count = 0;
-   $color = "#565656";
-   break;
-case 1:
-   $count = 1;
-   $color = "#565656";
-   echo "width: 65px;";
-   echo "background-size: contain !important;";
-   break;
-case 2:
-   $count = 2;
-   $color = "#ffffff";
-   break;
-case 3:
-   $count = 3;
-   $color = "#ffffff";
-   break;
-case 4:
-   $count = 4;
-   $color = "#ffffff";
-   echo "background-size: contain !important; width: 87px; height: 30px; text-align: right;padding:0px !important; padding-right: 12px !important;";
-   break;
-default:
-   $count = 3;
-   $color = "#ffffff";
-   break;
-}
+<?php
+    switch($count_style)
+    {
+    case 0:
+       $count = 0;
+       $color = "#565656";
+       break;
+    case 1:
+       $count = 1;
+       $color = "#565656";
+       echo "width: 65px;";
+       echo "background-size: contain !important;";
+       break;
+    case 2:
+       $count = 2;
+       $color = "#ffffff";
+       break;
+    case 3:
+       $count = 3;
+       $color = "#ffffff";
+       break;
+    case 4:
+       $count = 4;
+       $color = "#ffffff";
+       echo "background-size: contain !important; width: 87px; height: 30px; text-align: right;padding:0px !important; padding-right: 12px !important;";
+       break;
+    default:
+       $count = 3;
+       $color = "#ffffff";
+       break;
+    }
+
 ?> background-image: url('<?= PHOTO_GALLERY_WP_IMAGES_URL."/albums/count/".$count.".png" ?>') !important;
     color: <?= $color; ?>;
 }
@@ -61,7 +81,7 @@ default:
 }
 
 <?php
-$grid = Photo_Gallery_WP()->settings->album_grid_style;
+
 switch($grid) {
     case '0':
         $view_width = "width:100%;";
@@ -70,23 +90,23 @@ switch($grid) {
         break;
     case '1':
         $view_width = "width:47%;";
-        $img_height = "height:165px;";
+        $img_height = "height:185px;";
         //$img_height = "height:auto;";
         $visibility = "display:block;";
         break;
     case '2':
         $view_width = "width:30%;";
-        $img_height = "height:115px;";
+        $img_height = "height:135px;";
         $visibility = "display:none;";
         break;
     case '3':
         $view_width = "width:23%;";
-        $img_height = "height:95px;";
+        $img_height = "height:115px;";
         $visibility = "display:none;";
         break;
     case '4':
-        $view_width = "width:".Photo_Gallery_WP()->settings->album_thumbnail_width_size."px;";
-        $img_height = "height:".Photo_Gallery_WP()->settings->album_thumbnail_height_size."px;";
+        $view_width = "width:".$thumb_width."px;";
+        $img_height = "height:".$thumb_height."px;";
         echo "#album_list, .gallery_images, .album_image_place{background-color:#".Photo_Gallery_WP()->settings->thumb_box_background."; 
         text-align:center;
         border:".Photo_Gallery_WP()->settings->thumb_image_border_width."px solid;
@@ -107,7 +127,9 @@ switch($grid) {
         $view_width = "width:49%;";
         $img_height = "height:165px;";
         break;
-}?>
+}
+
+?>
 
 .view {
     color: #fff;
@@ -143,7 +165,7 @@ switch($grid) {
     width: <?php echo ($grid == 4 || $grid == 5) ? "100%" : "auto" ?>;
     margin: 0 auto;
 <?php
-    echo ($grid == 4) ? "height: 100%" : "height: auto";
+    echo ($grid == 4) ? "height: 100%" : "height: 100%";
 if($grid == 6){
     echo "padding:4px;";
 } ?>
@@ -527,17 +549,17 @@ if($grid == 6){
     text-align: center;
     padding: 7px 16px;
     text-decoration: none;
-<?php if(Photo_Gallery_WP()->settings->album_category_style == 0){ ?> background-color: #43454f;
+<?php if($cat_style == 0){ ?> background-color: #43454f;
     color: white;
     border-radius: 3px;
-<?php }elseif(Photo_Gallery_WP()->settings->album_category_style == 1){ ?> background-color: #e9515f;
+<?php }elseif($cat_style == 1){ ?> background-color: #e9515f;
     border-radius: 7px;
     color: #fff;
-<?php }elseif(Photo_Gallery_WP()->settings->album_category_style == 2){ ?> background-color: #fff;
+<?php }elseif($cat_style == 2){ ?> background-color: #fff;
     border: 2px solid #43454f;
     border-radius: 3px;
     color: #43454f;
-<?php }elseif(Photo_Gallery_WP()->settings->album_category_style == 3){ ?> background-image: url("<?= PHOTO_GALLERY_WP_IMAGES_URL."/albums/category/bg_3.png"; ?>");
+<?php }elseif($cat_style == 3){ ?> background-image: url("<?= PHOTO_GALLERY_WP_IMAGES_URL."/albums/category/bg_3.png"; ?>");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50%;
@@ -545,7 +567,7 @@ if($grid == 6){
     border-radius: 4px;
     border: 2px solid #7b2436;
     box-shadow: -1px -2px 4px rgba(4, 4, 4, 0.42);
-<?php }elseif(Photo_Gallery_WP()->settings->album_category_style == 4){ ?> background-image: url("<?= PHOTO_GALLERY_WP_IMAGES_URL."/albums/category/bg_4.png"; ?>");
+<?php }elseif($cat_style == 4){ ?> background-image: url("<?= PHOTO_GALLERY_WP_IMAGES_URL."/albums/category/bg_4.png"; ?>");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50%;
@@ -554,10 +576,10 @@ if($grid == 6){
     border: 2px solid #78985d;
     border-bottom-color: #758865;
     box-shadow: 0px 1px 4px rgba(4, 4, 4, 0.42);
-<?php }elseif(Photo_Gallery_WP()->settings->album_category_style == 5){ ?> background-color: #ed1b52;
+<?php }elseif($cat_style == 5){ ?> background-color: #ed1b52;
     border-radius: 3px;
     color: #ffffff;
-<?php }elseif(Photo_Gallery_WP()->settings->album_category_style == 6){ ?> background-color: #42cb6f;
+<?php }elseif($cat_style == 6){ ?> background-color: #42cb6f;
     color: #fff;
     border-bottom: 4px solid #3ab75c;
     -webkit-border-radius: 5px;
@@ -569,14 +591,14 @@ if($grid == 6){
 .album_categories li span.active, .album_categories li span:hover {
     cursor: pointer;
 
-<?php if(Photo_Gallery_WP()->settings->album_category_style == 0){ ?> background-color: #2e303c;
-<?php }elseif(Photo_Gallery_WP()->settings->album_category_style == 1){ ?> background-color: #b93642;
-<?php }elseif(Photo_Gallery_WP()->settings->album_category_style == 2){ ?> background-color: #43454f;
+<?php if($cat_style == 0){ ?> background-color: #2e303c;
+<?php }elseif($cat_style == 1){ ?> background-color: #b93642;
+<?php }elseif($cat_style == 2){ ?> background-color: #43454f;
     color: #ffffff;
-<?php }elseif(Photo_Gallery_WP()->settings->album_category_style == 3){ ?> color: #fff683;
-<?php }elseif(Photo_Gallery_WP()->settings->album_category_style == 4){ ?> color: #2f4a18;
-<?php }elseif(Photo_Gallery_WP()->settings->album_category_style == 5){ ?> background-color: #ab1b41;
-<?php }elseif(Photo_Gallery_WP()->settings->album_category_style == 6){ ?> background-color: #3ab75c;
+<?php }elseif($cat_style == 3){ ?> color: #fff683;
+<?php }elseif($cat_style == 4){ ?> color: #2f4a18;
+<?php }elseif($cat_style == 5){ ?> background-color: #ab1b41;
+<?php }elseif($cat_style == 6){ ?> background-color: #3ab75c;
 <?php } ?>
 }
 

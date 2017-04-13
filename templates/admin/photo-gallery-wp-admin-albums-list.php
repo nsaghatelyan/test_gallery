@@ -3,12 +3,12 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
-
 global $wpdb;
 $gallery_wp_nonce = wp_create_nonce('huge_it_gallery_nonce');
 $photo_gallery_wp_nonce_add_album = wp_create_nonce('photo_gallery_wp_nonce_add_album');
 $huge_it_gallery_nonce_remove_album = wp_create_nonce('huge_it_gallery_nonce_remove_album');
 ?>
+
 <div class="wrap">
     <?php $path_site = plugins_url("../images", __FILE__); ?>
     <div style="clear: both;"></div>

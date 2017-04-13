@@ -54,5 +54,24 @@
             $(this).addClass('ph-g-wp-thumb-div-selected');
             shortcode = $(this).attr('data-shortcode');
         });
+
+        //ns code start here
+        var list = [];
+        $(".gallery_item").change(function () {
+            if ($(this).prop("checked") === true) {
+                list.push($(this).val());
+            }
+            else {
+                var index = list.indexOf($(this).val());
+                list.splice(index, 1);
+            }
+
+            if (list.length > 0) {
+                $("#insert_album").removeAttr("disabled");
+            }
+            else {
+                $("#insert_album").attr("disabled", "disabled");
+            }
+        });
     });
 })();

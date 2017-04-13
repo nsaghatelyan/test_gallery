@@ -2,7 +2,7 @@
 wp_register_style('album-popup-css', Photo_Gallery_WP()->plugin_url() . "/assets/style/album-popup.css");
 wp_enqueue_style('album-popup-css');
 
-switch (Photo_Gallery_WP()->settings->album_onhover_effects) {
+switch (Photo_Gallery_WP()->settings->album_popup_onhover_effects) {
     case 0:
         $hover_class = "view-first";
         break;
@@ -23,15 +23,16 @@ switch (Photo_Gallery_WP()->settings->album_onhover_effects) {
         break;
 }
 
-if (Photo_Gallery_WP()->settings->album_grid_style == 5) {
+if (Photo_Gallery_WP()->settings->album_popup_grid_style == 5) {
     $mosaic = 1;
-} elseif (Photo_Gallery_WP()->settings->album_grid_style == 6) {
+} elseif (Photo_Gallery_WP()->settings->album_popup_grid_style == 6) {
     $mosaic = 2;
 } else {
     $mosaic = 0;
 }
 
 $cat_class = array();
+$cat_class_all = array();
 foreach ($album_categories as $val) {
     $cat_class_all[] = ".hg_cat_" . $val->id;
 }
@@ -41,38 +42,40 @@ foreach ($album_categories as $val) {
 <input type="hidden" name="mosaic" value="<?= $mosaic ?>">
 <div id="main" style="display: inline-block; width:100%;">
     <div id="album_list_container">
-        <div class="row album_categories">
-            <ul id="filters" class="clearfix">
-                <li><span class="filter active" id="album_all_categories"
-                          data-filter="<?php echo implode(', ', $cat_class_all); ?>"><?= __("All", "gallery-images") ?></span>
-                </li>
-                <?php foreach ($album_categories as $key => $cat) { ?>
-                    <li><span class="filter" data-filter=".hg_cat_<?= $cat->id ?>"><?= $cat->name ?></span></li>
-                <?php } ?>
-            </ul>
-        </div>
+        <?php if (!empty($cat_class_all)) { ?>
+            <div class="row album_categories">
+                <ul id="filters" class="clearfix">
+                    <li><span class="filter active" id="album_all_categories"
+                              data-filter=".hg_cat_0, <?php echo implode(', ', $cat_class_all); ?>"><?= __("All", "gallery-images") ?></span>
+                    </li>
+                    <?php foreach ($album_categories as $key => $cat) { ?>
+                        <li><span class="filter" data-filter=".hg_cat_<?= $cat->id ?>"><?= $cat->name ?></span></li>
+                    <?php } ?>
+                </ul>
+            </div>
+        <?php } ?>
         <div class="row filtr-container album_list" id="album_list">
             <?php
             foreach ($albums as $key => $album) { ?>
-                <div class="view <?= $hover_class; ?>  <?php echo implode(" ", $album->cat_class); ?>">
+                <div class="view <?= $hover_class; ?>  <?php echo implode(" ", $album->cat_class); ?> hg_cat_0">
                     <div class="<?= $hover_class; ?>-wrapper">
-                        <?php if (Photo_Gallery_WP()->settings->album_show_image_count !== "false") { ?>
+                        <?php if (Photo_Gallery_WP()->settings->album_popup_show_image_count !== "false") { ?>
                             <span class="album_images_count"><?= $album->image_count ?></span>
                         <?php } ?>
                         <img src="<?= $album->image_url ?>" alt="<?= $album->name ?>"/>
                         <div class="mask">
                             <a href="#" class="envira-album-gallery-<?= $album->id ?> envira-gallery-link">
                                 <div class="mask-text">
-                                    <?php if (Photo_Gallery_WP()->settings->album_show_title !== 'false') { ?>
+                                    <?php if (Photo_Gallery_WP()->settings->album_popup_show_title !== 'false') { ?>
                                         <h2><?= $album->name ?></h2>
                                     <?php }
-                                    if (Photo_Gallery_WP()->settings->album_show_description !== 'false') { ?>
+                                    if (Photo_Gallery_WP()->settings->album_popup_show_description !== 'false') { ?>
                                         <span class="text-category"><?= $album->description ?></span>
                                     <?php } ?>
                                 </div>
                             </a>
                             <?php if ($hover_class != "view-forth") { ?>
-                                <?php if (Photo_Gallery_WP()->settings->album_show_sharing_buttons !== "false") { ?>
+                                <?php if (Photo_Gallery_WP()->settings->album_popup_show_sharing_buttons !== "false") { ?>
                                     <div class="album_socials"></div>
                                 <?php }
                             } ?>
@@ -378,6 +381,5 @@ foreach ($album_categories as $val) {
             $(this).addClass('active');
         });
     });
-
 
 </script>
