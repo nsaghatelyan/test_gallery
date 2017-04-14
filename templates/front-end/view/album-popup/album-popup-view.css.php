@@ -905,5 +905,16 @@ div#all {
     height: 100%;
 }
 
+#envirabox-thumbs ul {
+    width: 20000px !important;
+}
+
+<?php if(Photo_Gallery_WP()->settings->album_popup_window_thumbnails == 'no') {?>
+#envirabox-thumbs {
+    display: none;
+}
+
+<?php } ?>
+
 <?= "</style>" ?>
 

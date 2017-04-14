@@ -293,10 +293,6 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'panel' => 'albums',
                 'title' => __('Album on hover effect', 'photo-gallery-wp')
             ),
-            'album_thumbnail_size' => array(
-                'panel' => 'albums',
-                'title' => __('Album thumbnail size', 'photo-gallery-wp')
-            ),
             'album_content_style' => array(
                 'panel' => 'albums',
                 'title' => __('Album content style', 'photo-gallery-wp')
@@ -318,14 +314,11 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'panel' => 'albums',
                 'title' => __('Album on hover effect', 'photo-gallery-wp')
             ),
-            'album_popup_thumbnail_size' => array(
-                'panel' => 'albums',
-                'title' => __('Album thumbnail size', 'photo-gallery-wp')
-            ),
             'album_popup_content_style' => array(
                 'panel' => 'albums',
                 'title' => __('Album content style', 'photo-gallery-wp')
             ),
+
         );
     }
 
@@ -1952,6 +1945,11 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
         $this->album_show_image_count = $this->get_option("album_show_image_count", 'yes');
         $this->album_show_sharing_buttons = $this->get_option("album_show_sharing_buttons", 'no');
 
+        $this->album_thumbnail_background = $this->get_option("album_thumbnail_background", '336699');
+        $this->album_thumbnail_image_border_width = $this->get_option("album_thumbnail_image_border_width", '2');
+        $this->album_thumbnail_image_border_color = $this->get_option("album_thumbnail_image_border_color", '1F3F5E');
+        $this->album_thumbnail_image_border_radius = $this->get_option("album_thumbnail_image_border_radius", '5');
+
         //popup
         $this->album_popup_count_style = $this->get_option("album_popup_count_style", '3');
         $this->album_popup_category_style = $this->get_option("album_popup_category_style", '0');
@@ -1964,6 +1962,13 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
         $this->album_popup_show_description = $this->get_option("album_popup_show_description", 'yes');
         $this->album_popup_show_image_count = $this->get_option("album_popup_show_image_count", 'yes');
         $this->album_popup_show_sharing_buttons = $this->get_option("album_popup_show_sharing_buttons", 'no');
+
+        $this->album_popup_thumbnail_background = $this->get_option("album_popup_thumbnail_background", '336699');
+        $this->album_popup_thumbnail_image_border_width = $this->get_option("album_popup_thumbnail_image_border_width", '2');
+        $this->album_popup_thumbnail_image_border_color = $this->get_option("album_popup_thumbnail_image_border_color", '1F3F5E');
+        $this->album_popup_thumbnail_image_border_radius = $this->get_option("album_popup_thumbnail_image_border_radius", '5');
+
+        $this->album_popup_window_thumbnails = $this->get_option("album_popup_window_thumbnails", 'yes');
     }
 
     private function controls_mosaic()
@@ -2815,15 +2820,10 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                     '1' => 'blur',
                     '2' => 'image scale',
                     '3' => 'content in the bottom',
-                    '4' => 'direction hover'
+                    '4' => 'elastic'
                 )
             ),
-            'album_thumbnail_width_size' => array(
-                'section' => 'album_thumbnail_size',
-                'type' => 'number',
-                'default' => $this->album_thumbnail_width_size,
-                'label' => __('Thumbnail width in px', 'photo-gallery-wp')
-            ),
+
             'album_grid_style' => array(
                 'section' => 'album_content_style',
                 'type' => 'select',
@@ -2841,6 +2841,50 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                     // '7' => 'isotope',
                 )
             ),
+
+            'album_thumbnail_width_size' => array(
+                'section' => 'album_content_style',
+                'type' => 'number',
+                'default' => $this->album_thumbnail_width_size,
+                'label' => __('Thumbnail width in px', 'photo-gallery-wp')
+            ),
+
+            'album_thumbnail_height_size' => array(
+                'section' => 'album_content_style',
+                'type' => 'number',
+                'default' => $this->album_thumbnail_height_size,
+                'label' => __('Thumbnail height in px', 'photo-gallery-wp')
+            ),
+            'album_thumbnail_background' => array(
+                'section' => 'album_content_style',
+                'type' => 'color',
+                'default' => $this->album_thumbnail_background,
+                'label' => __('Box background', 'photo-gallery-wp'),
+                'help' => __('thumb_box_background', 'photo-gallery-wp')
+            ),
+            'album_thumbnail_image_border_width' => array(
+                'section' => 'album_content_style',
+                'type' => 'number',
+                'default' => $this->album_thumbnail_image_border_width,
+                'label' => __('Image Border Width in px', 'photo-gallery-wp'),
+                'help' => __('album_thumbnail_image_border_width', 'photo-gallery-wp')
+            ),
+            'album_thumbnail_image_border_color' => array(
+                'section' => 'album_content_style',
+                'type' => 'color',
+                'default' => $this->album_thumbnail_image_border_color,
+                'label' => __('Image Border Color', 'photo-gallery-wp'),
+                'help' => __('album_thumbnail_image_border_color', 'photo-gallery-wp')
+            ),
+            'album_thumbnail_image_border_radius' => array(
+                'section' => 'album_content_style',
+                'type' => 'number',
+                'default' => $this->album_thumbnail_image_border_radius,
+                'label' => __('Border Radius in px', 'photo-gallery-wp'),
+                'help' => __('album_thumbnail_image_border_radius', 'photo-gallery-wp')
+            ),
+
+
             'album_show_title' => array(
                 'section' => 'album_content_style',
                 'type' => 'checkbox',
@@ -2848,12 +2892,7 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'label' => __('Show title', 'photo-gallery-wp'),
                 'help' => __('show_title', 'photo-gallery-wp')
             ),
-            'album_thumbnail_height_size' => array(
-                'section' => 'album_thumbnail_size',
-                'type' => 'number',
-                'default' => $this->album_thumbnail_height_size,
-                'label' => __('Thumbnail height in px', 'photo-gallery-wp')
-            ),
+
             'album_show_description' => array(
                 'section' => 'album_content_style',
                 'type' => 'checkbox',
@@ -2939,22 +2978,8 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                     '1' => 'blur',
                     '2' => 'image scale',
                     '3' => 'content in the bottom',
-                    '4' => 'direction hover'
+                    '4' => 'elastic'
                 )
-            ),
-
-            'album_popup_thumbnail_width_size' => array(
-                'section' => 'album_popup_thumbnail_size',
-                'type' => 'number',
-                'default' => $this->album_popup_thumbnail_width_size,
-                'label' => __('Thumbnail width in px', 'photo-gallery-wp')
-            ),
-
-            'album_popup_thumbnail_height_size' => array(
-                'section' => 'album_popup_thumbnail_size',
-                'type' => 'number',
-                'default' => $this->album_popup_thumbnail_height_size,
-                'label' => __('Thumbnail height in px', 'photo-gallery-wp')
             ),
 
             'album_popup_grid_style' => array(
@@ -2973,6 +2998,48 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                     '6' => 'masonry',
                     // '7' => 'isotope',
                 )
+            ),
+
+            'album_popup_thumbnail_width_size' => array(
+                'section' => 'album_popup_content_style',
+                'type' => 'number',
+                'default' => $this->album_popup_thumbnail_width_size,
+                'label' => __('Thumbnail width in px', 'photo-gallery-wp')
+            ),
+
+            'album_popup_thumbnail_height_size' => array(
+                'section' => 'album_popup_content_style',
+                'type' => 'number',
+                'default' => $this->album_popup_thumbnail_height_size,
+                'label' => __('Thumbnail height in px', 'photo-gallery-wp')
+            ),
+            'album_popup_thumbnail_background' => array(
+                'section' => 'album_popup_content_style',
+                'type' => 'color',
+                'default' => $this->album_popup_thumbnail_background,
+                'label' => __('Box background', 'photo-gallery-wp'),
+                'help' => __('thumb_box_background', 'photo-gallery-wp')
+            ),
+            'album_popup_thumbnail_image_border_width' => array(
+                'section' => 'album_popup_content_style',
+                'type' => 'number',
+                'default' => $this->album_popup_thumbnail_image_border_width,
+                'label' => __('Image Border Width in px', 'photo-gallery-wp'),
+                'help' => __('album_popup_thumbnail_image_border_width', 'photo-gallery-wp')
+            ),
+            'album_popup_thumbnail_image_border_color' => array(
+                'section' => 'album_popup_content_style',
+                'type' => 'color',
+                'default' => $this->album_popup_thumbnail_image_border_color,
+                'label' => __('Image Border Color', 'photo-gallery-wp'),
+                'help' => __('album_popup_thumbnail_image_border_color', 'photo-gallery-wp')
+            ),
+            'album_popup_thumbnail_image_border_radius' => array(
+                'section' => 'album_popup_content_style',
+                'type' => 'number',
+                'default' => $this->album_popup_thumbnail_image_border_radius,
+                'label' => __('Border Radius in px', 'photo-gallery-wp'),
+                'help' => __('album_popup_thumbnail_image_border_radius', 'photo-gallery-wp')
             ),
 
             'album_popup_show_title' => array(
@@ -3006,6 +3073,15 @@ class Photo_Gallery_WP_Settings extends WPDEV_Settings_API
                 'label' => __('Show sharing buttons', 'photo-gallery-wp'),
                 'help' => __('show_sharing_buttons', 'photo-gallery-wp')
             ),
+
+            'album_popup_window_thumbnails' => array(
+                'section' => 'album_popup_content_style',
+                'type' => 'checkbox',
+                'default' => $this->album_popup_window_thumbnails,
+                'label' => __('Show thumbnails in popup window', 'photo-gallery-wp'),
+                'help' => __('show_thumbnail_in_popup_window', 'photo-gallery-wp')
+            ),
+
         );
     }
 

@@ -4,16 +4,25 @@
     if($album_view == 1){
         $grid = Photo_Gallery_WP()->settings->album_popup_grid_style;
         $count_style = Photo_Gallery_WP()->settings->album_popup_count_style;
+        $cat_style = Photo_Gallery_WP()->settings->album_popup_category_style;
         $thumb_width = Photo_Gallery_WP()->settings->album_popup_thumbnail_width_size;
         $thumb_height = Photo_Gallery_WP()->settings->album_popup_thumbnail_height_size;
-        $cat_style = Photo_Gallery_WP()->settings->album_popup_category_style;
+        $thumb_container_bg_color = Photo_Gallery_WP()->settings->album_popup_thumbnail_background;
+        $thumb_border_width = Photo_Gallery_WP()->settings->album_popup_thumbnail_image_border_width;
+        $thumb_border_color = Photo_Gallery_WP()->settings->album_popup_thumbnail_image_border_color;
+        $thumb_border_radius = Photo_Gallery_WP()->settings->album_popup_thumbnail_image_border_radius;
+
     }
     elseif($album_view == 2){
         $grid = Photo_Gallery_WP()->settings->album_grid_style;
         $count_style = Photo_Gallery_WP()->settings->album_count_style;
+        $cat_style = Photo_Gallery_WP()->settings->album_category_style;
         $thumb_width = Photo_Gallery_WP()->settings->album_thumbnail_width_size;
         $thumb_height = Photo_Gallery_WP()->settings->album_thumbnail_height_size;
-        $cat_style = Photo_Gallery_WP()->settings->album_category_style;
+        $thumb_container_bg_color = Photo_Gallery_WP()->settings->album_thumbnail_background;
+        $thumb_border_width = Photo_Gallery_WP()->settings->album_thumbnail_image_border_width;
+        $thumb_border_color = Photo_Gallery_WP()->settings->album_thumbnail_image_border_color;
+        $thumb_border_radius = Photo_Gallery_WP()->settings->album_thumbnail_image_border_radius;
     }
 ?>
 
@@ -107,11 +116,18 @@ switch($grid) {
     case '4':
         $view_width = "width:".$thumb_width."px;";
         $img_height = "height:".$thumb_height."px;";
-        echo "#album_list, .gallery_images, .album_image_place{background-color:#".Photo_Gallery_WP()->settings->thumb_box_background."; 
+        echo "
+        #album_list, .gallery_images, .album_image_place{background-color:#".$thumb_container_bg_color."; 
         text-align:center;
-        border:".Photo_Gallery_WP()->settings->thumb_image_border_width."px solid;
-        border-color:#".Photo_Gallery_WP()->settings->thumb_image_border_color.";}";
-        echo ".view {display: inline-block;}";
+        }";
+        echo ".view {display: inline-block; max-width:98%}
+        .view{
+            border: ".$thumb_border_width."px solid !important;
+            border-color: #".$thumb_border_color." !important;
+            border-radius: ".$thumb_border_radius."px !important;
+        }
+        ";
+
         break;
     case '5':
         $view_width = "width:100%;";
@@ -638,10 +654,6 @@ if($grid == 6){
 
 .rwd-share-buttons li, .rwd-share-buttons li a {
     width: 26px !important;
-}
-
-#envirabox-thumbs ul {
-    width: 100% !important;
 }
 
 <?= "</style>" ?>

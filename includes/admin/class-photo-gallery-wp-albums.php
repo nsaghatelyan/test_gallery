@@ -56,7 +56,7 @@ class Photo_Gallery_WP_Albums
                 break;
             case 'delete_gallery':
                 if ($id) {
-                    $this->delete_gallery($_GET["gallery_id"]);
+                    $this->delete_gallery($_GET["gallery_id"], $id);
                     $this->edit_album($id);
                 }
                 break;
@@ -78,16 +78,19 @@ class Photo_Gallery_WP_Albums
         }
     }
 
-    public function delete_gallery($id)
+    public function delete_gallery($id_gallery, $id_album)
     {
         global $wpdb;
 
         $data = array("id_album" => 0);
         $format = array("%d");
-        $where = array('id' => $id);
+        $where = array('id' => $id_gallery);
         $where_format = array("%d");
 
-        $wpdb->update($wpdb->prefix . "photo_gallery_wp_gallerys", $data, $where, $format, $where_format);
+        $wpdb->delete($wpdb->prefix . "photo_gallery_wp_album_has_gallery", array(
+            "id_album" => $id_album,
+            "id_gallery" => $id_gallery
+        ), array('%d', '%d'));
     }
 
     public function show_albums_page()
@@ -126,10 +129,10 @@ class Photo_Gallery_WP_Albums
         array_push($params, $limit, $offset);
 
         global $wpdb;
-//        $query = "SELECT galleries.*, COUNT(images.id) as images_count FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys AS galleries LEFT JOIN " . $wpdb->prefix . "photo_gallery_wp_images AS images ON galleries.id = images.gallery_id " . $where . " GROUP BY galleries.id LIMIT %d OFFSET %d";
-        $query = "SELECT albums.*, COUNT(galleries.id) as galleries_count FROM " . $wpdb->prefix . "photo_gallery_wp_albums AS albums LEFT JOIN " . $wpdb->prefix . "photo_gallery_wp_gallerys AS galleries ON albums.id = galleries.id_album" . $where . " GROUP BY albums.id LIMIT %d OFFSET %d";
+//        $query = "SELECT albums.*, COUNT(galleries.id) as galleries_count FROM " . $wpdb->prefix . "photo_gallery_wp_albums AS albums LEFT JOIN " . $wpdb->prefix . "photo_gallery_wp_gallerys AS galleries ON albums.id = galleries.id_album" . $where . " GROUP BY albums.id LIMIT %d OFFSET %d";
+        $query = "SELECT albums.*, COUNT(album_has_gallery.id_gallery) as galleries_count FROM " . $wpdb->prefix . "photo_gallery_wp_albums AS albums LEFT JOIN " . $wpdb->prefix . "photo_gallery_wp_album_has_gallery AS album_has_gallery ON albums.id = album_has_gallery.id_album " . $where . " GROUP BY albums.id LIMIT %d OFFSET %d";
         $albums = $wpdb->get_results($wpdb->prepare($query, $params));
-        
+
         require_once(PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . 'photo-gallery-wp-admin-albums-list.php');
     }
 
@@ -148,13 +151,6 @@ class Photo_Gallery_WP_Albums
             }
         }
 
-        if (isset($_POST["photo_gallery_wp_sl_effects"])) {
-            if (isset($_GET["removeslide"])) {
-                if ($_GET["removeslide"] != '') {
-                    $wpdb->query($wpdb->prepare("DELETE FROM " . $wpdb->prefix . "photo_gallery_wp_images  WHERE id = %d ", $idfordelete));
-                }
-            }
-        }
 
         //get categories
         $query = esc_sql("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_album_categories");
@@ -169,7 +165,10 @@ class Photo_Gallery_WP_Albums
         $album_row->category_arr = explode(",", $album_row->category);
 
         // get Album's galleries list
-        $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys where id_album = %d order by ordering ASC  ", $album_row->id);
+        $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_album_has_gallery AS album_has_gallery LEFT JOIN " . $wpdb->prefix . "photo_gallery_wp_gallerys AS galleries 
+         ON (album_has_gallery.id_gallery = galleries.id) WHERE album_has_gallery.id_album = %d ORDER BY ordering ASC ", $id);
+
+        //$query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys where id_album = %d order by ordering ASC  ", $album_row->id);
         $row_galleries = $wpdb->get_results($query);
         foreach ($row_galleries as $val) {
             $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_images where gallery_id = %d order by ordering ASC  LIMIT 1", $val->id);
@@ -178,23 +177,22 @@ class Photo_Gallery_WP_Albums
         }
 
         //get all galleries list which not in current album
-        $query = $wpdb->prepare("SELECT id,name FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys where id_album != %d order by ordering ASC  ", $album_row->id);
+        $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_album_has_gallery where id_album = %d", $id);
+        $pluged_galleries = $wpdb->get_results($query);
+        $pluged_galleries_id = array();
+        foreach ($pluged_galleries as $val) {
+            $pluged_galleries_id[] = $val->id_gallery;
+        }
+
+        $format = rtrim(str_repeat("%d, ", count($pluged_galleries_id)), ", ");
+
+        $query = $wpdb->prepare("SELECT id,name FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys WHERE id NOT IN (" . $format . ") order by ordering ASC", $pluged_galleries_id);
+
         $all_galleries = $wpdb->get_results($query);
 
-        if (isset($_GET["addslide"])) {
-            if ($_GET["addslide"] == 1) {
-                $table_name = $wpdb->prefix . "photo_gallery_wp_images";
-                $sql_2 = "
-INSERT INTO 
-`" . $table_name . "` ( `name`, `gallery_id`, `description`, `image_url`, `sl_url`, `ordering`, `published`, `published_in_sl_width`) VALUES
-( '', '" . $row->id . "', '', '', '', 'par_TV', 2, '1' )";
-                $wpdb->query($sql_2);
-            }
-        }
 
         $query = "SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_albums order by id ASC";
         $rowsld = $wpdb->get_results($query);
-
 
         $paramssld = photo_gallery_wp_get_general_options();
 
@@ -242,8 +240,8 @@ INSERT INTO
         }
 
 
+        $wpdb->query("DELETE FROM " . $wpdb->prefix . "photo_gallery_wp_album_categories");
         if (!empty($new_cat_arr)) {
-            $wpdb->query("DELETE FROM " . $wpdb->prefix . "photo_gallery_wp_album_categories");
             foreach ($new_cat_arr as $key => $val) {
                 $wpdb->query("INSERT INTO " . $wpdb->prefix . "photo_gallery_wp_album_categories (`id`,`name`) VALUES ('" . ++$key . "','$val')");
             }
@@ -253,7 +251,6 @@ INSERT INTO
         if (!(isset($_POST['sl_width']) && isset($_POST["album_name"]))) {
             echo '';
         }
-
         if (isset($_POST['photo_gallery_wp_admin_image_hover_preview'])) {
             $img_hover_preview = sanitize_text_field($_POST['photo_gallery_wp_admin_image_hover_preview']);
             update_option('photo_gallery_wp_admin_image_hover_preview', $img_hover_preview);
@@ -279,7 +276,10 @@ INSERT INTO
         if (isset($_POST["unplugged"]) && !empty($_POST{"unplugged"})) {
             foreach ($_POST["unplugged"] as $item) {
                 $new_id = sanitize_text_field($item);
-                $wpdb->update($wpdb->prefix . "photo_gallery_wp_gallerys", array("id_album" => $id), array("id" => $new_id), array("%d"), array("%d"));
+                $wpdb->insert($wpdb->prefix . "photo_gallery_wp_album_has_gallery", array(
+                    "id_album" => $id,
+                    "id_gallery" => $new_id
+                ), array('%d', '%d'));
             }
         }
 

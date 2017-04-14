@@ -86,13 +86,12 @@ class Photo_Gallery_WP_Template_Loader
                     );
                 }
 
-                $albumID = $albums[0]->id;
 //            $album_view = $albums[0]->gallery_list_effects_s;
                 $album_view = Photo_Gallery_WP()->settings->album_style;
                 $query = esc_sql("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_album_categories");
                 $album_categories = $wpdb->get_results($query);
             }
-            $albumID = $albums[0]->id;
+            //$albumID = $albums[0]->id;
 
             foreach ($albums as $val) {
                 $val->cat_class = explode(",", $val->category);
@@ -101,7 +100,6 @@ class Photo_Gallery_WP_Template_Loader
                 }
             }
 
-            //wp_enqueue_script("album_filter.js", Photo_Gallery_WP()->plugin_url() . "/assets/js/jquery.filterizr.js", false);
             wp_enqueue_script("album_filter.js", Photo_Gallery_WP()->plugin_url() . "/assets/js/jquery.mixitup.min.js", false);
             wp_enqueue_style("album_filter.css", Photo_Gallery_WP()->plugin_url() . "/assets/style/filterize.css", false);
 
@@ -119,7 +117,7 @@ class Photo_Gallery_WP_Template_Loader
                         wp_register_script('mosaicflow.js', Photo_Gallery_WP()->plugin_url() . '/assets/js/jquery.mosaicflow.js', array('jquery'), '1.0.0', true);
                         wp_enqueue_script('mosaicflow.js');
                     }
-                    $view_slug = photo_gallery_wp_get_view_slag_by_id($albumID);
+                    // $view_slug = photo_gallery_wp_get_view_slag_by_id($albumID);
                     require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'album-popup' . DIRECTORY_SEPARATOR . 'album-popup-view.php';
                     require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'album-popup' . DIRECTORY_SEPARATOR . 'album-popup-view.css.php';
                     break;
@@ -135,7 +133,7 @@ class Photo_Gallery_WP_Template_Loader
                         wp_register_script('mosaicflow.js', Photo_Gallery_WP()->plugin_url() . '/assets/js/jquery.mosaicflow.js', array('jquery'), '1.0.0', true);
                         wp_enqueue_script('mosaicflow.js');
                     }
-                    $view_slug = photo_gallery_wp_get_view_slag_by_id($albumID);
+                    //$view_slug = photo_gallery_wp_get_view_slag_by_id($albumID);
                     require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'album-page' . DIRECTORY_SEPARATOR . 'album-page-view.php';
                     require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'front-end' . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'album-page' . DIRECTORY_SEPARATOR . 'album-page-view.css.php';
                     break;

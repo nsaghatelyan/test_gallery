@@ -10,25 +10,29 @@ jQuery(document).ready(function ($) {
     });
 
 
-    thumbnail_oprions("#album_grid_style", "#album_thumbnail_width_size", "#album_thumbnail_height_size");
-    thumbnail_oprions("#album_popup_grid_style", "#album_popup_thumbnail_width_size", "#album_popup_thumbnail_height_size");
+    thumbnail_opt("#album_popup_grid_style");
+    thumbnail_opt("#album_grid_style");
 
-    function thumbnail_oprions(grid, width, height) {
-        if (jQuery(grid).val() != 4) {
-            jQuery(width).attr("disabled", "disabled").css("background-color", "#ccc").attr("title", 'This option available for "Thumbnail" grid view');
-            jQuery(height).attr("disabled", "disabled").css("background-color", "#ccc").attr("title", 'This option available for "Thumbnail" grid view');
+    // console.log(jQuery("#album_popup_grid_style").parent().parent().find(".control-container-number").length);
+
+    function thumbnail_opt(grid) {
+        if (jQuery(grid).val() == 4) {
+            jQuery(grid).parent().parent().find(".control-container-number, .control-container-color").show();
+        }
+        else {
+            jQuery(grid).parent().parent().find(".control-container-number, .control-container-color").hide();
         }
 
+
         jQuery(grid).on("change", function () {
-            if (jQuery(this).val() == 4) {
-                jQuery(width).removeAttr("disabled").css("background-color", "#fff").attr("title", "");
-                jQuery(height).removeAttr("disabled").css("background-color", "#fff").attr("title", "");
+            if (jQuery(grid).val() == 4) {
+                jQuery(grid).parent().parent().find(".control-container-number, .control-container-color").fadeIn();
             }
             else {
-                jQuery(width).attr("disabled", "disabled").css("background-color", "#ccc").attr("title", 'This option available for "Thumbnail" grid view');
-                jQuery(height).attr("disabled", "disabled").css("background-color", "#ccc").attr("title", 'This option available for "Thumbnail" grid view');
+                jQuery(grid).parent().parent().find(".control-container-number, .control-container-color").fadeOut();
             }
-        });
+        })
+
     }
 
 
@@ -52,26 +56,26 @@ jQuery(document).ready(function ($) {
         var top_arr = [];
         var left_arr = [];
 
-        for (var i = 2; i < 14; i++) {
-            if (i < 8) {
+        for (var i = 2; i < 13; i++) {
+            if (i < 7) {
                 top_arr.push(jQuery("#albums .wpdev-settings-section:nth-child(" + i + ")").css("top"));
                 left_arr.push(jQuery("#albums .wpdev-settings-section:nth-child(" + i + ")").css("left"));
                 if (view == 1) {
                     jQuery("#albums .wpdev-settings-section:nth-child(" + i + ")").hide();
                 }
                 else {
-                    jQuery("#albums .wpdev-settings-section:nth-child(" + i + ")").show();
+                    jQuery("#albums .wpdev-settings-section:nth-child(" + i + ")").fadeIn();
                 }
             }
             else {
                 if (view == 1) {
-                    var new_index = i - 8;
+                    var new_index = i - 7;
                     var top = jQuery("#albums > .wpdev-settings-section:nth-child(" + i + ")").css("top");
                     var new_top = Math.abs(parseInt(top) - 500) + "px";
                     jQuery("#albums .wpdev-settings-section:nth-child(" + i + ")").css({
                         "top": top_arr[new_index],
                         "left": left_arr[new_index]
-                    }).show();
+                    }).fadeIn();
                 }
                 else {
                     jQuery("#albums .wpdev-settings-section:nth-child(" + i + ")").css("top", new_top).hide();

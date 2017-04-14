@@ -74,14 +74,14 @@ class Photo_Gallery_WP_Galleries
         $limit = 10;
         $where = "";
         $params = array();
-        if (isset($_GET['search_keyword']) && $_GET['search_keyword'] != "") {
+        if(isset($_GET['search_keyword']) && $_GET['search_keyword'] != "") {
             $where = "WHERE galleries.name LIKE %s";
-            array_unshift($params, "%" . trim($_GET['search_keyword']) . "%");
+            array_unshift($params, "%".trim($_GET['search_keyword'])."%");
             $pagination = $this->add_gallery_pagination(trim($_GET['search_keyword']), $limit);
         } else {
             $pagination = $this->add_gallery_pagination(null, $limit);
         }
-        if (!isset($_GET['paged'])) {
+        if(!isset($_GET['paged'])) {
             $offset = 0;
         } else {
             if ((int)$_GET['paged'] == 0) wp_die('Pagination Error');
@@ -93,7 +93,7 @@ class Photo_Gallery_WP_Galleries
         array_push($params, $limit, $offset);
 
         global $wpdb;
-        $query = "SELECT galleries.*, COUNT(images.id) as images_count FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys AS galleries LEFT JOIN " . $wpdb->prefix . "photo_gallery_wp_images AS images ON galleries.id = images.gallery_id " . $where . " GROUP BY galleries.id LIMIT %d OFFSET %d";
+        $query = "SELECT galleries.*, COUNT(images.id) as images_count FROM ".$wpdb->prefix."photo_gallery_wp_gallerys AS galleries LEFT JOIN ".$wpdb->prefix."photo_gallery_wp_images AS images ON galleries.id = images.gallery_id ".$where." GROUP BY galleries.id LIMIT %d OFFSET %d";
         $galleries = $wpdb->get_results($wpdb->prepare($query, $params));
         require_once(PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . 'photo-gallery-wp-admin-galleries-list.php');
 
@@ -209,7 +209,7 @@ INSERT INTO
                     "rating" => sanitize_text_field($_POST["rating"]),
                     "autoslide" => sanitize_text_field($_POST["autoslide"])
                 );
-                $format = array("%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", '%s', "%s", '%s');
+                $format = array("%s","%s","%s","%s","%s","%s","%s","%s","%s",'%s',"%s",'%s');
                 $where = array('id' => $id);
                 $where_format = array('%d');
                 if (isset($_POST["display_type"]) && isset($_POST["content_per_page"])) {
@@ -220,7 +220,7 @@ INSERT INTO
                 $data['gallery_loader_type'] = 0;
                 array_push($format, '%s');
                 if (isset($_POST['show-hide-loading']) && $_POST['show-hide-loading'] == 1) {
-                    if (isset($_POST['gallery_loader_type']) && in_array($_POST['gallery_loader_type'], array(1, 2, 3, 4))) {
+                    if(isset($_POST['gallery_loader_type']) && in_array($_POST['gallery_loader_type'],array(1,2,3,4))) {
                         $data['gallery_loader_type'] = $_POST["gallery_loader_type"];
                     }
                 }
@@ -321,9 +321,8 @@ INSERT INTO
     /**
      * @param $condition string default null
      * @return int
-     */
-    protected function add_gallery_pagination($condition = null, $limit)
-    {
+    */
+    protected function add_gallery_pagination($condition = null, $limit) {
         $pagination = array(
             'total' => 0,
             'enable' => false,
@@ -334,10 +333,10 @@ INSERT INTO
         $parts = parse_url($_SERVER['REQUEST_URI']);
         global $wpdb;
         if ($condition) {
-            $query = $wpdb->prepare("SELECT COUNT(`id`) FROM `" . $wpdb->prefix . "photo_gallery_wp_gallerys` WHERE `name` LIKE %s", '%' . $condition . '%');
-            $pagination['links'] .= "&search_keyword=" . $condition;
+            $query = $wpdb->prepare("SELECT COUNT(`id`) FROM `".$wpdb->prefix."photo_gallery_wp_gallerys` WHERE `name` LIKE %s", '%'.$condition.'%');
+            $pagination['links'] .= "&search_keyword=".$condition;
         } else {
-            $query = "SELECT COUNT(id) FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys";
+            $query = "SELECT COUNT(id) FROM ".$wpdb->prefix."photo_gallery_wp_gallerys";
         }
         $pagination['total'] = $wpdb->get_var($query);
         if ($pagination['total'] > $limit) {

@@ -76,8 +76,8 @@ class Photo_Gallery_WP_Frontend_Scripts
         wp_register_script('ph-front-end-js-' . $view_slug, plugins_url('../assets/js/view-' . $view_slug . '.js', __FILE__), array('jquery'), '1.0.0', true);
         wp_enqueue_script('ph-front-end-js-' . $view_slug);
 
-        wp_register_script('ph-envira-js', plugins_url('../assets/js/envira-minb93b.js', __FILE__), array('jquery'), '1.0.0', true);
-        wp_enqueue_script('ph-envira-js');
+        wp_register_script('album-popup-view-js', plugins_url('../assets/js/album_popup_view.js', __FILE__), array('jquery'), '1.0.0', true);
+        wp_enqueue_script('album-popup-view-js');
 
 
         wp_register_script('ph-custom-js', plugins_url('../assets/js/custom.js', __FILE__), array('jquery'), '1.0.0', true);

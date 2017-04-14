@@ -43,7 +43,10 @@ class Photo_Gallery_WP_Ajax
 
         if (isset($_POST["album_id"])) {
             $id = esc_html($_POST["album_id"]);
-            $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys where id_album = '%d' order by ordering ASC", $id);
+            $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_album_has_gallery AS album_has_gallery LEFT JOIN " . $wpdb->prefix . "photo_gallery_wp_gallerys AS galleries 
+            ON (album_has_gallery.id_gallery = galleries.id) WHERE album_has_gallery.id_album = '%d' ORDER BY ordering ASC ", $id);
+
+
             $gallerys = $wpdb->get_results($query);
 
             foreach ($gallerys as $key => $val) {

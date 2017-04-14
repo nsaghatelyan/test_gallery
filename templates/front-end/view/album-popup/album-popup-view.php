@@ -2,6 +2,7 @@
 wp_register_style('album-popup-css', Photo_Gallery_WP()->plugin_url() . "/assets/style/album-popup.css");
 wp_enqueue_style('album-popup-css');
 
+
 switch (Photo_Gallery_WP()->settings->album_popup_onhover_effects) {
     case 0:
         $hover_class = "view-first";
@@ -117,6 +118,8 @@ foreach ($album_categories as $val) {
     });
 
     jQuery(document).ready(function () {
+        jQuery("#envirabox-thumbs").hide();
+
         jQuery(document).ready(function () {
             jQuery("#album_all_categories").addClass("active");
         })

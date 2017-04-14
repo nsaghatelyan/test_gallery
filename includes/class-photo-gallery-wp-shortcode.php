@@ -134,10 +134,11 @@ class Photo_Gallery_WP__Shortcode
         $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_albums where id IN (" . $format . ") order by " . $album_sorting . " ASC", $id_array);
         $albums = $wpdb->get_results($query);
 
-        $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys where id_album IN (" . $format . ") order by id ASC", $id_array);
-        $album_galleries = $wpdb->get_results($query);
-        $album_galleries = $wpdb->get_results($query);
 
+        $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_album_has_gallery AS album_has_gallery LEFT JOIN " . $wpdb->prefix . "photo_gallery_wp_gallerys AS galleries 
+         ON (album_has_gallery.id_gallery = galleries.id) WHERE album_has_gallery.id_album IN (" . $format . ") ORDER BY ordering ASC ", $id_array);
+//        $query = $wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys where id_album IN (" . $format . ") order by id ASC", $id_array);
+        $album_galleries = $wpdb->get_results($query);
 
         foreach ($album_galleries as $key => $val) {
             $query = $wpdb->prepare("SELECT id,gallery_id, name, description, image_url FROM " . $wpdb->prefix . "photo_gallery_wp_images where gallery_id = '%d' order by ordering ASC", $val->id);
@@ -215,7 +216,7 @@ class Photo_Gallery_WP__Shortcode
         $query = "SELECT galleries.*, COUNT(images.id) as images_count FROM " . $wpdb->prefix . "photo_gallery_wp_gallerys AS galleries LEFT JOIN " . $wpdb->prefix . "photo_gallery_wp_images AS images ON galleries.id = images.gallery_id GROUP BY galleries.id";
         $shortcodegallerys = $wpdb->get_results($query);
 
-        $query = "SELECT albums.*, COUNT(galleries.id) as galleries_count FROM " . $wpdb->prefix . "photo_gallery_wp_albums AS albums LEFT JOIN " . $wpdb->prefix . "photo_gallery_wp_gallerys AS galleries ON albums.id = galleries.id_album GROUP BY albums.id";
+        $query = "SELECT albums.*, COUNT(album_has_gallery.id_gallery) as galleries_count FROM " . $wpdb->prefix . "photo_gallery_wp_albums AS albums LEFT JOIN " . $wpdb->prefix . "photo_gallery_wp_album_has_gallery AS album_has_gallery ON albums.id = album_has_gallery.id_album GROUP BY albums.id";
         $shortcodealbums = $wpdb->get_results($query);
 
         require PHOTO_GALLERY_WP_TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . 'photo-gallery-wp-admin-inline-popup-content-html.php';

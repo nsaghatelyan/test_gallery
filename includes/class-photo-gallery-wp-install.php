@@ -51,6 +51,7 @@ CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "photo_gallery_wp_like_dislike` 
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=10";
+
         $sql_photo_gallery_wp_gallerys = "
 CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "photo_gallery_wp_gallerys` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -69,10 +70,6 @@ CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "photo_gallery_wp_gallerys` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
 )   DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ";
-
-        $sql_photo_gallery_wp_gallery_alter = "
-            ALTER TABLE `" . $wpdb->prefix . "photo_gallery_wp_gallerys` ADD `id_album` int(11) unsigned DEFAULT 0 after `id`
-        ";
 
         $sql_photo_gallery_wp_albums = "
 CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "photo_gallery_wp_albums` (
@@ -101,13 +98,16 @@ CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "photo_gallery_wp_album_categori
   PRIMARY KEY (`id`)
 )   DEFAULT CHARSET=utf8";
 
-        /* $sql_photo_gallery_wp_album_has_category = "
-             CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "photo_gallery_wp_album_has_category` (
-   `id_cat` int(11) unsigned NOT NULL,
+
+        //album has_gallery table
+
+        $sql_photo_gallery_wp_album_has_gallery = "
+             CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "photo_gallery_wp_album_has_gallery` (
    `id_album` int(11) unsigned NOT NULL,
-   PRIMARY KEY (`id_cat`,`id_album`)
+   `id_gallery` int(11) unsigned NOT NULL,
+   PRIMARY KEY (`id_album`,`id_gallery`)
  )   DEFAULT CHARSET=utf8
-         ";*/
+         ";
 
         $table_name = $wpdb->prefix . "photo_gallery_wp_images";
         $sql_2 = "
@@ -125,27 +125,39 @@ INSERT INTO
 
         $album_table_name = $wpdb->prefix . "photo_gallery_wp_albums";
         $table_name = $wpdb->prefix . "photo_gallery_wp_gallerys";
+        $album_has_gallery = $wpdb->prefix . "photo_gallery_wp_album_has_gallery";
         $sql_3 = "
 INSERT INTO `$album_table_name` (`id`, `name`, `sl_height`, `sl_width`, `gallery_list_effects_s`, `description`, `sl_position`, `ordering`, `published`, `photo_gallery_wp_sl_effects`) VALUES
 (1, 'My First Album', 375, 600, 'random', 'My first Album description', 'center', 1, '300', '5')";
 
-        $sql_3_2 = "
-        INSERT INTO `$table_name` (`id`, `id_album`, `name`, `sl_height`, `sl_width`, `pause_on_hover`, `gallery_list_effects_s`, `description`, `param`, `sl_position`, `ordering`, `published`, `photo_gallery_wp_sl_effects`) VALUES
-(1, 1, 'My First Gallery', 375, 600, 'on', 'random', '4000', '1000', 'center', 1, '300', '5')";
+        $sql_4 = "
+        INSERT INTO `$table_name` (`id`, `name`, `sl_height`, `sl_width`, `pause_on_hover`, `gallery_list_effects_s`, `description`, `param`, `sl_position`, `ordering`, `published`, `photo_gallery_wp_sl_effects`) VALUES
+(1, 'My First Gallery', 375, 600, 'on', 'random', '4000', '1000', 'center', 1, '300', '5')";
+
         $wpdb->query($sql_photo_gallery_wp_album_categories);
-        // $wpdb->query($sql_photo_gallery_wp_album_has_category);
         $wpdb->query($sql_photo_gallery_wp_images);
         $wpdb->query($sql_photo_gallery_wp_albums);
         $wpdb->query($sql_photo_gallery_wp_gallerys);
-        $wpdb->query($sql_photo_gallery_wp_gallery_alter);
+        $wpdb->query($sql_photo_gallery_wp_album_has_gallery);
         $wpdb->query($sql_photo_gallery_wp_like_dislike);
+
+        $sql_5 = "
+            INSERT INTO `$album_has_gallery` (`id_album`,`id_gallery`) VALUES (1, 1)
+        ";
+
+        /////////////////////////////////////////
 
         if (!$wpdb->get_var("select count(*) from " . $wpdb->prefix . "photo_gallery_wp_images")) {
             $wpdb->query($sql_2);
         }
         if (!$wpdb->get_var("select count(*) from " . $wpdb->prefix . "photo_gallery_wp_gallerys")) {
+            $wpdb->query($sql_4);
+        }
+        if (!$wpdb->get_var("select count(*) from " . $wpdb->prefix . "photo_gallery_wp_albums")) {
             $wpdb->query($sql_3);
-            $wpdb->query($sql_3_2);
+        }
+        if (!$wpdb->get_var("select count(*) from " . $wpdb->prefix . "photo_gallery_wp_album_has_gallery")) {
+            $wpdb->query($sql_5);
         }
         ////////////////////////////////////////
         $imagesAllFieldsInArray2 = $wpdb->get_results("DESCRIBE " . $wpdb->prefix . "photo_gallery_wp_gallerys", ARRAY_A);
@@ -183,6 +195,8 @@ INSERT INTO `$album_table_name` (`id`, `name`, `sl_height`, `sl_width`, `gallery
             $wpdb->query("ALTER TABLE " . $wpdb->prefix . "photo_gallery_wp_images  ADD `like` INT NOT NULL DEFAULT 0 AFTER `published_in_sl_width`");
             $wpdb->query("ALTER TABLE " . $wpdb->prefix . "photo_gallery_wp_images  ADD `dislike` INT NOT NULL DEFAULT '0' AFTER `like`");
         }
+
+
         //ADDING Rating COLUMNS
         $imagesAllFieldsInArray5 = $wpdb->get_results("DESCRIBE " . $wpdb->prefix . "photo_gallery_wp_gallerys", ARRAY_A);
         $fornewUpdate4 = 0;
